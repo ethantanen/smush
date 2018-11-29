@@ -1,0 +1,20 @@
+Customer Concerns for SMUSH
+sheet music upload service helper
+
+Reliability
+	Storage of music data should be reliable and resilient...fire,
+	tornadoes etc...
+Ability to add new music
+	Need to be able to add new music to the archives/database
+	Needs to be controlled and monitored so music in the archives/db is accurate and reliable
+	Music should be verifiable by person if necessary, original image/pdf still accessible
+
+Availability
+	Music should be readily available for users who wish to access it
+
+Accessibility
+	Multiple ways to add music to the archives, able to add in different formats
+
+Searchability
+	Customer wants a simple way to search archives for music
+
