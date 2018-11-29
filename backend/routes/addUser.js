@@ -3,7 +3,7 @@ const router = require('express')
   .Router()
 
 // render pages view
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
   res.render('addUser.ejs')
 })
 
