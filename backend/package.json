@@ -1,0 +1,31 @@
+{
+  "name": "final_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethantanen/MPS-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ethantanen/MPS-Project/issues"
+  },
+  "homepage": "https://github.com/ethantanen/MPS-Project#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "mongoose": "^5.3.14",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1"
+  }
+}
