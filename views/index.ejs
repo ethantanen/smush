@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body >
+
+  <h1> Home! </h1>
+  <h3> Welcome to the freakin' site! </h3>
+  <br><br>
+
+
+  <h1> Music Related Stuff </h1>
+
+  <h4> Upload Score </h4>
+  <form action='/archive/insert/photo' method='POST' enctype='multipart/form-data'>
+    <input type='file' name='file'><br>
+    artistName <input type='text' name='artistName'>
+    <input type='submit'>
+  </form>
+  <br>
+
+  <h4> Search Archive </h4>
+  <form action='/archive/select'>
+    search by name <input type='text' name='artistName'>
+    <input type='submit'>
+  </form>
+  <br>
+
+  <h4> Delete Archive Entry </h4>
+  <form action='/archive/remove'>
+    delete by name <input type='text' name='artistName'>
+    <input type='submit'>
+  </form>
+  <br>
+
+  <h4> Update Archive Entry </h4>
+  <form action='/archive/update' method='POST'>
+    entry name <input type='text' name='oldName'>
+    update name <input type='text' name='newName'>
+    <input type='submit'>
+  </form>
+  <br><br>
+
+  <h1> User Related Stuff </h1>
+
+  <h4> Become User </h4>
+  <form action='/user/insert' method='POST'>
+    name <input type='text' name='name'><br>
+    username <input type='text' name='username'><br>
+    email <input type='text' name='email'><br>
+    password <input type='text' password='password'><br>
+    <input type='submit'>
+  </form>
+  <br>
+
+  <h4> Update User Info </h4>
+  <form action='/user/update' method='POST'>
+    name <input type='text' name='oldName'>
+    new name <input type='text' name='newName'>
+    <input type='submit'>
+  </form>
+  <br>
+
+  <h4> Delete Account </h4>
+  <form action='/user/remove'>
+    username <input type='text' name='username'>
+    <input type='submit'>
+  </form>
+  <br>
+
+  <h4> Query Users </h4>
+  <form action='/user/select'>
+    search by name <input type='text' name='username'>
+    <input type='submit'>
+  </form>
+  <br>
+
+  <h4> Request Admin Permissions </h4>
+  <form>
+    name <input type='text'>
+    <input type='submit'>
+  </form>
+  <br>
+
+</body>
+
+</html>
