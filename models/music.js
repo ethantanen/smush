@@ -15,10 +15,10 @@ function makeEntry(artistName, trackName, musicXML, key, tempo, image) {
 }
 
 // insert document into database
-function insert(artistName=null, trackName=null, musicXML=null, key=null, tempo=null, image=null) {
+function insert(entry) {
   return new Promise((resolve, reject) => {
-    entry_json = makeEntry(artistName, trackName, musicXML, key, tempo, image)
-    entry = new Music(entry_json)
+    // entry_json = makeEntry(artistName, trackName, musicXML, key, tempo, image)
+    entry = new Music(entry)
     entry.save().then((entry) => {
       if(!entry) return reject('couldn\'t add user')
       return resolve(entry)
@@ -61,7 +61,7 @@ function remove(query) {
 // connect to database
 function connect() {
   // connect to mongo database
-  const URI = 'mongodb://' + process.env.USERNAME + ':' + process.env.PASSWORD +
+  const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
     '@ds115712.mlab.com:15712/music_app_1234'
   mongoose.connect(URI, {useNewUrlParser: true})
 
@@ -71,7 +71,7 @@ function connect() {
     trackName: String,
     musicXML: String,
     key: String,
-    tempo: Number,
+    tempo: String,
     image: String
   })
 

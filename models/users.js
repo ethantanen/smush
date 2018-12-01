@@ -16,10 +16,10 @@ function makeUser(username=null, password=null, email=null, name=null, permissio
 }
 
 // insert document into database
-function insert(username, password, email, name, permissions) {
+function insert(entry) {
   return new Promise((resolve, reject) => {
-    user_json = makeUser(username)
-    user = new User(user_json)
+    // user_json = makeUser(username)
+    user = new User(entry)
     user.save().then((user) => {
       if(!user) return reject('couldn\'t add user')
       return resolve(user)
@@ -41,6 +41,9 @@ function select(query) {
 
 // update document in database
 function update(query, update) {
+  console.log("DJF:LSD")
+  console.log(query, 'dick', update)
+
   return new Promise((resolve, reject) => {
     User.findOneAndUpdate(query, update).then((user) => {
       if (!user) return reject('couldn\'t update user')
@@ -62,7 +65,7 @@ function remove(query) {
 // connect to database
 function connect() {
   // connect to mongo database
-  const URI = 'mongodb://' + process.env.USERNAME + ':' + process.env.PASSWORD +
+  const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
     '@ds115712.mlab.com:15712/music_app_1234'
   mongoose.connect(URI, {useNewUrlParser: true})
 

@@ -5,6 +5,9 @@ const fs = require('fs')
 const https = require('https')
 const logger = require('morgan')
 const cors = require('cors')
+const session = require('express-session')
+
+
 
 // setup databases
 const music = require('./models/music')
@@ -30,12 +33,17 @@ app.listen(3000, (err) => {
 app.set('view engine', 'ejs')
 
 // add middleware
-app.use(bodyParser({
-  limit: '50mb'
-}))
+app.use(bodyParser({limit: '50mb'}))
 app.use(express.static(__dirname + '/static'))
 app.use(logger('dev'))
 app.use(cors())
+app.use(session({secret: 'guccipancakes'}))
+
+// TODO: delete this!
+app.use((req, res, next) => {
+  console.log('SESSION:', req.session, 'BODY', req.body)
+  next()
+})
 
 // connect routers
 app.use('/user', user.router)

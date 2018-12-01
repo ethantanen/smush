@@ -16,29 +16,50 @@
   <h4> Upload Score </h4>
   <form action='/archive/insert/photo' method='POST' enctype='multipart/form-data'>
     <input type='file' name='file'><br>
-    artistName <input type='text' name='artistName'>
+    artistName <input type='text' name='artistName'><br>
+    trackName <input type='text' name='trackName'><br>
+    key <input type='text' name='key'><br>
+    tempo <input type='text' name='tempo'><br>
     <input type='submit'>
   </form>
   <br>
 
   <h4> Search Archive </h4>
   <form action='/archive/select'>
-    search by name <input type='text' name='artistName'>
+    artistName <input type='text' name='artistName'><br>
+    trackName <input type='text' name='trackName'><br>
+    key <input type='text' name='key'><br>
+    tempo <input type='text' name='tempo'><br>
     <input type='submit'>
   </form>
   <br>
 
   <h4> Delete Archive Entry </h4>
   <form action='/archive/remove'>
-    delete by name <input type='text' name='artistName'>
+    artistName <input type='text' name='artistName'><br>
+    trackName <input type='text' name='trackName'><br>
+    key <input type='text' name='key'><br>
+    tempo <input type='text' name='tempo'><br>
     <input type='submit'>
   </form>
   <br>
 
   <h4> Update Archive Entry </h4>
   <form action='/archive/update' method='POST'>
-    entry name <input type='text' name='oldName'>
-    update name <input type='text' name='newName'>
+
+    <!-- Old Entry -->
+    <label><u> Old Entry </u></label><br>
+    artistName <input type='text' name='artistNameO'><br>
+    trackName <input type='text' name='trackNameO'><br>
+    key <input type='text' name='keyO'><br>
+    tempo <input type='text' name='tempoO'><br><br>
+
+    <!-- New Entry -->
+    <label><u> New Entry </u> </label><br>
+    artistName <input type='text' name='artistNameN'><br>
+    trackName <input type='text' name='trackNameN'><br>
+    key <input type='text' name='keyN'><br>
+    tempo <input type='text' name='tempoN'><br>
     <input type='submit'>
   </form>
   <br><br>
@@ -50,36 +71,63 @@
     name <input type='text' name='name'><br>
     username <input type='text' name='username'><br>
     email <input type='text' name='email'><br>
-    password <input type='text' password='password'><br>
+    password <input type='text' name='password'><br>
     <input type='submit'>
   </form>
   <br>
 
   <h4> Update User Info </h4>
   <form action='/user/update' method='POST'>
-    name <input type='text' name='oldName'>
-    new name <input type='text' name='newName'>
+
+    <!-- Old User Information -->
+    <label> Old User </label><br>
+    name <input type='text' name='nameO'><br>
+    username <input type='text' name='usernameO'><br>
+    email <input type='text' name='emailO'><br>
+    password <input type='text' name='passwordO'><br><br>
+
+
+    <!-- New User Information -->
+    <label> New User </label><br>
+    name <input type='text' name='nameN'><br>
+    username <input type='text' name='usernameN'><br>
+    email <input type='text' name='emailN'><br>
+    password <input type='text' name='passwordN'><br>
+
     <input type='submit'>
   </form>
   <br>
 
   <h4> Delete Account </h4>
   <form action='/user/remove'>
-    username <input type='text' name='username'>
+    name <input type='text' name='name'><br>
+    username <input type='text' name='username'><br>
+    email <input type='text' name='email'><br>
+    password <input type='text' name='password'><br>
     <input type='submit'>
   </form>
   <br>
 
   <h4> Query Users </h4>
   <form action='/user/select'>
-    search by name <input type='text' name='username'>
+    name <input type='text' name='name'><br>
+    username <input type='text' name='username'><br>
+    email <input type='text' name='email'><br>
+    password <input type='text' name='password'><br>
     <input type='submit'>
   </form>
   <br>
 
+  <h4> Log In </h4>
+  <form action='/user/authenticate'>
+    username <input type='text' name='username'><br>
+    password <input type='text' name='password'><br>
+    <input type='submit'>
+  </form>
+
   <h4> Request Admin Permissions </h4>
   <form>
-    name <input type='text'>
+    name <input type='text'><br>
     <input type='submit'>
   </form>
   <br>
