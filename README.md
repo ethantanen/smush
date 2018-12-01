@@ -1,4 +1,4 @@
-#MPS-Project
+# MPS-Project
 
 
 Directory Structure:
@@ -13,4 +13,4 @@ To run:
 source config/app_env
 
 if you have nodemon installed run --> npm run dev
-else --> node app.js 
+else --> node app.js
