@@ -5,8 +5,8 @@ const router = require('express').Router()
 const transporter = require('nodemailer').createTransport({
  service: 'gmail',
  auth: {
-        user: 'guccipancakes1234@gmail.com',
-        pass: 'account password'
+        user: process.env.USERNAME_EMAIL,
+        pass: process.env.PASSWORD_EMAIL
     }
 })
 
