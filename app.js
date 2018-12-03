@@ -41,7 +41,7 @@ app.use(session({secret: 'guccipancakes'}))
 
 // TODO: delete this!
 app.use((req, res, next) => {
-  console.log('SESSION:', req.session, 'BODY', req.body)
+  // console.log('SESSION:', req.session, 'BODY', req.body)
   next()
 })
 

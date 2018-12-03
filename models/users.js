@@ -41,9 +41,6 @@ function select(query) {
 
 // update document in database
 function update(query, update) {
-  console.log("DJF:LSD")
-  console.log(query, 'dick', update)
-
   return new Promise((resolve, reject) => {
     User.findOneAndUpdate(query, update).then((user) => {
       if (!user) return reject('couldn\'t update user')
