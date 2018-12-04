@@ -9,7 +9,7 @@ const users = require('../models/users')
 // log a user in
 // TODO: this is where we should store the users permissions in the session
 router.post('/authenticate',
-  passport.authenticate('local', {failureRedirect:'/login'}),
+  passport.authenticate('local', {failureRedirect:'/user/login'}),
   (req, res) => {
     res.send(req.user)
   })
