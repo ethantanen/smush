@@ -13,6 +13,9 @@ router.post('/insert/photo', upload.single('file'), async (req, res) => {
   // parse file from request and convert to base64
   file = fs.readFileSync(req.file.path)
   file_64 = new Buffer(file).toString('base64')
+
+  //TODO: cv crap
+
   req.body.image = file_64
 
   // insert file into music database
@@ -67,7 +70,7 @@ router.post('/update', async (req, res) => {
   } catch (err) {
     res.send('something went wrong')
   }
-  
+
 })
 
 //NOTE we can remove any sort of malformed entry --> ['', ' ', 'poop'].includes(query[key])
