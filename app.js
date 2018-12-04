@@ -4,10 +4,7 @@ const bodyParser = require('body-parser')
 const fs = require('fs')
 const https = require('https')
 const logger = require('morgan')
-const cors = require('cors')
 const session = require('express-session')
-
-
 
 // setup databases
 const music = require('./models/music')
@@ -36,12 +33,11 @@ app.set('view engine', 'ejs')
 app.use(bodyParser({limit: '50mb'}))
 app.use(express.static(__dirname + '/static'))
 app.use(logger('dev'))
-app.use(cors())
 app.use(session({secret: 'guccipancakes'}))
 
 // TODO: delete this!
 app.use((req, res, next) => {
-  // console.log('SESSION:', req.session, 'BODY', req.body)
+  //console.log('SESSION:', req.session, 'BODY', req.body)
   next()
 })
 
@@ -51,6 +47,6 @@ app.use('/contact', contact.router)
 app.use('/archive', archive.router)
 
 // render homescreen/ redirect unmatched urls to homescreen
-app.all('*', (req, res) => {
+app.all('/*', (req, res) => {
   res.render('index.ejs')
 })

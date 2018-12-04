@@ -8,33 +8,24 @@ const users = require('../models/users')
 // log a user in
 // TODO: this is where we should store the users permissions in the session
 router.get('/login', async (req, res) => {
-
-  // search database for user
-  username = req.query.username
-  password = req.query.password
-  result = await users.select({username: username, password: password})
-
-  // check if user exists
-  if (result.length > 0) {
-    req.session.id = uuid()
-    req.send('You\'re logged in')
-  } else {
-    req.send('Youre note user bruh!')
-  }
+  // render login page
+  // when submit is clicked it redirects to the authenticate endpoint
 
 })
 
 // log a user off
 router.get('/logoff', (req, res) => {
-  req.session.id = undefined
-  res.send()
+  req.logout()
+  req.redirect('/')
 })
 
-// make new entry using an image
-// TODO: should be an insert/ from-html-form type thing
-// NOTE: it just base64 encodes image and inserts into database
+// authenticate user
+router.get('/authenticate', (req, res) => {
+  // use passport authentication function
+})
+
+// add new user to database 
 router.post('/insert', async (req, res) => {
-  console.log(req.body)
   try {
     entry = await users.insert(format(req.body))
     res.send('sucess')
