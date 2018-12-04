@@ -2,12 +2,25 @@
 <html>
 
 <head>
+  <% include partials/navbar.ejs %>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
+
+
 <div class="container">
 
-    <div class="topnav">
+  <h4> Search Archive </h4>
+  <form action='/archive/select'>
+    artistName <input type='text' name='artistName'><br>
+    trackName <input type='text' name='trackName'><br>
+    key <input type='text' name='key'><br>
+    tempo <input type='text' name='tempo'><br>
+    <input type='submit'>
+  </form>
+  <br>
+
+    <div class="navbar">
         <a class="active" href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
@@ -19,69 +32,17 @@
 		<h2 class="lead"><strong class="text-danger">songs.find.(searchterm).count()</strong> results were found for the search for <strong class="text-danger">this.responseText.searchTerm</strong></h2>
 	</hgroup>
 
+  <% for (result in data) { %>
   <table>
-  <% for(var i = 0; i < data[0].length; i++) {%>
-    <% for(var key in data){%>
-      <tr>
-        <td>
-          <%= data[i][key].title%>
-        </td>
-        <td>
-          <%= data[i][key].artist%>
-        </td>
-        <td>
-          <%= data[i][key].date%>
-        </td>
-        <td>
-          <%= data[i][key].desc%>
-        </td>
-      </tr>
-      <% } %>
+  <% for (obj in data[result]) { %>
+    <tr>
+      <td> <%= data[result][obj] %></td>
+    </tr>
     <% } %>
   </table>
+  <% } %>
 
-	<script>
-        for (var i = 0; i < data[0].length; i++) {
-            for (var key in data) {
-                var title = data[i][key].title;
-                var artist = data[i][key].artist;
-                var date = data[i][key].date;
-                var desc = data[i][key].desc;
-                var badge = document.createElement('article');
-                badge.className = "search-result row";
-                badge.innerHTML =
-                "<article class=\"search-result row\">" +
-                  "<div class=\"result-info\">" +
-                      "<h3><a href=\"songendpoint\" title=\"\">" + title + "</a></h3>" +
 
-                      "<ul class=\"meta-search\">" +
-                        "<class=\"artist\"><span>" + artist + "</span>" +
-                        "<class=\"date\"> <span>" + date + "</span>" +
-                      "</ul>" +
-                  "</div>" +
-                  "<div id=\"result-description\" class=\"description\"> " +
-
-                    "<p>" + desc+ "</p> </div>" +
-                "</article>"
-
-                //I gave the div the same ID's as the keys in the object for ease
-              }
-            document.getElementById(key).appendChild(badge);
-
-}
-    </script>
-		<article class="search-result row">
-			<div id="result-info" class="info">
-			    <h3><a href="songendpoint" title="">responseText.title</a></h3>
-				<ul class="meta-search">
-					<class="artist"><span>this.responseText.artist</span>
-					<class="date"> <span>this.responseText.date</span>
-				</ul>
-			</div>
-			<div id="result-description"class="description">
-				<p>responseText.description?</p>
-			</div>
-		</article>
 
 
 
