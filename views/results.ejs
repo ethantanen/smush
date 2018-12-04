@@ -1,31 +1,24 @@
 
+
 <html>
 
-<head>
-  <% include partials/navbar.ejs %>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
-
+<% include partials/head.ejs %>
+  <body>
+        <% include partials/navbar.ejs %>
 
 
 <div class="container">
 
-  <h4> Search Archive </h4>
-  <form action='/archive/select'>
-    artistName <input type='text' name='artistName'><br>
-    trackName <input type='text' name='trackName'><br>
-    key <input type='text' name='key'><br>
-    tempo <input type='text' name='tempo'><br>
-    <input type='submit'>
-  </form>
-  <br>
 
-    <div class="navbar">
-        <a class="active" href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <input type="text" placeholder="Search..">
-    </div>
+    <h4> Search Archive </h4>
+    <form action='/archive/select'>
+      artistName <input type='text' name='artistName'><br>
+      trackName <input type='text' name='trackName'><br>
+      key <input type='text' name='key'><br>
+      tempo <input type='text' name='tempo'><br>
+      <input type='submit'>
+    </form>
+    <br>
 
     <hgroup class="mb20">
 		<h1>Search Results</h1>
@@ -41,10 +34,6 @@
     <% } %>
   </table>
   <% } %>
-
-
-
-
 
 </div>
 </html>
