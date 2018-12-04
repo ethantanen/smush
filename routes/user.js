@@ -11,7 +11,6 @@ const users = require('../models/users')
 router.post('/authenticate',
   passport.authenticate('local', {failureRedirect:'/login'}),
   (req, res) => {
-    console.log('hre')
     res.send(req.user)
   })
 
@@ -24,7 +23,6 @@ router.get('/logoff', (req, res) => {
 // authenticate user
 router.get('/login', (req, res) => {
   res.render('login.ejs')
-
 })
 
 // add new user to database
