@@ -7,6 +7,7 @@ const logger = require('morgan')
 const session = require('express-session')
 const auth = require('./config/auth')
 const passport = require('passport')
+const flash = require('connect-flash')
 
 // setup databases
 const music = require('./models/music')
@@ -25,6 +26,8 @@ app = express()
 // TODO move this elsewhere bruh!
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash());
+
 
 // start server on port 3000
 app.listen(3000, (err) => {
@@ -54,7 +57,7 @@ app.use(session({secret: 'guccipancakes'}))
 
 // TODO: delete this!
 app.use((req, res, next) => {
-  //console.log('SESSION:', req.session, 'BODY', req.body)
+  // console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
   next()
 })
 

@@ -2,7 +2,8 @@
 // for authentication and such
 // TODO: check for reduncy before inserting a document
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 // return json representation of user
 function makeUser(username=null, password=null, email=null, name=null, permissions=null) {
@@ -17,8 +18,8 @@ function makeUser(username=null, password=null, email=null, name=null, permissio
 
 // insert document into database
 function insert(entry) {
-  return new Promise((resolve, reject) => {
-    // user_json = makeUser(username)
+  return new Promise( async (resolve, reject) => {
+    entry.password = await makePasswordHash(entry.password)
     user = new User(entry)
     user.save().then((user) => {
       if(!user) return reject('couldn\'t add user')
@@ -59,6 +60,16 @@ function remove(query) {
   })
 }
 
+function makePasswordHash(password) {
+  return bcrypt.hash(password, 12)
+}
+
+function validatePasswordHash(password, storedPasswordHash) {
+  console.log('dfjas;ldfja;lskdjfalk;sdjf;alksdjf;asj')
+  return bcrypt.compare(password, storedPasswordHash)
+}
+  
+
 // connect to database
 function connect() {
   // connect to mongo database
@@ -87,4 +98,5 @@ module.exports = {
   remove: remove,
   update: update,
   select: select,
+  validatePasswordHash: validatePasswordHash,
 }
