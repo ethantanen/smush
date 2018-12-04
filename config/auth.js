@@ -12,8 +12,6 @@ passport.use(new LocalStrategy( (username, password, done) => {
     })
     .catch((err) => {
       done(null, null)
-      // throw new Error('user doesn\'t exist')
-
     })
 }))
 

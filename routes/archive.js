@@ -23,7 +23,6 @@ router.post('/insert/photo', upload.single('file'), async (req, res) => {
   } catch (err) {
     res.send('something went wrong!')
   }
-
 })
 
 // delete user
