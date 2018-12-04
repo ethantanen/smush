@@ -29,6 +29,12 @@ app.listen(3000, (err) => {
 // set view engine
 app.set('view engine', 'ejs')
 
+
+// TESTING TESTING TESTING
+app.get('/home', (req, res) => {
+  res.render('home.ejs')
+})
+
 // add middleware
 app.use(bodyParser({limit: '50mb'}))
 app.use(express.static(__dirname + '/static'))
