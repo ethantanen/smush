@@ -21,12 +21,10 @@ router.get('/logoff', (req, res) => {
 
 // authenticate user
 router.get('/authenticate', (req, res) => {
-  // use passport authentication function 
+  // use passport authentication function
 })
 
-// make new entry using an image
-// TODO: should be an insert/ from-html-form type thing
-// NOTE: it just base64 encodes image and inserts into database
+// add new user to database 
 router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))

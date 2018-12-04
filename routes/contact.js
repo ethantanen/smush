@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
 
 // use nodemailer to send the email
 router.post('/sendEmail', (req, res) => {
-  console.log('dookie',format(req.body))
   // transporter.sendMail(data[, callback])
   transporter.sendMail(format(req.body), (err, m) => {
     if (err) return console.log(err)
