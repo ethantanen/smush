@@ -40,7 +40,7 @@ router.get('/remove', async (req, res) => {
 router.get('/select', async (req, res) => {
   try {
     results = await music.select(format(req.query))
-    res.send(results)
+    res.render('results.ejs', {data: results})
   } catch (err) {
     res.status(404).send('something went wrong')
   }
