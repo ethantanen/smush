@@ -42,7 +42,7 @@ app.get('/home', (req, res) => {
 })
 
 app.get('/results', (req, res) => {
-  res.render('results.ejs', {data: undefined})
+  res.render('results.ejs', {data: [{id:"", artistName:"", trackName:"" }]})
 })
 
 

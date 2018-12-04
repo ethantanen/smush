@@ -1,10 +1,13 @@
 
 
 <html>
-
 <% include partials/head.ejs %>
-  <body>
-        <% include partials/navbar.ejs %>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<body>
+<% include partials/navbar.ejs %>
 
 
 <div class="container">
@@ -20,18 +23,48 @@
     </form>
     <br>
 
-    <hgroup class="mb20">
+  <hgroup class="mb20">
 		<h1>Search Results</h1>
-		<h2 class="lead"><strong class="text-danger">songs.find.(searchterm).count()</strong> results were found for the search for <strong class="text-danger">this.responseText.searchTerm</strong></h2>
+		<h2 class="lead"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
 	</hgroup>
 
   <% for (result in data) { %>
-  <table>
-    <tr>
-      <td> <%= JSON.stringify(data[result]) %> </td>
-    </tr>
-  </table>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="table-container">
+            <table class="table table-filter">
+              <tbody>
+                <tr>
+                  <td>
+                    Artist: <%=data[result].artistName %>
+                  </td>
+                  <td>
+                    <a href=/<%= data[result].id%> </a> Track: <%=data[result].trackName %>
+                  </td>
+                  <td>
+                    <div class="media">
+                      <a href="#" class="pull-left">
+                        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   <% } %>
 
 </div>
 </html>
+
+
+<div class="row">
+		<section class="content">
+			<h1>Table Filter</h1>
+
+		</section>
+
+	</div>

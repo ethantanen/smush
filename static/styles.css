@@ -26,3 +26,8 @@ li a:hover {
     background-color: #673ab7;
     color: white;
 }
+
+h1,
+h2 {
+  text-align: center;
+}
