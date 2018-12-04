@@ -8,28 +8,34 @@ const users = require('../models/users')
 
 // log a user in
 // TODO: this is where we should store the users permissions in the session
-router.post('/authenticate',
-  passport.authenticate('local', {failureRedirect:'/user/login'}),
-  (req, res) => {
-    res.send(req.user)
+router.post('/authenticate', passport.authenticate('local',
+  {
+    successRedirect: '/home',
+    failureRedirect: '/user/login',
+    failureFlash: true
   })
+)
 
 // log a user off
-router.get('/logoff', (req, res) => {
-  req.logout()
-  req.redirect('/')
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    res.redirect('/home')
+  })
 })
 
 // authenticate user
 router.get('/login', (req, res) => {
-  res.render('login.ejs')
+  if (req.session.passport) return res.send('you are already logged in ')
+  res.render('login.ejs', {message: req.flash('error')})
 })
 
-// add new user to database
+// add new user to database and log them in
 router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))
-    res.send('sucess')
+    req.login({username: entry.username, password: entry.password}, (err) => {
+      res.redirect('/')
+    })
   } catch (err) {
     res.send('something went wrong!')
   }
