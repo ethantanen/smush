@@ -27,11 +27,9 @@
 
   <% for (result in data) { %>
   <table>
-  <% for (obj in data[result]) { %>
     <tr>
-      <td> <%= data[result][obj] %></td>
+      <td> <%= JSON.stringify(data[result]) %> </td>
     </tr>
-    <% } %>
   </table>
   <% } %>
 
