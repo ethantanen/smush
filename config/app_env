@@ -1,0 +1,7 @@
+# MLab db credentials
+export USERNAME_MLAB='team_gucci_pancakes'
+export PASSWORD_MLAB='gucci_pancakes_1234'
+
+# Email credentials
+export USERNAME_EMAIL='guccipancakes1234'
+export PASSWORD_EMAIL='GucciPancakes1234'
