@@ -14,8 +14,6 @@ router.post('/insert/photo', upload.single('file'), async (req, res) => {
   file = fs.readFileSync(req.file.path)
   file_64 = new Buffer(file).toString('base64')
 
-  //TODO: cv crap
-
   req.body.image = file_64
 
   // insert file into music database

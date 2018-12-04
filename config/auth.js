@@ -4,7 +4,6 @@ const users = require('../models/users')
 
 // setup LocalStrategy
 passport.use(new LocalStrategy( (username, password, done) => {
-  console.log("heree")
   return users.select({username: username})
     .then((user) => {
       console.log(user, password, user.password)
@@ -12,7 +11,6 @@ passport.use(new LocalStrategy( (username, password, done) => {
       return done(null, user)
     })
     .catch((err) => {
-      console.log(err)
       return done(err)
     })
 }))
@@ -22,7 +20,7 @@ passport.serializeUser((user, done) => {
   done(null, user.username)
 })
 
-// deserialize user by querying database by username 
+// deserialize user by querying database by username
 passport.deserializeUser((username, done) => {
   users.findOne({username: username})
     .then((user) => {
