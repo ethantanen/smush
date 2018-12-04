@@ -35,6 +35,12 @@ app.get('/home', (req, res) => {
   res.render('home.ejs')
 })
 
+app.get('/results', (req, res) => {
+  res.render('results.ejs', {data: [{title:"Title1", artist:"artist1", desc:"desc1", date:"pub_date1"},
+                                    {title:"Title2", artist:"artist2", desc:"desc2", date:"pub_date2"}]}
+                  )
+})
+
 // add middleware
 app.use(bodyParser({limit: '50mb'}))
 app.use(express.static(__dirname + '/static'))
