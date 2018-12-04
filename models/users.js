@@ -32,7 +32,7 @@ function insert(entry) {
 // complex queries
 function select(query) {
   return new Promise((resolve, reject) => {
-    User.find(query).then((users) => {//.limit.sort ... very open ended!
+    User.findOne(query).then((users) => {//.limit.sort ... very open ended!
       if (!users) return reject('couldn\'t select user')
       return resolve(users)
     })

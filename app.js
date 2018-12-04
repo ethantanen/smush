@@ -5,6 +5,8 @@ const fs = require('fs')
 const https = require('https')
 const logger = require('morgan')
 const session = require('express-session')
+const auth = require('./config/auth')
+const passport = require('passport')
 
 // setup databases
 const music = require('./models/music')
@@ -20,6 +22,10 @@ const archive = require('./routes/archive')
 // create app
 app = express()
 
+// TODO move this elsewhere bruh!
+app.use(passport.initialize())
+app.use(passport.session())
+
 // start server on port 3000
 app.listen(3000, (err) => {
   if (err) { return console.log(err) }
@@ -34,6 +40,7 @@ app.set('view engine', 'ejs')
 app.get('/home', (req, res) => {
   res.render('home.ejs')
 })
+
 
 // add middleware
 app.use(bodyParser({limit: '50mb'}))
