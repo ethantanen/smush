@@ -41,6 +41,10 @@ app.get('/home', (req, res) => {
   res.render('home.ejs')
 })
 
+app.get('/results', (req, res) => {
+  res.render('results.ejs', {data: undefined})
+})
+
 
 // add middleware
 app.use(bodyParser({limit: '50mb'}))
