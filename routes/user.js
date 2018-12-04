@@ -1,17 +1,18 @@
 // published modules
 const router = require('express').Router()
 const uuid = require('uuid/v1');
+const passport = require('passport')
 
 // import model
 const users = require('../models/users')
 
 // log a user in
 // TODO: this is where we should store the users permissions in the session
-router.get('/login', async (req, res) => {
-  // render login page
-  // when submit is clicked it redirects to the authenticate endpoint
-
-})
+router.post('/authenticate',
+  passport.authenticate('local', {failureRedirect:'/login'}),
+  (req, res) => {
+    res.send(req.user)
+  })
 
 // log a user off
 router.get('/logoff', (req, res) => {
@@ -20,11 +21,11 @@ router.get('/logoff', (req, res) => {
 })
 
 // authenticate user
-router.get('/authenticate', (req, res) => {
-  // use passport authentication function
+router.get('/login', (req, res) => {
+  res.render('login.ejs')
 })
 
-// add new user to database 
+// add new user to database
 router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))
