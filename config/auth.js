@@ -11,6 +11,7 @@ passport.use(new LocalStrategy( (username, password, done) => {
       return done(null, user)
     })
     .catch((err) => {
+      console.log('bootie sandwich')
       return done(err)
     })
 }))
