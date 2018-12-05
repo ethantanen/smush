@@ -53,6 +53,7 @@ app.get('/results', (req, res) => {
   res.render('results.ejs', {data: [{id:"", artistName:"", trackName:"" }]})
 })
 
+
 // add middleware
 app.use(bodyParser({limit: '50mb'}))
 app.use(express.static(__dirname + '/static'))

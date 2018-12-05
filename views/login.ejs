@@ -1,69 +1,65 @@
-<!-- <html>
-<head>
-</head>
-<body>
 
-  <h1> Log On In! </h1>
-  <form action='/user/authenticate' method='POST'>
-    username <input type='text' name='username'>
-    password <input type='password' name='password'>
-    <input type='submit'>
-  </form>
-
-  <%= message %>
-</body> -->
 <html>
-<head>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-</head>
-<!------ Include the above in your HEAD tag ---------->
+
+<% include partials/head.ejs %>
+<% include partials/navbar.ejs %>
+<p style="margin-bottom:10%;"> </p>
 
 <div class="container">
-	<div class="row">
-		<form class="form-signin mg-btm">
-    	<h3 class="heading-desc">
-		<button type="button" class="close pull-right" aria-hidden="true">×</button>
-		Login to Bootsnipp</h3>
-		<div class="social-box">
-			<div class="row mg-btm">
-             <div class="col-md-12">
-                <a href="#" class="btn btn-primary btn-block">
-                  <i class="icon-facebook"></i>    Login with Facebook
-                </a>
-			</div>
-			</div>
-			<div class="row">
-			<div class="col-md-12">
-                <a href="#" class="btn btn-info btn-block" >
-                  <i class="icon-twitter"></i>    Login with Twitter
-                </a>
+    <div class="row" >
+
+
+      <div class='col-md-5 offset-md-4'>
+
+        <div class="shadow p-3 mb-5 bg-white rounded">
+
+
+        <!-- Title -->
+    		<h3> Login to Smush! </h3>
+
+
+        <!-- Login with facebook -->
+        <div class="row" style="margin-bottom:3px;">
+          <div class="col-md-12">
+            <a href="#" class="btn btn-primary btn-block"> <i class="icon-facebook"></i> Login with Facebook </a>
+          </div>
+        </div>
+
+        <!-- Login with twitter -->
+        <div class="row" style="margin-bottom:3px;">
+          <div class="col-md-12">
+            <a href="#" class="btn btn-info btn-block" > <i class="icon-twitter"></i> Login with Twitter </a>
+          </div>
+        </div>
+
+        <!-- Login with username and password -->
+        <div class='row' style="margin-bottom:3px;">
+          <div class='col-md-12'
+            <form action='/user/authenticate' method='POST'>
+              <input type="text" class="form-control" placeholder="Email" autofocus>
+              <input type="password" class="form-control" placeholder="Password">
+            </form>
+          </div>
+        </div>
+
+        <!-- Login page footer -->
+        <div class="row">
+
+          <!-- Sign up and forgot password links -->
+          <div class="col-md-9">
+            <div class="left-section">
+              <a href="">Forgot your password?</a><br>
+              <a href="">Sign up now</a>
             </div>
           </div>
-		</div>
-		<div class="main">
 
-		<input type="text" class="form-control" placeholder="Email" autofocus>
-        <input type="password" class="form-control" placeholder="Password">
-
-        Are you a business? <a href=""> Get started here</a>
-		<span class="clearfix"></span>
+          <!-- Login button -->
+          <div class="col-md-2 pull-left">
+            <button type="submit" class="btn btn-large btn-danger pull-right">Login</button>
+          </div>
         </div>
-		<div class="login-footer">
-		<div class="row">
-                        <div class="col-xs-6 col-md-6">
-                            <div class="left-section">
-								<a href="">Forgot your password?</a>
-								<a href="">Sign up now</a>
-							</div>
-                        </div>
-                        <div class="col-xs-6 col-md-6 pull-right">
-                            <button type="submit" class="btn btn-large btn-danger pull-right">Login</button>
-                        </div>
-                    </div>
 
-		</div>
-      </form>
-	</div>
+      </div>
+    </div>
+  </div>
 </div>
