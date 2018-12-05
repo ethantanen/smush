@@ -1,6 +1,6 @@
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: var(--theme-background);
+  background-color: var(--theme-background) !important;
 }
 
 :root {
