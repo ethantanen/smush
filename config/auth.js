@@ -4,6 +4,8 @@ const users = require('../models/users')
 
 // setup LocalStrategy
 passport.use(new LocalStrategy( (username, password, done) => {
+
+  console.log('HELLO', username, password)
   return users.select({username: username})
     .then(async (user) => {
       if (! await users.validatePasswordHash(password, user.password)) return done(null, false, {message: 'username or password incorrect'})
