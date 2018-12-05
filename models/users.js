@@ -1,6 +1,6 @@
 // NOTE: need to do some research on passport
 // for authentication and such
-// TODO: check for reduncy before inserting a document
+// TODO: check for reduncy before inserting a document!
 
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
@@ -68,7 +68,6 @@ function validatePasswordHash(password, storedPasswordHash) {
   console.log('dfjas;ldfja;lskdjfalk;sdjf;alksdjf;asj')
   return bcrypt.compare(password, storedPasswordHash)
 }
-  
 
 // connect to database
 function connect() {

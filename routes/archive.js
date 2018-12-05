@@ -35,11 +35,21 @@ router.get('/remove', async (req, res) => {
   }
 })
 
-// search database
+// search database w/ specific values
 router.get('/select', async (req, res) => {
   try {
     results = await music.select(format(req.query))
     console.log(format(req.query))
+    res.render('results.ejs', {data: results})
+  } catch (err) {
+    res.status(404).render('error.ejs')
+  }
+})
+
+// search database by phrase
+router.get('/search', async (req, res) => {
+  try {
+    results = await music.search(format(req.query))
     res.render('results.ejs', {data: results})
   } catch (err) {
     res.status(404).render('error.ejs')
