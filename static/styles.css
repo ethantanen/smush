@@ -2,36 +2,12 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-:root {
+/* :root {
   --mdc-theme-primary: #03a9f4;
   --mdc-theme-secondary: #673ab7;
   --mdc-theme-background: #e8f5e9;
 }
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #03a9f4;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #673ab7;
-    color: white;
-}
+*/
 
 h1,
 h2 {
