@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-<% include partials/head.ejs %>
+<head>
+  <% include partials/head.ejs %>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
 
 
   <body>
         <% include partials/navbar.ejs %>
-
 
   <div style="text-align:center;">
     <h1>
@@ -15,14 +19,22 @@
     <p>
      sheet music upload service helper
     </p>
-    <form action=#TODO method='POST' enctype='multipart/form-data'>
 
-      <div class="mdc-text-field mdc-text-field--fullwidth">
-        <input class="mdc-text-field__input" type="text" placeholder="Search here..." aria-label="Full-Width Text Field">
+    <form action=#TODO method='POST' enctype='multipart/form-data'>
+      <div class="container">
+          <h5>Search Music...</h5>
+          <div class="row">
+              <div class="col-12">
+                  <div class="input-group">
+                      <input class="form-control border-secondary py-2" type="search" value="search">
+                      <div class="input-group-append">
+                          <a href="#TODOwithsearchdata" class="btn btn-outline-secondary"></a>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-      <button class="mdc-button--raised" type="submit">
-        Search
-      </button>
 
     </form>
   </div>
