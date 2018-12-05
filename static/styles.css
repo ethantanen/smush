@@ -1,13 +1,14 @@
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: var(--theme-background);
 }
 
-/* :root {
-  --mdc-theme-primary: #03a9f4;
-  --mdc-theme-secondary: #673ab7;
-  --mdc-theme-background: #e8f5e9;
+:root {
+  --theme-primary: #03a9f4;
+  --theme-secondary: #673ab7;
+  --theme-background: #e8f5e9;
 }
-*/
+
 
 h1,
 h2 {
