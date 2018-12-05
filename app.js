@@ -46,7 +46,7 @@ app.get('/home', (req, res) => {
 
 //testing my musicdtails
 app.get('/musicdetails', (req, res) => {
-  res.render('musicdetails.ejs', {data: [{trackName: "twinkle little star", artistName: "kuooenting", key:"key", tempo:"999", image:"encoded image string"}]})
+  res.render('musicdetails.ejs', {data: {trackName: "twinkle little star", artistName: "kuooenting", key:"key", tempo:"999", image:"encoded image string"}})
 })
 
 app.get('/results', (req, res) => {
