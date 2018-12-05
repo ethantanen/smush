@@ -6,13 +6,11 @@ const users = require('../models/users')
 passport.use(new LocalStrategy( (username, password, done) => {
   return users.select({username: username})
     .then(async (user) => {
-      console.log(user, password, user.password)
-      if (! await users.validatePasswordHash(password, user.password)) return done(null, false, {message: 'wrong username or password'})
+      if (! await users.validatePasswordHash(password, user.password)) return done(null, false, {message: 'username or password incorrect'})
       return done(null, user)
     })
     .catch((err) => {
-      console.log('hello!!', err)
-      done(null, null, {message: 'username doesn\'t exist'})
+      done(null, null, {message: 'username or password inccorect'})
     })
 }))
 

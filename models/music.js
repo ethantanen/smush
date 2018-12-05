@@ -38,6 +38,14 @@ function select(query) {
   })
 }
 
+// search database with mongodb text field
+function search(query) {
+  return new Promise((resolve, reject) => {
+    //TODO: add search w/ text qualifier 
+  })
+}
+
+
 // update document in database
 function update(query, update) {
   return new Promise((resolve, reject) => {
