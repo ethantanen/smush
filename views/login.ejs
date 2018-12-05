@@ -1,21 +1,25 @@
-
 <html>
 
 <% include partials/head.ejs %>
 <% include partials/navbar.ejs %>
+
+<head>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
 <p style="margin-bottom:10%;"> </p>
 
 <div class="container">
-    <div class="row" >
+  <div class="row">
 
 
-      <div class='col-md-5 offset-md-4'>
+    <div class='col-md-5 offset-md-4'>
 
-        <div class="shadow p-3 mb-5 bg-white rounded">
+      <div class="shadow p-3 mb-5 bg-white rounded">
 
 
         <!-- Title -->
-    		<h3> Login to Smush! </h3>
+        <h3> Login to Smush! </h3>
 
 
         <!-- Login with facebook -->
@@ -34,10 +38,10 @@
 
         <!-- Login with username and password -->
         <div class='row' style="margin-bottom:3px;">
-          <div class='col-md-12'
-            <form action='/user/authenticate' method='POST'>
-              <input type="text" class="form-control" placeholder="Email" autofocus>
-              <input type="password" class="form-control" placeholder="Password">
+          <div class='col-md-12'>
+            <form action='/user/authenticate' method='POST' id='login'>
+              <input type="text" class="form-control" placeholder="Username"  name='username' autofocus>
+              <input type="password" class="form-control" placeholder="Password" name='password'>
             </form>
           </div>
         </div>
@@ -55,9 +59,22 @@
 
           <!-- Login button -->
           <div class="col-md-2 pull-left">
-            <button type="submit" class="btn btn-large btn-danger pull-right">Login</button>
+            <button type="submit" class="btn btn-large btn-danger pull-right" form='login' >Login</button>
           </div>
         </div>
+
+        <%if (message.length > 0) { %>
+          <div id='myModal' class="modal fade b" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <h3> <%= message %> </h3>
+              </div>
+            </div>
+          </div>
+          <script> $('#myModal').modal('show') </script>
+        <% } %>
+
+
 
       </div>
     </div>

@@ -9,7 +9,7 @@ const users = require('../models/users')
 
 // TODO:
 // where should a user be redirected if theyre already logged in and visit the log in page?
-// 
+//
 
 // log a user in
 // TODO: this is where we should store the users permissions in the session
@@ -18,7 +18,7 @@ router.post('/authenticate', passport.authenticate('local',
     successRedirect: '/home',
     failureRedirect: '/user/login',
     failureFlash: true
-  })
+  }), (req, res) => {console.log('yo')}
 )
 
 // log a user off
