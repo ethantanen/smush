@@ -1,3 +1,4 @@
 node_modules
 config/app_env
 .DS_Store
+upload
