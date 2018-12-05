@@ -5,8 +5,8 @@ const router = require('express').Router()
 const transporter = require('nodemailer').createTransport({
  service: 'gmail',
  auth: {
-        user: process.env.USERNAME_EMAIL,
-        pass: process.env.PASSWORD_EMAIL
+        user: 'guccipancakes1234@gmail.com',
+        pass: 'account password'
     }
 })
 
@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 
 // use nodemailer to send the email
 router.post('/sendEmail', (req, res) => {
+  console.log('dookie',format(req.body))
   // transporter.sendMail(data[, callback])
   transporter.sendMail(format(req.body), (err, m) => {
     if (err) return console.log(err)

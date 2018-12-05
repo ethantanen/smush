@@ -9,6 +9,10 @@ body {
   --theme-background: #e8f5e9;
 }
 
+.result {
+margin: auto;
+}
+
 
 h1,
 h2 {

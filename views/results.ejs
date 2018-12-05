@@ -3,18 +3,9 @@
 <html>
 
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <% include partials/head.ejs %>
 
-<<<<<<< HEAD
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-=======
 </head>
->>>>>>> 49ae5b7f131759108ab631616624f96336cedcf2
 
 <body>
 <% include partials/navbar.ejs %>
@@ -35,31 +26,27 @@
 		<h1>Search Results</h1>
 		<h2 class="lead"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
 	</hgroup>
-
+  <br>
+  <div class="result">
   <% for (result in data) { %>
-    <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="table-container">
-            <table class="table table-filter">
-              <tbody>
-                <tr>
-                  <td>
-                    Artist: <%=data[result].artistName %>
-                  </td>
-                  <td>
-                    <a href=/<%= data[result].id%> </a> Track: <%=data[result].trackName %>
-                  </td>
-                  <td>
-                        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" align="right">
-                  </td>
-                </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% } %>
+        <table class="table table-filter fixed">
+          <col width="33%"/>
+          <col width="33%"/>
+            <td>
+              Artist: <%=data[result].artistName %>
+            </td>
+            <td>
+              <a href=/<%= data[result].id%> </a> Track: <%=data[result].trackName %>
+            </td>
+            <td>
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" align="right">
+            </td>
 
+        </table>
+
+
+  <% } %>
+  </div>
 </div>
+</body>
 </html>
