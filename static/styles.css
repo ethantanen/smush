@@ -2,6 +2,12 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+:root {
+  --mdc-theme-primary: #03a9f4;
+  --mdc-theme-secondary: #673ab7;
+  --mdc-theme-background: #e8f5e9;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
