@@ -8,11 +8,12 @@ const bcrypt = require('bcrypt')
 // insert document into database
 async function insert(entry) {
   return new Promise( async (resolve, reject) => {
+    
     // check if user exists already before inserting new user
     isUser = await User.findOne(entry)
     if (isUser) return reject('username or email already exists')
-
     if(entry.password) entry.password = await makePasswordHash(entry.password)
+    entry.permissions = 'User'
 
     user = new User(entry)
     user.save().then((user) => {
@@ -52,10 +53,12 @@ function remove(query) {
   })
 }
 
+// encrypt password using salt cryptography
 function makePasswordHash(password) {
   return bcrypt.hash(password, 12)
 }
 
+// check if hash matches plain text password
 function validatePasswordHash(password, storedPasswordHash) {
   console.log('dfjas;ldfja;lskdjfalk;sdjf;alksdjf;asj')
   return bcrypt.compare(password, storedPasswordHash)

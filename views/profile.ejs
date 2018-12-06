@@ -23,32 +23,52 @@
           <h3> <%= user.name %> </h3>
 
           <!-- User Info -->
-          <form>
-            <div class="input-group mb-7">
+          <form id='profile'>
+            <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="email">Email</span>
               </div>
-              <input type="text" class="form-control" placeholder="<%= user.email %>" aria-describedby="email">
+              <input type="text" class="form-control" placeholder="<%= user.email %>" aria-describedby="email" readonly>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="permissions">Permissions</span>
               </div>
-              <input type="text" class="form-control" placeholder="<%= user.permissions %>" aria-describedby="permissions">
+              <input type="text" class="form-control" placeholder="<%= user.permissions %>" aria-describedby="permissions" readonly>
+            </div>
+          </form>
+
+
+          <div class='row'>
+            <div class="col-md-2 pull-left">
+              <button  form='profile' id='editBtn' type="button" class="btn btn-large btn-success pull-left">Edit</button>
             </div>
 
 
-          </form>
-          <!-- <h2> <%= user.permissions %> </h2>
-          <h2> <%= user.username %> </h2> -->
+            <script>
+              $('#editBtn').on('click', (event) => {
+                // event.preventDefault()
+                if ($('#editBtn').text() === 'Edit') {
+                  $('#profile').attr('action', '/user/update')
+                  $('input').attr('readonly', false)
+                  $('#editBtn').text('Save')
+                  $('#editBtn').attr('class', 'btn btn-large btn-danger pull-left')
+                } else {
+                  $('#profile').submit()
+                }
+
+
+              })
+            </script>
+
+            <div class="col-md-9 pull-left">
+              <button type="submit" class="btn btn-large btn-secondary pull-right" formaction='/user/request-admin'>Request Admin Permissions</button>
+            </div>
+          </div>
+
 
 
           <% include partials/message.ejs %>
-
-          <!-- Request Admin Permissions -->
-          <button > Request Admin </button>
-
-          <!-- Change Password -->
 
         </div>
       </div>

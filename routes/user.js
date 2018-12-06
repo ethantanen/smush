@@ -3,6 +3,8 @@ const router = require('express').Router()
 const uuid = require('uuid/v1');
 const passport = require('passport')
 
+// TODO: check that password matches before signin someone up
+
 // import model
 const users = require('../models/users')
 
@@ -58,7 +60,7 @@ router.get('/reset-password', (req, res) => {
 router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))
-    req.login({username: entry.username, password: entry.password}, (err) => {
+    req.login(entry, (err) => {
       res.render('home.ejs', {message: 'Welcome ' + entry.name, isLoggedIn: true})
     })
   } catch (err) {
@@ -88,7 +90,7 @@ router.get('/select', async (req, res) => {
 })
 
 router.get('/profile', (req, res) => {
-  console.log(req.user)
+  console.log('[PROFILE]', req.user)
   res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
 })
 
