@@ -1,0 +1,59 @@
+<html>
+
+<% include partials/navbar.ejs %>
+
+<head>
+  <% include partials/head.ejs %>
+</head>
+
+<body>
+
+  <p style="margin-bottom:10%;"> </p>
+
+  <div class="container">
+    <div class="row">
+
+
+      <div class='col-md-5 offset-md-4'>
+
+        <div class="shadow p-3 mb-5 bg-white rounded">
+
+          <!-- Title -->
+          <h3> Register Your Smush Account! </h3>
+
+          <!-- Signup with username and password -->
+          <div class='row' style="margin-bottom:3px;">
+            <div class='col-md-12'>
+              <form action='/user/insert' method='POST' id='signup'>
+                <input type='text' class='form-control' placeholder="Name" name='name' autofocus required>
+                <input type='email' class='form-control' placeholder="Email" name='email' required>
+                <input type="text" class="form-control" placeholder="Username"  name='username' required>
+                <input type="password" class="form-control" placeholder="Password" name='password' required>
+              </form>
+            </div>
+          </div>
+
+          <!-- Login page footer -->
+          <div class="row">
+
+            <!-- Sign up and forgot password links -->
+            <div class="col-md-8">
+              <div class="left-section">
+                <a href="/user/login">Already have an account?</a><br>
+              </div>
+            </div>
+
+            <!-- Login button -->
+            <div class="col-md-1 pull-left">
+              <button type="submit" class="btn btn-large btn-danger pull-right" form='signup' >Signup</button>
+            </div>
+          </div>
+
+        <% include partials/message.ejs %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
