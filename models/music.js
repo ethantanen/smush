@@ -27,7 +27,7 @@ function select(query) {
 // search database with mongodb text field
 function search(query) {
   return new Promise((resolve, reject) => {
-    Music.find({$text: {$search: "123" }})
+    Music.find({$text: {$search: query }})
       .then(resolve)
       .catch(reject)
   })
