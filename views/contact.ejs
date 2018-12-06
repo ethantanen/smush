@@ -9,13 +9,47 @@
 <body >
   <% include partials/navbar.ejs %>
 
-  <h1> Contact! </h1>
-  <h3> Send us an email </h3>
-  <br><br>
-  <form action='/contact/sendEmail' method='POST'>
-    name <input type='text' name='name'><br><br>
-    email <input type='text' name='email'><br><br>
-    message <input type='text' name='message'><br><br>
-    <input type='submit'>
-  </form>
+  <link rel='stylesheet' href='bootstrap-social.css'>
+<!-- Add font awesome icons -->
+
+
+  <p style="margin-bottom:10%;"> </p>
+
+  <div class="container">
+    <div class="row">
+      <div class='col-md-5 offset-md-4'>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+
+
+          <!-- Title -->
+          <h3> Send SMUSH an email </h3>
+
+
+          <!-- Login with username and password -->
+          <div class='row' style="margin-bottom:3px;">
+            <div class='col-md-12'>
+              <form action='/contact/sendEmail' method='POST' id="email">
+                <input type='text' class="form-control" placeholder="Your name" ><br>
+                <input type='text' class="form-control" placeholder="Email" ><br>
+                <input type='text' class="form-control" placeholder="Your message"><br>
+            </div>
+          </div>
+
+          <!-- Login page footer -->
+          <div class="row">
+
+
+
+            <!-- Login button -->
+            <div class="col-md-1 pull-left">
+              <button type="submit" class="btn btn-large btn-danger pull-right" form='email' style="margin: 0 auto">Send Email</button>
+            </div>
+          </div>
+
+          <% include partials/message.ejs %>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
