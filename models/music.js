@@ -86,4 +86,5 @@ module.exports = {
   remove: remove,
   update: update,
   select: select,
+  search: search,
 }

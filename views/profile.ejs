@@ -24,10 +24,19 @@
 
           <!-- User Info -->
           <form>
-            <input type="text" class="form-control" placeholder=  '<%= JSON.stringify(user.name) %>' name='username' readonly>
-            <!-- <input type="text" class="form-control" placeholder="Username"  name='username' >
-            <input type="text" class="form-control" placeholder="Username"  name='username'  >
-            <input type="text" class="form-control" placeholder="Username"  name='username'  > -->
+            <div class="input-group mb-7">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="email">Email</span>
+              </div>
+              <input type="text" class="form-control" placeholder="<%= user.email %>" aria-describedby="email">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="permissions">Permissions</span>
+              </div>
+              <input type="text" class="form-control" placeholder="<%= user.permissions %>" aria-describedby="permissions">
+            </div>
+
 
           </form>
           <!-- <h2> <%= user.permissions %> </h2>
