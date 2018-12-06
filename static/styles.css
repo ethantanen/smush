@@ -32,11 +32,11 @@ h2 {
   height: 100%;
   background-size: cover;
   position: absolute;
-  -webkit-animation: 900000s backgroundScroll infinite linear;
-  -moz-animation: 900000s backgroundScroll infinite linear;
-  -o-animation: 900000s backgroundScroll infinite linear;
-  -ms-animation: 900000s backgroundScroll infinite linear;
-  animation: 900000s backgroundScroll infinite linear;
+  -webkit-animation: 9000000s backgroundScroll infinite linear;
+  -moz-animation: 9000000s backgroundScroll infinite linear;
+  -o-animation: 9000000s backgroundScroll infinite linear;
+  -ms-animation: 9000000s backgroundScroll infinite linear;
+  animation: 9000000s backgroundScroll infinite linear;
 }
 
 @-webkit-keyframes backgroundScroll {
