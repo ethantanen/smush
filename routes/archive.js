@@ -40,7 +40,7 @@ router.get('/select', async (req, res) => {
   try {
     results = await music.select(format(req.query))
     console.log(format(req.query))
-    res.render('results.ejs', {data: results})
+    res.render('results.ejs', {data: results, isLoggedIn: req.session.passport})
   } catch (err) {
     res.status(404).render('error.ejs')
   }
@@ -50,7 +50,7 @@ router.get('/select', async (req, res) => {
 router.get('/search', async (req, res) => {
   try {
     results = await music.search(format(req.query))
-    res.render('results.ejs', {data: results})
+    res.render('results.ejs', {data: results, isLoggedIn: req.session.passport})
   } catch (err) {
     res.status(404).render('error.ejs')
   }

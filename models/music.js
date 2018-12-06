@@ -1,5 +1,6 @@
 // TODO: check for redundency before inserting a document
 var mongoose = require('mongoose');
+var textSearch = require('mongoose-text-search');
 
 // NOTE: we can limit amount of data by making the midi file a derived element
 // return json representation of music database entry
@@ -41,10 +42,9 @@ function select(query) {
 // search database with mongodb text field
 function search(query) {
   return new Promise((resolve, reject) => {
-    //TODO: add search w/ text qualifier 
+    //TODO: add search w/ text qualifier
   })
 }
-
 
 // update document in database
 function update(query, update) {
@@ -67,7 +67,7 @@ function remove(query) {
 }
 
 // connect to database
-function connect() {
+async function connect() {
   // connect to mongo database
   const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
     '@ds115712.mlab.com:15712/music_app_1234'
@@ -83,8 +83,15 @@ function connect() {
     image: String
   })
 
+  musicSchema.plugin(textSearch)
+  musicSchema.index({'$**': "text"})
+
   // create model
-  global.Music = mongoose.model('Music', musicSchema)
+  global.Music =  mongoose.model('Music', musicSchema)
+  
+  // Music.createIndex({name: 'text', trackName: 'text', key: 'text', tempo: 'text'})
+
+
 }
 
 // make functions visible to other modules

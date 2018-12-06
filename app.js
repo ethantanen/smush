@@ -23,12 +23,6 @@ const archive = require('./routes/archive')
 // create app
 app = express()
 
-// TODO move this elsewhere bruh!
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(flash());
-
-
 // start server on port 3000
 app.listen(3000, (err) => {
   if (err) { return console.log(err) }
@@ -38,32 +32,33 @@ app.listen(3000, (err) => {
 // set view engine
 app.set('view engine', 'ejs')
 
-
-// TESTING TESTING TESTING
-app.get('/home', (req, res) => {
-  res.render('home.ejs')
-})
-
-//testing my musicdtails
-app.get('/musicdetails', (req, res) => {
-  res.render('musicdetails.ejs', {data: {trackName: "twinkle little star", artistName: "kuooenting", key:"key", tempo:"999", image:"encoded image string"}})
-})
-
-app.get('/results', (req, res) => {
-  res.render('results.ejs', {data: [{id:"", artistName:"", trackName:"" }]})
-})
-
-
 // add middleware
 app.use(bodyParser({limit: '50mb'}))
 app.use(express.static(__dirname + '/static'))
 app.use(logger('dev'))
-app.use(session({secret: 'guccipancakes'}))
+app.use(session({secret: 'guccipancakes', cookie: {secure: false}}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash());
 
 // TODO: delete this!
 app.use((req, res, next) => {
-  // console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
+  //console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
   next()
+})
+
+// TESTING TESTING TESTING
+app.get('/home', (req, res) => {
+  res.render('home.ejs', {message: '', isLoggedIn: req.user})
+})
+
+//testing my musicdtails
+app.get('/musicdetails', (req, res) => {
+  res.render('musicdetails.ejs', {data: {trackName: "twinkle little star", artistName: "kuooenting", key:"key", tempo:"999", image:"encoded image string"}, isLoggedIn: req.user})
+})
+
+app.get('/results', (req, res) => {
+  res.render('results.ejs', {data: [{id:"", artistName:"", trackName:"" }]})
 })
 
 // connect routers
