@@ -52,6 +52,7 @@ router.get('/search', async (req, res) => {
     results = await music.search(req.query.search)
     res.render('results.ejs', {data: results, isLoggedIn: req.session.passport})
   } catch (err) {
+    console.log(err)
     res.status(404).render('error.ejs')
   }
 })
