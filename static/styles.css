@@ -12,7 +12,9 @@ body {
 .result {
 margin: auto;
 }
-
+fieldset {
+  margin:auto;
+}
 
 h1,
 h2 {

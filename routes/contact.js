@@ -12,7 +12,7 @@ const transporter = require('nodemailer').createTransport({
 
 // render contact view
 router.get('/', (req, res) => {
-  res.render('contact.ejs')
+  res.render('contact.ejs', {isLoggedIn: req.user})
 })
 
 // use nodemailer to send the email
