@@ -29,8 +29,6 @@ app.listen(3000, (err) => {
   console.log('listening on port 3000')
 })
 
-// TODO: logoff button rendered w/ conditoinal if user is logged in
-
 // set view engine
 app.set('view engine', 'ejs')
 
@@ -38,17 +36,16 @@ app.set('view engine', 'ejs')
 app.use(bodyParser({limit: '50mb'}))
 app.use(express.static(__dirname + '/static'))
 app.use(logger('dev'))
-app.use(session({secret: 'guccipancakes'}))
+app.use(session({secret: 'guccipancakes', cookie: {secure: false}}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash());
 
 // TODO: delete this!
 app.use((req, res, next) => {
-  // console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
+  //console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
   next()
 })
-
 
 // TESTING TESTING TESTING
 app.get('/home', (req, res) => {
@@ -57,7 +54,7 @@ app.get('/home', (req, res) => {
 
 //testing my musicdtails
 app.get('/musicdetails', (req, res) => {
-  res.render('musicdetails.ejs', {data: {trackName: "twinkle little star", artistName: "kuooenting", key:"key", tempo:"999", image:"encoded image string"}})
+  res.render('musicdetails.ejs', {data: {trackName: "twinkle little star", artistName: "kuooenting", key:"key", tempo:"999", image:"encoded image string"}, isLoggedIn: req.user})
 })
 
 app.get('/results', (req, res) => {
@@ -71,5 +68,5 @@ app.use('/archive', archive.router)
 
 // render homescreen/ redirect unmatched urls to homescreen
 app.all('/*', (req, res) => {
-  res.render('index.ejs')
+  res.render('home.ejs', {message: '', isLoggedIn: req.user})
 })

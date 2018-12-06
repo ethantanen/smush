@@ -19,12 +19,13 @@ function makeUser(username=null, password=null, email=null, name=null, permissio
 // insert document into database
 async function insert(entry) {
   return new Promise( async (resolve, reject) => {
-
+    console.log('[ENTRY]', entry)
     // check if user exists already before inserting new user
-    isUser = await User.findOne({$or: [{username: entry.username}, {email: entry.email}]})
+    isUser = await User.findOne(entry)
     if (isUser) return reject('username or email already exists')
 
-    entry.password = await makePasswordHash(entry.password)
+    if(entry.password) entry.password = await makePasswordHash(entry.password)
+
     user = new User(entry)
     user.save().then((user) => {
       if(!user) return reject('couldn\'t add user')
@@ -87,6 +88,8 @@ function connect() {
     password: String,
     email: String,
     name: String,
+    facebookId: String,
+    twitterId: String,
     permissions: String,
   })
 

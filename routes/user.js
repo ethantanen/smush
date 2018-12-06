@@ -6,20 +6,13 @@ const passport = require('passport')
 // import model
 const users = require('../models/users')
 
-
-// TODO:
-// where should a user be redirected if theyre already logged in and visit the log in page?
-//
-
 // log a user in
-// TODO: this is where we should store the users permissions in the session
 router.post('/authenticate', passport.authenticate('local',
   {
     successRedirect: '/home',
     failureRedirect: '/user/login',
     failureFlash: true
-  }), (req, res) => {console.log('yo')}
-)
+}))
 
 // log a user off
 router.get('/logout', (req, res) => {
@@ -36,6 +29,23 @@ router.get('/login', (req, res) => {
   res.render('login.ejs', {message: req.flash('error'), isLoggedIn: req.user})
 })
 
+router.get('/facebook-login', passport.authenticate('facebook', {scope: ['email']}))
+router.get('/facebook-token', passport.authenticate('facebook',
+{
+  successRedirect: '/home',
+  failureRedirect: '/user/login',
+  failureFlash: true
+
+}))
+
+router.get('/twitter-login', passport.authenticate('twitter'))
+router.get('/twitter-token', passport.authenticate('twitter',
+{
+  successRedirect: '/home',
+  failureRedirect: '/user/login',
+  failureFlash: true
+}))
+
 router.get('/signup', (req, res) => {
   if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in', isLoggedIn: true})
   res.render('signup.ejs', {message: "", isLoggedIn: req.user})
@@ -46,7 +56,7 @@ router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))
     req.login({username: entry.username, password: entry.password}, (err) => {
-      res.redirect('/home')
+      res.render('home.ejs', {message: 'Welcome ' + entry.name, isLoggedIn: true})
     })
   } catch (err) {
     res.render('signup.ejs', {message: 'Username already taken!', isLoggedIn: req.user})
@@ -93,7 +103,6 @@ router.post('/update', async (req, res) => {
     entry = await users.update(format(oldEntry), format(newEntry))
     res.send(entry)
   } catch (err) {
-    console.log(err)
     res.send('something went wrong')
   }
 })
