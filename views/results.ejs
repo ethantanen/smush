@@ -3,10 +3,11 @@
 <html>
 
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <% include partials/head.ejs %>
+
+<script>
+  var image = new Image();
+</script>
 
 </head>
 
@@ -25,40 +26,48 @@
       <input type='submit'>
     </form>
     <br>
-
   <hgroup class="mb20">
 		<h1>Search Results</h1>
 		<h2 class="lead"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
 	</hgroup>
+  <br>
+  <div class="result">
 
   <% for (result in data) { %>
-    <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="table-container">
-            <table class="table table-filter">
-              <tbody>
-                <tr>
-                  <td>
-                    Artist: <%=data[result].artistName %>
-                  </td>
-                  <td>
-                    <a href=/<%= data[result].id%> </a> Track: <%=data[result].trackName %>
-                  </td>
-                  <td>
-                    <div class="media">
-                      <a href="#" class="pull-right">
-                        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% } %>
+      <a href=/<%= data[result].id%> >
+        <table class="table table-filter fixed">
 
+          <tr id="row">
+          <col width="50%"/>
+          <col width="30%"/>
+          <col width="20%"/>
+            <td>
+              Artist: <%=data[result].artistName %>
+            </td>
+            <td>
+              Track: <%=data[result].trackName %>
+            </td>
+            <td id="image<%=result%>">
+            </td>
+
+            <script>
+              cell = document.getElementById("image<%=result%>");
+              image = new Image();
+
+              image.src = 'data:image/png;base64,<%=data[result].image%>';
+              ratio = Math.min(100 / image.width, 100 / image.height);
+              image.width = image.width*ratio;
+              image.height = image.height*ratio;
+
+              cell.appendChild(image);
+
+            </script>
+            </tr>
+        </table>
+        </a>
+
+  <% } %>
+  </div>
 </div>
+</body>
 </html>

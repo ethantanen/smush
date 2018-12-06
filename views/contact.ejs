@@ -2,12 +2,15 @@
 <html>
 
 <head>
+  <% include partials/head.ejs %>
+
 </head>
 
 <body >
+  <% include partials/navbar.ejs %>
 
   <h1> Contact! </h1>
-  <h3> Send us a freakin' email! </h3>
+  <h3> Send us an email </h3>
   <br><br>
   <form action='/contact/sendEmail' method='POST'>
     name <input type='text' name='name'><br>

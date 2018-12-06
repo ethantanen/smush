@@ -72,5 +72,5 @@ app.use('/archive', archive.router)
 
 // render homescreen/ redirect unmatched urls to homescreen
 app.all('/*', (req, res) => {
-  res.render('home.ejs', {message: '', isLoggedIn: req.user})
+  res.render('index.ejs', {isLoggedIn:req.user, message: ""})
 })
