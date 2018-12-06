@@ -19,6 +19,8 @@ passport.use(new LocalStrategy( (username, password, done) => {
     })
 }))
 
+console.log(process.env.FACEBOOK_CLIENTID)
+
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENTID,
   clientSecret: process.env.FACEBOOK_CLIENTSECRET,
