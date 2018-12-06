@@ -5,21 +5,9 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-// return json representation of user
-function makeUser(username=null, password=null, email=null, name=null, permissions=null) {
-  return {
-    username: username,
-    password: password,
-    email: email,
-    name: name,
-    permissions: permissions,
-  }
-}
-
 // insert document into database
 async function insert(entry) {
   return new Promise( async (resolve, reject) => {
-    console.log('[ENTRY]', entry)
     // check if user exists already before inserting new user
     isUser = await User.findOne(entry)
     if (isUser) return reject('username or email already exists')
@@ -35,8 +23,6 @@ async function insert(entry) {
 }
 
 // select document from database, returns a promise-like object (good for async, await)
-// TODO: maybe create specific functions for more
-// complex queries
 function select(query) {
   return new Promise((resolve, reject) => {
     User.findOne(query).then((users) => {//.limit.sort ... very open ended!

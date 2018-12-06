@@ -51,6 +51,9 @@ router.get('/signup', (req, res) => {
   res.render('signup.ejs', {message: "", isLoggedIn: req.user})
 })
 
+router.get('/reset-password', (req, res) => {
+  res.render('reset-password.ejs', {isLoggedIn: req.user})
+})
 // add new user to database and log them in
 router.post('/insert', async (req, res) => {
   try {
@@ -82,6 +85,11 @@ router.get('/select', async (req, res) => {
   } catch (err) {
     res.status(404).send('something went wrong')
   }
+})
+
+router.get('/profile', (req, res) => {
+  console.log(req.user)
+  res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
 })
 
 // update entry

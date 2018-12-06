@@ -2,19 +2,6 @@
 var mongoose = require('mongoose');
 var textSearch = require('mongoose-text-search');
 
-// NOTE: we can limit amount of data by making the midi file a derived element
-// return json representation of music database entry
-function makeEntry(artistName, trackName, musicXML, key, tempo, image) {
-  return {
-    artistName: artistName,
-    trackName: trackName,
-    musicXML: musicXML,
-    key: key,
-    tempo: tempo,
-    image: image,
-  }
-}
-
 // insert document into database
 function insert(entry) {
   return new Promise((resolve, reject) => {
@@ -28,8 +15,6 @@ function insert(entry) {
 }
 
 // select document from database, returns a promise-like object (good for async, await)
-// TODO: maybe create specific functions for more
-// complex queries
 function select(query) {
   return new Promise((resolve, reject) => {
     Music.find(query).then((entry) => {//.limit.sort ... very open ended!
@@ -42,7 +27,9 @@ function select(query) {
 // search database with mongodb text field
 function search(query) {
   return new Promise((resolve, reject) => {
-    //TODO: add search w/ text qualifier
+    Music.find({$text: {$search: "123" }})
+      .then(resolve)
+      .catch(reject)
   })
 }
 
@@ -68,6 +55,7 @@ function remove(query) {
 
 // connect to database
 async function connect() {
+
   // connect to mongo database
   const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
     '@ds115712.mlab.com:15712/music_app_1234'
@@ -83,14 +71,11 @@ async function connect() {
     image: String
   })
 
-  musicSchema.plugin(textSearch)
-  musicSchema.index({'$**': "text"})
+  // setup indices for full text search
+  musicSchema.index({name: 'text', trackName: 'text', key: 'text', tempo: 'text'})
 
   // create model
   global.Music =  mongoose.model('Music', musicSchema)
-  
-  // Music.createIndex({name: 'text', trackName: 'text', key: 'text', tempo: 'text'})
-
 
 }
 
