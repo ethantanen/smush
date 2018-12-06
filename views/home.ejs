@@ -23,22 +23,20 @@
       </div>
     </div>
 
-    <form action=#TODO method='POST' enctype='multipart/form-data'>
-      <div class="container">
-          <h5>Search Music...</h5>
-          <div class="row">
-              <div class="col-12">
-                  <div class="input-group">
-                      <input id="search" class="form-control border-secondary py-2" type="search" value="search" action="archive/search">
-                      <div class="input-group-append">
-                          <a href="#TODOwithsearchdata" class="btn btn-outline-secondary"></a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+    <div class="container">
+        <h5>Search Music...</h5>
+        <div class="row">
+            <div class="col-12">
+              <form action='/archive/search'>
+                <div class="input-group">
+                    <input name="search" class="form-control border-secondary py-2" type="text" placeholder="search">
+                    <a class="btn btn-outline-secondary" type='submit'></a>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
 
-    </form>
   </div>
 
   <% include partials/message.ejs %>
