@@ -48,6 +48,10 @@ app.use((req, res, next) => {
 })
 
 // TESTING TESTING TESTING
+
+app.get('/index', (req, res) => {
+  res.render('index.ejs')
+})
 app.get('/home', (req, res) => {
   res.render('home.ejs', {message: '', isLoggedIn: req.user})
 })
