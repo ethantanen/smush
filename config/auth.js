@@ -20,9 +20,9 @@ passport.use(new LocalStrategy( (username, password, done) => {
 }))
 
 passport.use(new FacebookStrategy({
-  clientID: '342802929843522',
-  clientSecret: 'c9a7ecfc28b10fffb1e13a60258687c2',
-  callbackURL: 'http://localhost:3000/user/facebook-token',
+  clientID: process.env.FACEBOOK_CLIENTID,
+  clientSecret: process.env.FACEBOOK_CLIENTSECRET,
+  callbackURL: process.env.FACEBOOK_CALLBACKURL,
   profileFields: ['id', 'emails', 'displayName']
 }, (accessToken, refreshToken, profile, done) => {
   return users.select({facebookId: profile.id})
@@ -36,9 +36,9 @@ passport.use(new FacebookStrategy({
 }))
 
 passport.use(new TwitterStrategy({
-  consumerKey: 'lUReLL1gN7FSolcFtwamG4emf',
-  consumerSecret: 'khHCpKvCsAumbJnnSFkTT7UIkSI5VHQjiDnXCo3HeNRJod4fr3',
-  callbackURL: 'http://localhost:3000/user/twitter-token'
+  consumerKey: process.env.TWITTER_CONSUMERKEY,
+  consumerSecret: process.env.TWITTER_CONSUMERSECRET,
+  callbackURL: process.env.TWITTER_CALLBACKURL,
 
 }, (token, tokenSecret, profile, done) => {
   return users.select({twitterId: profile.id})
