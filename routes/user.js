@@ -23,15 +23,22 @@ router.post('/authenticate', passport.authenticate('local',
 
 // log a user off
 router.get('/logout', (req, res) => {
+  if (!req.user) return res.redirect('/home')
+  user = req.user
   req.session.destroy((err) => {
-    res.redirect('/home')
+    res.render('home.ejs', {message: user.name + ' has been logged out of SMUSH!', isLoggedIn: false})
   })
 })
 
 // authenticate user
 router.get('/login', (req, res) => {
-  if (req.session.passport) return res.send('you are already logged in ')
-  res.render('login.ejs', {message: req.flash('error')})
+  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in!', isLoggedIn: true})
+  res.render('login.ejs', {message: req.flash('error'), isLoggedIn: req.user})
+})
+
+router.get('/signup', (req, res) => {
+  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in', isLoggedIn: true})
+  res.render('signup.ejs', {message: "", isLoggedIn: req.user})
 })
 
 // add new user to database and log them in
@@ -39,10 +46,10 @@ router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))
     req.login({username: entry.username, password: entry.password}, (err) => {
-      res.redirect('/')
+      res.redirect('/home')
     })
   } catch (err) {
-    res.send('something went wrong!')
+    res.render('signup.ejs', {message: 'Username already taken!', isLoggedIn: req.user})
   }
 })
 

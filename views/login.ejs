@@ -1,89 +1,72 @@
 <html>
 <head>
-
   <% include partials/head.ejs %>
-
-
 </head>
 
 <% include partials/navbar.ejs %>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<body>
+
+  <p style="margin-bottom:10%;"> </p>
+
+  <div class="container">
+    <div class="row">
 
 
+      <div class='col-md-5 offset-md-4'>
 
-<p style="margin-bottom:10%;"> </p>
-
-<div class="container">
-  <div class="row">
+        <div class="shadow p-3 mb-5 bg-white rounded">
 
 
-    <div class='col-md-5 offset-md-4'>
-
-      <div class="shadow p-3 mb-5 bg-white rounded">
-
-
-        <!-- Title -->
-        <h3> Login to Smush! </h3>
+          <!-- Title -->
+          <h3> Login to Smush! </h3>
 
 
-        <!-- Login with facebook -->
-        <div class="row" style="margin-bottom:3px;">
-          <div class="col-md-12">
-            <a href="#" class="btn btn-primary btn-block"> <i class="icon-facebook"></i> Login with Facebook </a>
-          </div>
-        </div>
-
-        <!-- Login with twitter -->
-        <div class="row" style="margin-bottom:3px;">
-          <div class="col-md-12">
-            <a href="#" class="btn btn-info btn-block" > <i class="icon-twitter"></i> Login with Twitter </a>
-          </div>
-        </div>
-
-        <!-- Login with username and password -->
-        <div class='row' style="margin-bottom:3px;">
-          <div class='col-md-12'>
-            <form action='/user/authenticate' method='POST' id='login'>
-              <input type="text" class="form-control" placeholder="Username"  name='username' autofocus>
-              <input type="password" class="form-control" placeholder="Password" name='password'>
-            </form>
-          </div>
-        </div>
-
-        <!-- Login page footer -->
-        <div class="row">
-
-          <!-- Sign up and forgot password links -->
-          <div class="col-md-9">
-            <div class="left-section">
-              <a href="">Forgot your password?</a><br>
-              <a href="">Sign up now</a>
+          <!-- Login with facebook -->
+          <div class="row" style="margin-bottom:3px;">
+            <div class="col-md-12">
+              <a href="#" class="btn btn-primary btn-block"> <i class="icon-facebook"></i> Login with Facebook </a>
             </div>
           </div>
 
-          <!-- Login button -->
-          <div class="col-md-2 pull-left">
-            <button type="submit" class="btn btn-large btn-danger pull-right" form='login' >Login</button>
+          <!-- Login with twitter -->
+          <div class="row" style="margin-bottom:3px;">
+            <div class="col-md-12">
+              <a href="#" class="btn btn-info btn-block" > <i class="icon-twitter"></i> Login with Twitter </a>
+            </div>
           </div>
-        </div>
 
-        <%if (message.length > 0) { %>
-          <div id='myModal' class="modal fade b" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-              <div class="modal-content">
-                <h3> <%= message %> </h3>
+          <!-- Login with username and password -->
+          <div class='row' style="margin-bottom:3px;">
+            <div class='col-md-12'>
+              <form action='/user/authenticate' method='POST' id='login'>
+                <input type="text" class="form-control" placeholder="Username"  name='username' autofocus required>
+                <input type="password" class="form-control" placeholder="Password" name='password' required>
+              </form>
+            </div>
+          </div>
+
+          <!-- Login page footer -->
+          <div class="row">
+
+            <!-- Sign up and forgot password links -->
+            <div class="col-md-8">
+              <div class="left-section">
+                <a href="">Forgot your password?</a><br>
+                <a href="/user/signup">Sign up now</a>
               </div>
             </div>
+
+            <!-- Login button -->
+            <div class="col-md-1 pull-left">
+              <button type="submit" class="btn btn-large btn-danger pull-right" form='login' >Login</button>
+            </div>
           </div>
-          <script> $('#myModal').modal('show') </script>
-        <% } %>
 
+          <% include partials/message.ejs %>
 
-
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>

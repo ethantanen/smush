@@ -23,25 +23,36 @@ const archive = require('./routes/archive')
 // create app
 app = express()
 
-// TODO move this elsewhere bruh!
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(flash());
-
-
 // start server on port 3000
 app.listen(3000, (err) => {
   if (err) { return console.log(err) }
   console.log('listening on port 3000')
 })
 
+// TODO: logoff button rendered w/ conditoinal if user is logged in
+
 // set view engine
 app.set('view engine', 'ejs')
+
+// add middleware
+app.use(bodyParser({limit: '50mb'}))
+app.use(express.static(__dirname + '/static'))
+app.use(logger('dev'))
+app.use(session({secret: 'guccipancakes'}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash());
+
+// TODO: delete this!
+app.use((req, res, next) => {
+  // console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
+  next()
+})
 
 
 // TESTING TESTING TESTING
 app.get('/home', (req, res) => {
-  res.render('home.ejs')
+  res.render('home.ejs', {message: '', isLoggedIn: req.user})
 })
 
 //testing my musicdtails
@@ -51,19 +62,6 @@ app.get('/musicdetails', (req, res) => {
 
 app.get('/results', (req, res) => {
   res.render('results.ejs', {data: [{id:"", artistName:"", trackName:"" }]})
-})
-
-
-// add middleware
-app.use(bodyParser({limit: '50mb'}))
-app.use(express.static(__dirname + '/static'))
-app.use(logger('dev'))
-app.use(session({secret: 'guccipancakes'}))
-
-// TODO: delete this!
-app.use((req, res, next) => {
-  // console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
-  next()
 })
 
 // connect routers
