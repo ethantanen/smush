@@ -12,8 +12,9 @@ body {
 .result {
 margin: auto;
 }
-fieldset {
-  margin:auto;
+form {
+  margin: 0 auto;
+  text-align: center;
 }
 
 h1,
