@@ -90,7 +90,6 @@ router.get('/select', async (req, res) => {
 })
 
 router.get('/profile', (req, res) => {
-  console.log('[PROFILE]', req.user)
   res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
 })
 
@@ -98,6 +97,7 @@ router.get('/profile', (req, res) => {
 router.post('/update', async (req, res) => {
   // seperate html form data to determine the item that needs updating
   // and the new information
+  console.log(req.body)
   oldEntry = {}
   newEntry = {}
   for (key in req.body) {

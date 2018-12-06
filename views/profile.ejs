@@ -1,11 +1,11 @@
 
 <html>
 
-<% include partials/navbar.ejs %>
+<!-- <% include partials/navbar.ejs %>
 
 <head>
   <% include partials/head.ejs %>
-</head>
+</head> -->
 
 <body>
 
@@ -28,7 +28,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="email">Email</span>
               </div>
-              <input type="text" class="form-control" placeholder="<%= user.email %>" aria-describedby="email" readonly>
+              <input type="text" class="form-control editable" id='email' placeholder="<%= user.email %>" aria-describedby="email" readonly>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -38,26 +38,27 @@
             </div>
           </form>
 
-
           <div class='row'>
             <div class="col-md-2 pull-left">
               <button  form='profile' id='editBtn' type="button" class="btn btn-large btn-success pull-left">Edit</button>
             </div>
 
-
-            <script>
+            <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+            <script type='text/javascript'>
               $('#editBtn').on('click', (event) => {
+                console.log(jQuery)
                 // event.preventDefault()
                 if ($('#editBtn').text() === 'Edit') {
                   $('#profile').attr('action', '/user/update')
-                  $('input').attr('readonly', false)
+                  $('.editable').attr('readonly', false)
                   $('#editBtn').text('Save')
                   $('#editBtn').attr('class', 'btn btn-large btn-danger pull-left')
                 } else {
-                  $('#profile').submit()
+
+                  $.post('/user/update', {'emailO': '<%= user.email %>', 'emailN': $('.email').text()})
+
+
                 }
-
-
               })
             </script>
 
