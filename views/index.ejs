@@ -16,7 +16,7 @@
   <h1> Music Related Stuff </h1>
 
   <h4> Upload Score </h4>
-  <form action='/archive/insert/photo' method='POST' enctype='multipart/form-data'>
+  <form id="upload" action='' method='POST' enctype='multipart/form-data'>
     <input type='file' name='file'><br>
     artistName <input type='text' name='artistName'><br>
     trackName <input type='text' name='trackName'><br>
@@ -27,6 +27,38 @@
       Button
     </button>
   </form>
+  <script type='text/javascript'>
+  /* attach a submit handler to the form */
+          $("#upload").submit(function(event) {
+
+              /* stop form from submitting normally */
+              event.preventDefault();
+
+              /* get some values from elements on the page: */
+              var $form = $(this),
+                  file = $form.find('input[name="file"]').val(),
+                  artist = $form.find('input[name="artistName"]').val(),
+                  track = $form.find('input[name="trackName"]').val(),
+                  key = $form.find('input[name="key"]').val(),
+                  tempo = $form.find('input[name="tempo"]').val(),
+                  url = $form.attr('');
+
+              /* Send the data using post */
+              var posting = $.post(url, {
+                  file: file,
+                  artistName: artist,
+                  trackName: track,
+                  key : key,
+                  tempo: tempo
+              });
+
+              /* Put the results in a div */
+              posting.done(function(data) {
+                  alert('success');
+              });
+          });
+</script>
+
   <br>
 
   <h4> Search Archive </h4>

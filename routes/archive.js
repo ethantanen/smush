@@ -19,9 +19,9 @@ router.post('/insert/photo', upload.single('file'), async (req, res) => {
   // insert file into music database
   try {
     entry = await music.insert(format(req.body))
-    res.render("index.ejs", {message:"File successfully uploaded"})
+    res.send({message:"File successfully uploaded"})
   } catch (err) {
-    res.render("index.ejs", {message:"Something went wrong"})
+    res.send({message:"Something went wrong"})
   }
 })
 

@@ -5,6 +5,10 @@
 <head>
 <% include partials/head.ejs %>
 
+<script>
+  var image = new Image();
+</script>
+
 </head>
 
 <body>
@@ -28,22 +32,38 @@
 	</hgroup>
   <br>
   <div class="result">
+
   <% for (result in data) { %>
+      <a href=/<%= data[result].id%> >
         <table class="table table-filter fixed">
+
+          <tr id="row">
           <col width="33%"/>
           <col width="33%"/>
             <td>
               Artist: <%=data[result].artistName %>
             </td>
             <td>
-              <a href=/<%= data[result].id%> </a> Track: <%=data[result].trackName %>
+              Track: <%=data[result].trackName %>
             </td>
-            <td>
-              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" align="right">
+            <td id="image<%=result%>">
             </td>
 
+            <script>
+              cell = document.getElementById("image<%=result%>");
+              image = new Image();
+
+              image.src = 'data:image/png;base64,<%=data[result].image%>';
+              ratio = Math.min(100 / image.width, 100 / image.height);
+              image.width = image.width*ratio;
+              image.height = image.height*ratio;
+
+              cell.appendChild(image);
+
+            </script>
+            </tr>
         </table>
-
+        </a>
 
   <% } %>
   </div>

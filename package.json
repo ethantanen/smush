@@ -19,6 +19,8 @@
   "dependencies": {
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
+    "browserify": "^16.2.3",
+    "buffer": "^5.2.1",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
