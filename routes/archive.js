@@ -49,7 +49,7 @@ router.get('/select', async (req, res) => {
 // search database by phrase
 router.get('/search', async (req, res) => {
   try {
-    results = await music.search(format(req.query))
+    results = await music.search(req.query.search)
     res.render('results.ejs', {data: results, isLoggedIn: req.session.passport})
   } catch (err) {
     res.status(404).render('error.ejs')
