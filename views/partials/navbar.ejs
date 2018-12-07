@@ -17,8 +17,6 @@
                 <a href="/contact" class="nav-item active nav-link">Contact</a>
                 <a href="/about" class="nav-item active nav-link">About</a>
 
-                <script> console.log('<%= isLoggedIn %>') </script>
-
                 <% if (isLoggedIn && isLoggedIn.permissions==='User') { %>
                   <a href='/archive/upload' class='nav-item active nav-link'> Upload </a>
                  <% }  %>
