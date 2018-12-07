@@ -48,7 +48,6 @@ app.use((req, res, next) => {
 })
 
 // TESTING TESTING TESTING
-
 app.get('/index', (req, res) => {
   res.render('index.ejs')
 })

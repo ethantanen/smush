@@ -97,7 +97,6 @@ router.get('/profile', (req, res) => {
 router.post('/update', async (req, res) => {
   // seperate html form data to determine the item that needs updating
   // and the new information
-  console.log(req.body)
   oldEntry = {}
   newEntry = {}
   for (key in req.body) {
@@ -108,10 +107,13 @@ router.post('/update', async (req, res) => {
     }
   }
 
+  console.log('[HELLO]', newEntry, oldEntry)
+
   // update entry
   try {
     entry = await users.update(format(oldEntry), format(newEntry))
-    res.send(entry)
+    console.log('[pee]', entry)
+    res.render('profile.ejs', {message: 'Profile updated!', isLoggedIn: req.user, user: entry})
   } catch (err) {
     res.send('something went wrong')
   }

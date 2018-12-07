@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
 // insert document into database
 async function insert(entry) {
   return new Promise( async (resolve, reject) => {
-    
+
     // check if user exists already before inserting new user
     isUser = await User.findOne(entry)
     if (isUser) return reject('username or email already exists')
@@ -36,7 +36,7 @@ function select(query) {
 // update document in database
 function update(query, update) {
   return new Promise((resolve, reject) => {
-    User.findOneAndUpdate(query, update).then((user) => {
+    User.findOneAndUpdate(query, update, { new: true }).then((user) => {
       if (!user) return reject('couldn\'t update user')
       return resolve(user)
     })
