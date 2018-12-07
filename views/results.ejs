@@ -15,16 +15,19 @@
 <% include partials/navbar.ejs %>
 
 <div class="container">
+  <br>
+    <div class="row">
+        <div class="col-md-12">
+          <form action='/archive/search'>
+            <div class="input-group">
+                <input name="search" class="form-control border-secondary " type="text" placeholder="Search">
+                <a class="btn btn-outline-secondary" type='submit'><i class="fa fa-search"></i></a>
+            </div>
+          </form><br><br>
+        </div>
+    </div>
 
 
-    <h4> Search Archive </h4>
-    <form action='/archive/select'>
-      artistName <input type='text' name='artistName'><br>
-      trackName <input type='text' name='trackName'><br>
-      key <input type='text' name='key'><br>
-      tempo <input type='text' name='tempo'><br>
-      <input type='submit'>
-    </form>
     <br>
   <hgroup class="mb20">
 		<h1>Search Results</h1>
@@ -47,17 +50,24 @@
             <td>
               Track: <%=data[result].trackName %>
             </td>
-            <td id="image<%=result%>">
-            </td>
+              <td id="image<%=result%>"></td>
 
             <script>
+
+
               cell = document.getElementById("image<%=result%>");
               image = new Image();
+              ratio = Math.min(100 / image.width, 100 / image.height);
 
               image.src = 'data:image/png;base64,<%=data[result].image%>';
-              ratio = Math.min(100 / image.width, 100 / image.height);
               image.width = image.width*ratio;
               image.height = image.height*ratio;
+
+              image.onload = function(){
+              };
+
+
+
 
               cell.appendChild(image);
 
@@ -65,8 +75,15 @@
             </tr>
         </table>
         </a>
-
   <% } %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-4 offset-md-4' style = text-align:center;>
+    <a href="/archive/advsearch">
+    <button type="button" class="btn btn_material_style" >Advanced Search Options</button>
+  </a>
   </div>
 </div>
 </body>

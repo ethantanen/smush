@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/head.ejs %>
+<link rel='stylesheet' href='bootstrap-social.css'>
+</head>
+
+<body >
+  <% include partials/navbar.ejs %>
+
+
+<!-- Add font awesome icons -->
+
+
+  <p style="margin-bottom:10%;"> </p>
+
+  <div class="container">
+    <div class="row">
+      <div class='col-md-5 offset-md-4'>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+
+
+          <!-- Title -->
+          <h3> Upload a Piece </h3>
+
+
+          <!-- Login with username and password -->
+          <div class='row' style="margin-bottom:3px;">
+            <div class='col-md-12'>
+                <form id="upload" action='' method='POST' enctype='multipart/form-data'>
+                  <input type='file' class="form-control" name='file'><br>
+                  <input type='text' class="form-control" name='artistName' placeholder="Artist"><br>
+                  <input type='text' class="form-control" name='trackName' placeholder="Title"><br>
+                  <input type='text' class="form-control" name='key' placeholder="Key"><br>
+                  <input type='text' class="form-control" name='tempo' placeholder="Tempo"><br>
+                </form>
+                </div>
+          </div>
+
+          <div class="row">
+
+            <!-- Submit button -->
+            <div class="col-md-1 pull-left">
+              <button type="submit" class="btn btn-large btn-danger pull-right" form='upload'>Upload</button>
+            </div>
+          </div>
+
+          <% include partials/message.ejs %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

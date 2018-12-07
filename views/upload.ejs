@@ -3,6 +3,7 @@
 
 <head>
   <% include partials/head.ejs %>
+<link rel='stylesheet' href='bootstrap-social.css'>
 
 </head>
 
@@ -21,11 +22,14 @@
         <div class="shadow p-3 mb-5 bg-white rounded">
 
           <!-- Title -->
+
           <h3> Upload Score </h3>
 
-          <!-- Login with username and password -->
-          <div class='row' style="margin-bottom:3px;">
-            <div class='col-md-12'>
+          <div class="row">
+
+            <!-- Submit button -->
+          </div>
+
               <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
                 <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
                 <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
@@ -37,7 +41,6 @@
               </form>
             </div>
           </div>
-
 
           <% include partials/message.ejs %>
 
