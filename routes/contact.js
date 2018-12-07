@@ -26,8 +26,8 @@ router.post('/sendEmail', (req, res) => {
 router.get('/request-admin', (req, res) => {
   req.body.message = 'Request Admin Permission <br>' +
   '<form action="http://localhost:3000/user/update" method="POST">' +
-  '<input type="text" name="_id" value="' + req.user._id + '" readonly>' +
-  '<input type="text" name="permissions" value="Admin" readonly>' +
+  'ID: <input type="text" name="_id" value="' + req.user._id + '" readonly>' +
+  'Permissions: <input type="text" name="permissions" value="Admin" readonly>' +
   '<input type="submit">' +
   '</form>'
 

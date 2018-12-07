@@ -60,7 +60,6 @@ function makePasswordHash(password) {
 
 // check if hash matches plain text password
 function validatePasswordHash(password, storedPasswordHash) {
-  console.log('dfjas;ldfja;lskdjfalk;sdjf;alksdjf;asj')
   return bcrypt.compare(password, storedPasswordHash)
 }
 

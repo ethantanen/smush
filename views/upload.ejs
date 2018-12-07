@@ -22,27 +22,23 @@
 
 
           <!-- Title -->
-          <h3> Send SMUSH an email </h3>
+          <h3> Upload Score </h3>
 
 
           <!-- Login with username and password -->
           <div class='row' style="margin-bottom:3px;">
             <div class='col-md-12'>
               <form action='/contact/sendEmail' method='POST' id="email">
-                <input type='text' class="form-control" placeholder="Your name" ><br>
-                <input type='text' class="form-control" placeholder="Email" ><br>
-                <input type='text' class="form-control" placeholder="Your message"><br>
+                <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
+                <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
+                <input type='text' class="form-control" placeholder="Key" name='key'><br>
+                <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
+                <input type='file' class="form-control" placeholder="Image" name='image'><br>
+                <input type='file' class="form-control" placeholder="Midi or MusicXML" name='midi'>
+                <input type='submit' class='form-control' value='Upload'>
             </div>
           </div>
 
-          <!-- Login page footer -->
-          <div class="row">
-
-            <!-- Login button -->
-            <div class="col-md-1 pull-left">
-              <button type="submit" class="btn btn-large btn-danger pull-right" form='email' style="margin: 0 auto">Send Email</button>
-            </div>
-          </div>
 
           <% include partials/message.ejs %>
 

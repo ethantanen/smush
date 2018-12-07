@@ -6,6 +6,12 @@ const router = require('express').Router()
 // import model
 const music = require('../models/music')
 
+
+// TODO: check permissions 
+router.get('/upload', (req, res) => {
+  res.render('upload.ejs', {isLoggedIn: req.user})
+})
+
 // make new entry using an image
 // TODO: should be an insert/ from-html-form type thing
 router.post('/insert/photo', upload.single('file'), async (req, res) => {
@@ -39,7 +45,6 @@ router.get('/remove', async (req, res) => {
 router.get('/select', async (req, res) => {
   try {
     results = await music.select(format(req.query))
-    console.log(format(req.query))
     res.render('results.ejs', {data: results, isLoggedIn: req.user})
   } catch (err) {
     res.status(404).render('error.ejs')
@@ -52,7 +57,6 @@ router.get('/search', async (req, res) => {
     results = await music.search(req.query.search)
     res.render('results.ejs', {data: results, isLoggedIn: req.user})
   } catch (err) {
-    console.log(err)
     res.status(404).render('error.ejs')
   }
 })
