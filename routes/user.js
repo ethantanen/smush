@@ -21,14 +21,14 @@ router.get('/logout', (req, res) => {
   if (!req.user) return res.redirect('/home')
   user = req.user
   req.session.destroy((err) => {
-    res.render('home.ejs', {message: user.name + ' has been logged out of SMUSH!', isLoggedIn: false})
+    res.render('home.ejs', {message: user.name + ' has been logged out of SMUSH!', isLoggedIn: req.user})
   })
 })
 
 // authenticate user
 router.get('/login', (req, res) => {
-  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in!', isLoggedIn: true})
-  res.render('login.ejs', {message: req.flash('error'), isLoggedIn: req.user})
+  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in!', isLoggedIn: req.user})
+  res.render('login.ejs', {message: req.flash('error'), isLoggedIn: false})
 })
 
 router.get('/facebook-login', passport.authenticate('facebook', {scope: ['email']}))
@@ -49,7 +49,7 @@ router.get('/twitter-token', passport.authenticate('twitter',
 }))
 
 router.get('/signup', (req, res) => {
-  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in', isLoggedIn: true})
+  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in', isLoggedIn: req.user})
   res.render('signup.ejs', {message: "", isLoggedIn: req.user})
 })
 
@@ -61,7 +61,7 @@ router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))
     req.login(entry, (err) => {
-      res.render('home.ejs', {message: 'Welcome ' + entry.name, isLoggedIn: true})
+      res.render('home.ejs', {message: 'Welcome ' + entry.name, isLoggedIn: req.user})
     })
   } catch (err) {
     res.render('signup.ejs', {message: 'Username already taken!', isLoggedIn: req.user})

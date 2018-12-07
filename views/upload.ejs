@@ -28,14 +28,15 @@
           <!-- Login with username and password -->
           <div class='row' style="margin-bottom:3px;">
             <div class='col-md-12'>
-              <form action='/contact/sendEmail' method='POST' id="email">
+              <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
                 <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
                 <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
                 <input type='text' class="form-control" placeholder="Key" name='key'><br>
                 <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
-                <input type='file' class="form-control" placeholder="Image" name='image'><br>
-                <input type='file' class="form-control" placeholder="Midi or MusicXML" name='midi'>
-                <input type='submit' class='form-control' value='Upload'>
+                Image of Score <input type='file' class='form-control' name='file'><br>
+                Midi or MusicXML File <input type='file' class='form-control' name='file'><br>
+                <button type="submit" class="btn btn-success">Upload</button>
+              </form>
             </div>
           </div>
 
