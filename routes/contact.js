@@ -31,7 +31,6 @@ router.get('/request-admin', (req, res) => {
   '<input type="submit">' +
   '</form>'
 
-  console.log('req.body', req.body)
   transporter.sendMail(format(req.body), (err, m) => {
     if (err) console.log(err);
     res.render('profile.ejs', {message: 'Admin. Permissions request sent!', isLoggedIn: req.user, user: req.user})

@@ -49,7 +49,6 @@ router.get('/remove', async (req, res) => {
 //testing my musicdtails
 router.get('/archive-entry*', async (req, res) => {
   data = await music.select(req.query)
-  console.log(data[0])
   res.render('archive-entry.ejs', {data: data[0], isLoggedIn: req.user, message:''})
 })
 

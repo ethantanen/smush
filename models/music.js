@@ -59,6 +59,7 @@ async function connect() {
   // connect to mongo database
   const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
     '@ds115712.mlab.com:15712/music_app_1234'
+  console.log(URI)
   mongoose.connect(URI, {useNewUrlParser: true})
 
   // define music schema
@@ -73,11 +74,10 @@ async function connect() {
   })
 
   // setup indices for full text search
-  musicSchema.index({name: 'text', trackName: 'text', key: 'text', tempo: 'text'})
+  musicSchema.index({artistName: 'text', trackName: 'text', key: 'text', tempo: 'text'})
 
   // create model
   global.Music =  mongoose.model('Music', musicSchema)
-
 }
 
 // make functions visible to other modules

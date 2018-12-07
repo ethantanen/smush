@@ -107,12 +107,9 @@ router.post('/update', async (req, res) => {
     }
   }
 
-  console.log('[HELLO]', newEntry, oldEntry)
-
   // update entry
   try {
     entry = await users.update(format(oldEntry), format(newEntry))
-    console.log('[pee]', entry)
     res.render('profile.ejs', {message: 'Profile updated!', isLoggedIn: req.user, user: entry})
   } catch (err) {
     res.send('something went wrong')

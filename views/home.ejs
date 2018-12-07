@@ -12,8 +12,8 @@
 
 
 
-  <body>
-        <% include partials/navbar.ejs %>
+<body>
+  <% include partials/navbar.ejs %>
 
   <div style="text-align:center;">
     <div id="banner">
@@ -27,16 +27,16 @@
 
     <div class="container">
 
-        <h5>Search Music...</h5>
+      <h5>Search Music...</h5>
 
-        <div class="row">
-            <div class="col-md-12">
-              <form action='/archive/search'>
-                <div class="input-group">
-                    <input name="search" class="form-control border-secondary " type="text" placeholder="search">
-                    <a class="btn btn-outline-secondary" type='submit'><i class="fa fa-search"></i></a>
-                </div>
-              </form><br><br>
+      <div class="row">
+        <div class="col-md-12">
+          <form action='/archive/search'>
+            <div class="input-group">
+              <input name="search" class="form-control border-secondary " type="text" placeholder="search">
+              <a class="btn btn-outline-secondary" type='submit'><i class="fa fa-search"></i></a>
+            </div>
+          </form><br><br>
             </div>
         </div>
 
@@ -46,10 +46,11 @@
           </div>
         </div>
 
+      </div>
     </div>
-  </div>
 
-  <% include partials/message.ejs %>
+    <% include partials/message.ejs %>
 
-  </body>
+</body>
+
 </html>
