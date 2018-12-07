@@ -68,7 +68,8 @@ async function connect() {
     musicXML: String,
     key: String,
     tempo: String,
-    image: String
+    image: String,
+    midi: String,
   })
 
   // setup indices for full text search

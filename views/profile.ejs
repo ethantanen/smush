@@ -23,48 +23,65 @@
           <h3> <%= user.name %> </h3>
 
           <!-- User Info -->
-          <form id='profile'>
+          <form id='profile' method='POST'>
             <div class="input-group mb-4">
+              <!-- Form -->
               <div class="input-group-prepend">
                 <span class="input-group-text" id="email">Email</span>
               </div>
-              <input type="text" class="form-control editable" id='email' placeholder="<%= user.email %>" aria-describedby="email" readonly>
+              <input type="email" class="form-control editable" id='email' name='emailN' placeholder="<%= user.email %>" aria-describedby="email" readonly>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="permissions">Permissions</span>
               </div>
+
+              <!-- Old Information if update -->
+              <input type="hidden" name="emailO" value="<%=user.email%>" />
+
+
               <input type="text" class="form-control" placeholder="<%= user.permissions %>" aria-describedby="permissions" readonly>
             </div>
           </form>
 
-          <div class='row'>
-            <div class="col-md-2 pull-left">
-              <button  form='profile' id='editBtn' type="button" class="btn btn-large btn-success pull-left">Edit</button>
+
+
+            <!-- Edit button -->
+            <div class="btn-toolbar">
+              <div class='btn-group'>
+                <button  form='profile' id='editBtn' type="button" class="btn btn-large btn-success pull-left">Edit</button>
+                <button type="submit" style="visibility:hidden" id='cancel' class="btn btn-large btn-danger pull-right">Cancel</button>
+              </div>
             </div>
+            <!-- Request Admin Permission button -->
+            <br>
+
+            <form>
+              <button type="submit" class="btn btn-large btn-secondary pull-right" formaction='/contact/request-admin'>Request Admin Permissions</button>
+            </form>
+
+
+
 
             <script type='text/javascript'>
               $('#editBtn').on('click', (event) => {
-                console.log(jQuery)
-                // event.preventDefault()
                 if ($('#editBtn').text() === 'Edit') {
                   $('#profile').attr('action', '/user/update')
                   $('.editable').attr('readonly', false)
                   $('#editBtn').text('Save')
-                  $('#editBtn').attr('class', 'btn btn-large btn-danger pull-left')
+                  $('#editBtn').attr('class', 'btn btn-large btn-success pull-left')
+                  $('#cancel').attr('style', 'visibility:visible')
                 } else {
-
-                  $.post('/user/update', {'emailO': '<%= user.email %>', 'emailN': $('.email').text()})
-
-
+                  $('#profile').submit()
                 }
+              })
+
+              $('#cancel').on('click', (event) => {
+                $('.editable').attr('readonly', true)
               })
             </script>
 
-            <div class="col-md-9 pull-left">
-              <button type="submit" class="btn btn-large btn-secondary pull-right" formaction='/user/request-admin'>Request Admin Permissions</button>
-            </div>
-          </div>
+
 
 
 

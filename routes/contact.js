@@ -5,8 +5,8 @@ const router = require('express').Router()
 const transporter = require('nodemailer').createTransport({
  service: 'gmail',
  auth: {
-        user: 'guccipancakes1234@gmail.com',
-        pass: 'account password'
+        user: process.env.USERNAME_EMAIL,
+        pass: process.env.PASSWORD_EMAIL
     }
 })
 
@@ -17,13 +17,26 @@ router.get('/', (req, res) => {
 
 // use nodemailer to send the email
 router.post('/sendEmail', (req, res) => {
-  console.log('dookie',format(req.body))
-  // transporter.sendMail(data[, callback])
   transporter.sendMail(format(req.body), (err, m) => {
-    if (err) return console.log(err)
-    console.log(m)
+    if (err) return res.render('error.ejs')
+    res.render('home.ejs', {message: 'Your email has been sent!', isLoggedIn: use})
   })
-  res.send('Email been sent muh')
+})
+
+router.get('/request-admin', (req, res) => {
+  req.body.message = 'Request Admin Permission <br>' +
+  '<form action="http://localhost:3000/user/update" method="POST">' +
+  'ID: <input type="text" name="_id" value="' + req.user._id + '" readonly>' +
+  'Permissions: <input type="text" name="permissions" value="Admin" readonly>' +
+  '<input type="submit">' +
+  '</form>'
+
+  console.log('req.body', req.body)
+  transporter.sendMail(format(req.body), (err, m) => {
+    if (err) console.log(err);
+    res.render('profile.ejs', {message: 'Admin. Permissions request sent!', isLoggedIn: req.user, user: req.user})
+  })
+
 })
 
 // format the email

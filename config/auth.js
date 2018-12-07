@@ -30,7 +30,7 @@ passport.use(new FacebookStrategy({
       return done(null, user, {message: user})
     })
     .catch((err) => {
-      return users.insert({facebookId: profile.id, name: profile.displayName, email: profile.emails[0].value})
+      return users.insert({facebookId: profile.id, name: profile.displayName, email: profile.emails[0].value, permissions: 'User'})
         .then((user) => {return done(null, user, {message: user})})
     })
 }))
@@ -46,7 +46,7 @@ passport.use(new TwitterStrategy({
       return done(null, user, {message: user})
     })
     .catch((err) => {
-      return users.insert({twitterId: profile.id, name: profile.displayName, })
+      return users.insert({twitterId: profile.id, name: profile.displayName, permissions: 'User'})
         .then((user) => { return done(null, user, {message: user})})
     })
 }))

@@ -1,0 +1,43 @@
+<html>
+
+<% include partials/navbar.ejs %>
+
+<head>
+  <% include partials/head.ejs %>
+</head>
+
+<body>
+
+  <p style="margin-bottom:10%;"> </p>
+
+  <div class="container">
+    <div class="row">
+
+
+      <div class='col-md-5 offset-md-4'>
+
+        <div class="shadow p-3 mb-5 bg-white rounded">
+
+          <!-- Title -->
+
+
+          <div class="card">
+            <div class="card-header">
+               <h1> <%= data.trackName %></h1>
+            </div>
+            <img class="card-img-top" src='data:image/png;base64, <%= data.image %>' alt="Card image cap">
+            <div class="card-body">
+              <h2>  Artist: <%= data.artistName %></h2>
+              <h2> Tempo: <%= data.tempo %></h2>
+              <h2> Key: <%= data.key %></h2>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% include partials/message.ejs %>
+
+</body>

@@ -27,8 +27,8 @@ router.get('/logout', (req, res) => {
 
 // authenticate user
 router.get('/login', (req, res) => {
-  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in!', isLoggedIn: true})
-  res.render('login.ejs', {message: req.flash('error'), isLoggedIn: req.user})
+  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in!', isLoggedIn: req.user})
+  res.render('login.ejs', {message: req.flash('error'), isLoggedIn: false})
 })
 
 router.get('/facebook-login', passport.authenticate('facebook', {scope: ['email']}))
@@ -49,7 +49,7 @@ router.get('/twitter-token', passport.authenticate('twitter',
 }))
 
 router.get('/signup', (req, res) => {
-  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in', isLoggedIn: true})
+  if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in', isLoggedIn: req.user})
   res.render('signup.ejs', {message: "", isLoggedIn: req.user})
 })
 
@@ -61,7 +61,7 @@ router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))
     req.login(entry, (err) => {
-      res.render('home.ejs', {message: 'Welcome ' + entry.name, isLoggedIn: true})
+      res.render('home.ejs', {message: 'Welcome ' + entry.name, isLoggedIn: req.user})
     })
   } catch (err) {
     res.render('signup.ejs', {message: 'Username already taken!', isLoggedIn: req.user})
@@ -97,7 +97,6 @@ router.get('/profile', (req, res) => {
 router.post('/update', async (req, res) => {
   // seperate html form data to determine the item that needs updating
   // and the new information
-  console.log(req.body)
   oldEntry = {}
   newEntry = {}
   for (key in req.body) {
@@ -108,10 +107,13 @@ router.post('/update', async (req, res) => {
     }
   }
 
+  console.log('[HELLO]', newEntry, oldEntry)
+
   // update entry
   try {
     entry = await users.update(format(oldEntry), format(newEntry))
-    res.send(entry)
+    console.log('[pee]', entry)
+    res.render('profile.ejs', {message: 'Profile updated!', isLoggedIn: req.user, user: entry})
   } catch (err) {
     res.send('something went wrong')
   }
