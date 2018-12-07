@@ -53,21 +53,13 @@
               <td id="image<%=result%>"></td>
 
             <script>
-
-
               cell = document.getElementById("image<%=result%>");
               image = new Image();
-              ratio = Math.min(100 / image.width, 100 / image.height);
 
               image.src = 'data:image/png;base64,<%=data[result].image%>';
+              ratio = Math.min(100 / image.width, 100 / image.height);
               image.width = image.width*ratio;
               image.height = image.height*ratio;
-
-              image.onload = function(){
-              };
-
-
-
 
               cell.appendChild(image);
 
