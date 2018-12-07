@@ -3,21 +3,14 @@
 
 <head>
   <% include partials/head.ejs %>
-<<<<<<< HEAD
 <link rel='stylesheet' href='bootstrap-social.css'>
-=======
 
->>>>>>> 3fe9063085ec93117c0842a719f7ebb749cd528e
 </head>
 
 <body >
   <% include partials/navbar.ejs %>
 
-<<<<<<< HEAD
-
-=======
   <link rel='stylesheet' href='bootstrap-social.css'>
->>>>>>> 3fe9063085ec93117c0842a719f7ebb749cd528e
 <!-- Add font awesome icons -->
 
 
@@ -30,36 +23,14 @@
 
 
           <!-- Title -->
-<<<<<<< HEAD
-          <h3> Upload a Piece </h3>
-=======
+
           <h3> Upload Score </h3>
->>>>>>> 3fe9063085ec93117c0842a719f7ebb749cd528e
-
-
-          <!-- Login with username and password -->
-          <div class='row' style="margin-bottom:3px;">
-            <div class='col-md-12'>
-<<<<<<< HEAD
-                <form id="upload" action='' method='POST' enctype='multipart/form-data'>
-                  <input type='file' class="form-control" name='file'><br>
-                  <input type='text' class="form-control" name='artistName' placeholder="Artist"><br>
-                  <input type='text' class="form-control" name='trackName' placeholder="Title"><br>
-                  <input type='text' class="form-control" name='key' placeholder="Key"><br>
-                  <input type='text' class="form-control" name='tempo' placeholder="Tempo"><br>
-                </form>
-                </div>
-          </div>
 
           <div class="row">
 
             <!-- Submit button -->
-            <div class="col-md-1 pull-left">
-              <button type="submit" class="btn btn-large btn-danger pull-right" form='upload'>Upload</button>
-            </div>
           </div>
 
-=======
               <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
                 <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
                 <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
@@ -72,8 +43,6 @@
             </div>
           </div>
 
-
->>>>>>> 3fe9063085ec93117c0842a719f7ebb749cd528e
           <% include partials/message.ejs %>
 
         </div>
