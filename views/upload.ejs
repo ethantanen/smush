@@ -13,6 +13,7 @@
   <p style="margin-bottom:10%;"> </p>
 
   <div class="container">
+
     <div class="row">
 
 
@@ -36,48 +37,89 @@
         </div>
       </div>
 
-      <!-- Upload Document -->
-      <div class='col-md-4 '>
+      <!-- Edit Database (Edit & Delete) -->
+      <div class='col-md-8 '>
         <div class="shadow p-3 mb-5 bg-white rounded">
+
           <!-- Title -->
-          <h3> Delete Score </h3>
+          <h3> Edit Database </h3>
+          <!--Database Viewer -->
 
-          <div class="row"> </div>
+          <div style='height:300px; overflow:scroll;'>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope='col'>#</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Artist</th>
+                  <th scope="col">Track</th>
+                  <th scope="col">Tempo</th>
+                  <th scope="col">Key</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (i=0; i<db.length; i++) { %>
+                  <tr>
+                    <th scope="row"><%= i %></th>
+                    <td class='id'><%= db[i]._id %> </td>
+                    <td class='artistName'><%= db[i].artistName %></td>
+                    <td class='trackName'><%= db[i].trackName %></td>
+                    <td class='tempo'><%= db[i].tempo %></td>
+                    <td class='key'><%= db[i].key %></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+          <hr>
 
-          <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
-            <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
-            <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
-            <input type='text' class="form-control" placeholder="Key" name='key'><br>
-            <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
-              Image of Score <input type='file' class='form-control' name='file'><br>
-              Midi or MusicXML File <input type='file' class='form-control' name='file'><br>
-            <button type="submit" class="btn btn-success">Delete</button>
-          </form>
 
+          <!-- Tool Bar -->
+          <div class='row'>
+            <!-- Refine Table Content -->
+
+            <div class='col-md-6 border-right' >
+            <!-- Edit Entry -->
+              <br><h4> Refine Table Content </h4>
+              <form action='/archive/upload'>
+                ID <input type='text' readonly><br>
+                Artist <input type='text' name='artistName'><br>
+                Track <input type='text' name='trackName' ><br>
+                Tempo <input type='text' name='tempo' ><br>
+                Key <input type='text' name='key'><br>
+                <input type='submit'>
+              </form>
+            </div>
+
+            <div class='col-md-6'>
+            <!-- Edit Entry -->
+              <br><h4> Edit Entry </h4>
+              <form>
+                ID <input type='text' id='id' readonly><br>
+                Artist <input type='text' name='artistName' id='artistName'><br>
+                Track <input type='text' name='trackName' id='trackName'><br>
+                Tempo <input type='text' name='tempo' id='tempo'><br>
+                Key <input type='text' name='key' id='key'><br>
+                <input type='submit'>
+              </form>
+            </div>
+
+            <!-- Delete Entry -->
+          </div>
         </div>
       </div>
 
-      <!-- Upload Document -->
-      <div class='col-md-4 '>
-        <div class="shadow p-3 mb-5 bg-white rounded">
-          <!-- Title -->
-          <h3> Edit Score </h3>
+      <script>
+        $("tr").click(function(e) {
+            row = $(e.target).closest('tr')
+            $('#id').attr('value', row.children('.id').text())
+            $('#artistName').attr('value', row.children('.artistName').text())
+            $('#trackName').attr('value', row.children('.trackName').text())
+            $('#tempo').attr('value', row.children('.tempo').text())
+            $('#key').attr('value', row.children('.key').text())
 
-          <div class="row"> </div>
-
-          <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
-            <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
-            <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
-            <input type='text' class="form-control" placeholder="Key" name='key'><br>
-            <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
-              Image of Score <input type='file' class='form-control' name='file'><br>
-              Midi or MusicXML File <input type='file' class='form-control' name='file'><br>
-            <button type="submit" class="btn btn-success">Edit</button>
-          </form>
-
-        </div>
-      </div>
-
+        });
+      </script>
       <% include partials/message.ejs %>
 
     </div>

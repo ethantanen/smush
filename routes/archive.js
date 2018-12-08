@@ -8,8 +8,10 @@ const music = require('../models/music')
 
 
 // TODO: check permissions
-router.get('/upload', (req, res) => {
-  res.render('upload.ejs', {isLoggedIn: req.user, message: ''})
+router.get('/upload', async (req, res) => {
+  console.log(req.query)
+  db = await music.select(format(req.query))
+  res.render('upload.ejs', {isLoggedIn: req.user, message: '', db: db})
 })
 
 // make new entry using an image
