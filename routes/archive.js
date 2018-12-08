@@ -12,11 +12,6 @@ router.get('/upload', (req, res) => {
   res.render('upload.ejs', {isLoggedIn: req.user, message: ''})
 })
 
-
-router.get('/advsearch', (req, res) => {
-  res.render('advsearch.ejs', {isLoggedIn: req.user, message: ''})
-})
-
 // make new entry using an image
 // TODO: should be an insert/ from-html-form type thing
 router.post('/insert', upload.array('file', [2]), async (req, res) => {
@@ -99,10 +94,7 @@ router.post('/update', async (req, res) => {
   } catch (err) {
     res.send('something went wrong')
   }
-
 })
-
-
 
 //NOTE we can remove any sort of malformed entry --> ['', ' ', 'poop'].includes(query[key])
 // remove property where value is ''

@@ -3,49 +3,83 @@
 
 <head>
   <% include partials/head.ejs %>
-<link rel='stylesheet' href='bootstrap-social.css'>
-
 </head>
 
-<body >
-  <% include partials/navbar.ejs %>
+<body>
 
-  <link rel='stylesheet' href='bootstrap-social.css'>
-<!-- Add font awesome icons -->
+  <% include partials/navbar.ejs %>
 
 
   <p style="margin-bottom:10%;"> </p>
 
   <div class="container">
     <div class="row">
-      <div class='col-md-5 offset-md-4'>
+
+
+      <!-- Upload Document -->
+      <div class='col-md-4 '>
         <div class="shadow p-3 mb-5 bg-white rounded">
-
           <!-- Title -->
-
           <h3> Upload Score </h3>
 
-          <div class="row">
+          <div class="row"> </div>
 
-            <!-- Submit button -->
-          </div>
+          <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
+            <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
+            <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
+            <input type='text' class="form-control" placeholder="Key" name='key'><br>
+            <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
+              Image of Score <input type='file' class='form-control' name='file'><br>
+              Midi or MusicXML File <input type='file' class='form-control' name='file'><br>
+            <button type="submit" class="btn btn-success">Upload</button>
+          </form>
+        </div>
+      </div>
 
-              <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
-                <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
-                <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
-                <input type='text' class="form-control" placeholder="Key" name='key'><br>
-                <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
-                Image of Score <input type='file' class='form-control' name='file'><br>
-                Midi or MusicXML File <input type='file' class='form-control' name='file'><br>
-                <button type="submit" class="btn btn-success">Upload</button>
-              </form>
-            </div>
-          </div>
+      <!-- Upload Document -->
+      <div class='col-md-4 '>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+          <!-- Title -->
+          <h3> Delete Score </h3>
 
-          <% include partials/message.ejs %>
+          <div class="row"> </div>
+
+          <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
+            <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
+            <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
+            <input type='text' class="form-control" placeholder="Key" name='key'><br>
+            <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
+              Image of Score <input type='file' class='form-control' name='file'><br>
+              Midi or MusicXML File <input type='file' class='form-control' name='file'><br>
+            <button type="submit" class="btn btn-success">Delete</button>
+          </form>
 
         </div>
       </div>
+
+      <!-- Upload Document -->
+      <div class='col-md-4 '>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+          <!-- Title -->
+          <h3> Edit Score </h3>
+
+          <div class="row"> </div>
+
+          <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
+            <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
+            <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
+            <input type='text' class="form-control" placeholder="Key" name='key'><br>
+            <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
+              Image of Score <input type='file' class='form-control' name='file'><br>
+              Midi or MusicXML File <input type='file' class='form-control' name='file'><br>
+            <button type="submit" class="btn btn-success">Edit</button>
+          </form>
+
+        </div>
+      </div>
+
+      <% include partials/message.ejs %>
+
     </div>
   </div>
 </body>

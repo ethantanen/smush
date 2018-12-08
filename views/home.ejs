@@ -7,18 +7,16 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-
 </head>
 
-
-
 <body>
+
   <% include partials/navbar.ejs %>
 
+  <!-- Cloud Animation and Page Title -->
   <div style="text-align:center;">
     <div id="banner">
       <div id="cloud-scroll">
-        <!--  idfk why this wont resize to be bigger ever..... #TODO -->
         <h1 id="header1" style="line-height:400px;">
           SMUSH
         </h1>
@@ -27,8 +25,8 @@
 
     <div class="container">
 
+      <!-- Search Bar -->
       <h5>Search Music...</h5>
-
       <div class="row">
         <div class="col-md-12">
           <form action='/archive/search'>
@@ -39,17 +37,22 @@
           </form><br><br>
             </div>
         </div>
-
-        <div class='row'>
-          <div class='col-md-4 offset-md-4'>
-            <a href="/archive/advsearch">
-              <button type="button" class="btn btn_material_style" href="/home/#TODOAdvancedSearch">Advanced Search Options</button>
-            </a>
-          </div>
-        </div>
-
       </div>
     </div>
+
+    <!-- Advanced Search Options -->
+    <div class='row'>
+      <div class='col-md-4 offset-md-5'>
+        <button type="button" id='advsearch_button' class="btn btn_material_style">Advanced Search Options</button>
+      </div>
+      <div class='col-md-6 offset-md-3'>
+        <% include partials/advanced-search.ejs %>
+      </div>
+    </div>
+
+
+
+
 
     <% include partials/message.ejs %>
 

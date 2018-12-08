@@ -1,0 +1,32 @@
+<p style="margin-bottom:5%;"> </p>
+
+<div class="container as" style='display:none;'>
+  <div class="row">
+    <div class='col-md-6 offset-md-4'>
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        <div class='row' style='margin-bottom:3px;'>
+          <div class='col-md-12'>
+            <form id='select' action='/archive/select'>
+              <input type='text' class='form-control' name='artistName' placeholder='Artist'><br>
+              <input type='text' class='form-control' name='trackName' placeholder='Title'><br>
+              <input type='text' class='form-control' name='key' placeholder='Key'><br>
+              <input type='text' class='form-control' name='tempo' placeholder='Tempo'><br>
+              <input type='submit'>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pull up form on click -->
+<script>
+  $('#advsearch_button').on('click', (event) => {
+    if ($('.as').attr('style') === 'display:none;') {
+      $('.as').attr('style', 'display:block;')
+    } else {
+      $('.as').attr('style', 'display:none;')
+    }
+  })
+</script>
