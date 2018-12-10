@@ -43,8 +43,8 @@
 
           <!-- Title -->
           <h3> Edit Database </h3>
-          <!--Database Viewer -->
 
+          <!--Database Viewer -->
           <div style='height:300px; overflow:scroll;'>
             <table class="table table-hover">
               <thead>
@@ -76,10 +76,9 @@
 
           <!-- Tool Bar -->
           <div class='row'>
-            <!-- Refine Table Content -->
 
+            <!-- Refine Table Content -->
             <div class='col-md-6 border-right' >
-            <!-- Edit Entry -->
               <br><h4> Refine Table Content </h4>
               <form action='/archive/upload'>
                 ID <input type='text' readonly><br>
@@ -91,11 +90,11 @@
               </form>
             </div>
 
-            <div class='col-md-6'>
             <!-- Edit Entry -->
+            <div class='col-md-6'>
               <br><h4> Edit Entry </h4>
-              <form>
-                ID <input type='text' id='id' readonly><br>
+              <form action='/archive/update' method='POST'>
+                ID <input type='text' name='_id' id='id' readonly><br>
                 Artist <input type='text' name='artistName' id='artistName'><br>
                 Track <input type='text' name='trackName' id='trackName'><br>
                 Tempo <input type='text' name='tempo' id='tempo'><br>
@@ -112,11 +111,12 @@
       <script>
         $("tr").click(function(e) {
             row = $(e.target).closest('tr')
-            $('#id').attr('value', row.children('.id').text())
-            $('#artistName').attr('value', row.children('.artistName').text())
-            $('#trackName').attr('value', row.children('.trackName').text())
-            $('#tempo').attr('value', row.children('.tempo').text())
-            $('#key').attr('value', row.children('.key').text())
+            $('#id').val(row.children('.id').text())
+            $('#artistName').val(row.children('.artistName').text())
+            $('#trackName').val(row.children('.trackName').text())
+            $('#tempo').val(row.children('.tempo').text())
+            $('#key').val(row.children('.key').text())
+
 
         });
       </script>

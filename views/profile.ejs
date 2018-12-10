@@ -26,21 +26,17 @@
           <form id='profile' method='POST'>
             <div class="input-group mb-4">
               <!-- Form -->
+              <input type='hidden' name='_id' value='<%= user._id %>'>
               <div class="input-group-prepend">
                 <span class="input-group-text" id="email">Email</span>
               </div>
-              <input type="email" class="form-control editable" id='email' name='emailN' placeholder="<%= user.email %>" aria-describedby="email" readonly>
+              <input type="email" class="form-control editable" id='email' name='email' placeholder="<%= user.email %>" aria-describedby="email" readonly>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="permissions">Permissions</span>
               </div>
-
-              <!-- Old Information if update -->
-              <input type="hidden" name="emailO" value="<%=user.email%>" />
-
-
-              <input type="text" class="form-control" placeholder="<%= user.permissions %>" aria-describedby="permissions" readonly>
+              <input type='text' class='form-control' placeholder='<%= user.permissions%>' aria-describedby='permissions' readonly >
             </div>
           </form>
 

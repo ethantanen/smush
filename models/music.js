@@ -5,7 +5,6 @@ var textSearch = require('mongoose-text-search');
 // insert document into database
 function insert(entry) {
   return new Promise((resolve, reject) => {
-    // entry_json = makeEntry(artistName, trackName, musicXML, key, tempo, image)
     entry = new Music(entry)
     entry.save().then((entry) => {
       if(!entry) return reject('couldn\'t add user')
@@ -34,10 +33,10 @@ function search(query) {
 }
 
 // update document in database
-function update(query, update) {
+function update(id, update) {
   return new Promise((resolve, reject) => {
-    Music.findOneAndUpdate(query, update).then((entry) => {
-      if (!entry) return reject('user doesnt exist')
+    Music.findByIdAndUpdate(id, update, {new: true}).then((entry) => {
+      if (!entry) return reject('entry doesn\'t exist')
       return resolve(entry)
     })
   })

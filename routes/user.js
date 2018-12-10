@@ -40,7 +40,7 @@ router.get('/facebook-token', passport.authenticate('facebook',
 
 }))
 
-router.get('/twitter-login', passport.authenticate('twitter'))
+router.get('/twitter-login', passport.authenticate('twitter',{ scope: ['include_email=true']}))
 router.get('/twitter-token', passport.authenticate('twitter',
 {
   successRedirect: '/home',
@@ -56,6 +56,7 @@ router.get('/signup', (req, res) => {
 router.get('/reset-password', (req, res) => {
   res.render('reset-password.ejs', {isLoggedIn: req.user})
 })
+
 // add new user to database and log them in
 router.post('/insert', async (req, res) => {
   try {
@@ -93,23 +94,19 @@ router.get('/profile', (req, res) => {
   res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
 })
 
-// update entry
+// update entry TODO: convert this to use primary id and method find by id and update
 router.post('/update', async (req, res) => {
   // seperate html form data to determine the item that needs updating
   // and the new information
-  oldEntry = {}
-  newEntry = {}
-  for (key in req.body) {
-    if (key.slice(-1) == 'O') {
-      oldEntry[key.slice(0,-1)] = req.body[key]
-    } else {
-      newEntry[key.slice(0,-1)] = req.body[key]
-    }
-  }
+  id = req.body._id.trim()
+  delete req.body._id
+  update = req.body
+
+  console.log(id, update)
 
   // update entry
   try {
-    entry = await users.update(format(oldEntry), format(newEntry))
+    entry = await users.update(id, format(update))
     res.render('profile.ejs', {message: 'Profile updated!', isLoggedIn: req.user, user: entry})
   } catch (err) {
     res.send('something went wrong')
