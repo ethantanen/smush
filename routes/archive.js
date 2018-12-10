@@ -38,15 +38,16 @@ router.post('/insert', upload.array('file', [2]), async (req, res) => {
 })
 
 // delete entry
-router.get('/remove', async (req, res) => {
+router.post('/remove', async (req, res) => {
   try {
-    meta = await music.remove(format(req.query))
-    res.send('success')
+    meta = await music.remove(format(req.body._id.trim()))
+    db = await music.select({})
+    res.render('upload.ejs', {isLoggedIn: req.user, message: 'Entry Deleted', db: db})
   } catch (err) {
+    console.log(err)
     res.send('something went wrong')
   }
 })
-
 
 // render archive-entry view
 router.get('/archive-entry*', async (req, res) => {

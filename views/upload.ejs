@@ -101,9 +101,16 @@
                 Key <input type='text' name='key' id='key'><br>
                 <input type='submit'>
               </form>
+
+              <!-- Delete Entry -->
+              <form action='/archive/remove' method='POST'>
+                <input type='hidden' name='_id' id='rmid'>
+                <button type='submit' formaction='/archive/remove'> Delete </button>
+              </form>
             </div>
 
-            <!-- Delete Entry -->
+
+
           </div>
         </div>
       </div>
@@ -116,6 +123,7 @@
             $('#trackName').val(row.children('.trackName').text())
             $('#tempo').val(row.children('.tempo').text())
             $('#key').val(row.children('.key').text())
+            $('#rmid').val(row.children('.id').text())
 
 
         });

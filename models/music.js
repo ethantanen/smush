@@ -43,9 +43,9 @@ function update(id, update) {
 }
 
 // delete document from database
-function remove(query) {
+function remove(id) {
   return new Promise((resolve, reject) => {
-    Music.find(query).deleteOne().then((meta) => {
+    Music.findByIdAndDelete(id).then((meta) => {
       if (!meta) return reject('entry doesn\'t exist')
       return resolve(meta) //TODO: what does remove return?
     })
