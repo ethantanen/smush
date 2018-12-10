@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Request Admin Email Template </title>
+</head>
+
+<body>
+  <h1> User <%= user.name %> is requesting <em> administrative permissions </em>  </h1>
+  <br>
+  <h3> Please click the link below to confirm or deny their request. </h3>
+  <a href='http://localhost:3000/user/admin-confirm?user=<%= user._id %>'> Click Me! </a>
+<body>
+
+</html>

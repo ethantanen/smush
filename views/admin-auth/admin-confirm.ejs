@@ -1,0 +1,51 @@
+<html>
+
+<% include ../partials/navbar.ejs %>
+
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+
+<body>
+
+  <p style="margin-bottom:10%;"> </p>
+
+  <div class="container">
+    <div class="row">
+
+
+      <div class='col-md-5 offset-md-4'>
+
+        <div class="shadow p-3 mb-5 bg-white rounded">
+
+          <!-- Title -->
+          <h3> Confirm <%= user.name %> is an Admin </h3>
+
+          <div class='row'>
+
+            <!-- Confirm User Form -->
+            <div class='col-md-6'>
+              <form action='/user/update' method='POST'>
+                <input type='hidden' name='_id' value='<%= user._id %>'>
+                <input type='hidden' name='permissions' value='Admin'>
+                <button type="submit" class="btn btn-large btn-success float-md-right">Confirm</button>
+              </form>
+            </div>
+
+
+            <!-- Deny User Form -->
+            <div class='col-md-6'>
+              <form>
+                <button class="btn btn-large btn-danger float-md-left" formaction='/home/'>Deny</button>
+              </form>
+            </div>
+          </div>
+
+          <% include ../partials/message.ejs %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

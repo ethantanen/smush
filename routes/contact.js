@@ -1,6 +1,7 @@
 // published modules
 const router = require('express').Router()
-
+const fs = require('fs')
+const ejs = require('ejs')
 // create transporter object used to send emails
 const transporter = require('nodemailer').createTransport({
  service: 'gmail',
@@ -23,15 +24,21 @@ router.post('/sendEmail', (req, res) => {
   })
 })
 
-router.get('/request-admin', (req, res) => {
-  req.body.message = 'Request Admin Permission <br>' +
-  '<form action="http://localhost:3000/user/update" method="POST">' +
-  'ID: <input type="text" name="_id" value="' + req.user._id + '" readonly>' +
-  'Permissions: <input type="text" name="permissions" value="Admin" readonly>' +
-  '<input type="submit">' +
-  '</form>'
+// TODO: m
+router.get('/request-admin', async (req, res) => {
 
-  transporter.sendMail(format(req.body), (err, m) => {
+  message = await fs.readFileSync('./views/admin-auth/admin-email.ejs').toString()
+  message = ejs.render(message, {user: req.user})
+
+
+  mailOptions = {
+    from: 'guccipancakes1234@gmail.com',
+    to: 'guccipancakes1234@gmail.com',
+    subject: 'Email From Smush Request Admin Page',
+    html: message
+  }
+
+  transporter.sendMail(mailOptions, (err, m) => {
     if (err) console.log(err);
     res.render('profile.ejs', {message: 'Admin. Permissions request sent!', isLoggedIn: req.user, user: req.user})
   })

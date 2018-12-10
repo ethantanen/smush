@@ -16,15 +16,13 @@
             <ul class="navbar-nav mr-auto">
                 <a href="/contact" class="nav-item active nav-link">Contact</a>
                 <a href="/about" class="nav-item active nav-link">About</a>
-
-                <% if (isLoggedIn && isLoggedIn.permissions==='User') { %>
-                  <a href='/archive/upload' class='nav-item active nav-link'> Upload </a>
-                 <% }  %>
             </ul>
 
             <%if (isLoggedIn) { %>
 
-
+              <% if (isLoggedIn.permissions==='Admin') { %>
+                <a href='/archive/admin' class='btn btn-outline-warning'> Admin </a> &nbsp &nbsp
+              <% } %>
               <a href='/user/profile' class='btn btn-outline-success'> Profile </a> &nbsp &nbsp
               <a href="/user/logout" class="btn btn-outline-danger">Logout</a>
             <% } else {%>

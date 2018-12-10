@@ -41,7 +41,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash());
 
-// TODO: delete this!
+// TODO: delete this!/ make an info flag that prints all available pritnouts
 app.use((req, res, next) => {
   //console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
   next()
@@ -51,7 +51,6 @@ app.use((req, res, next) => {
 app.get('/index', (req, res) => {
   res.render('index.ejs')
 })
-
 
 // connect routers
 app.use('/user', user.router)

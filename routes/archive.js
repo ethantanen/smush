@@ -4,19 +4,16 @@ const fs = require('fs')
 const router = require('express').Router()
 const mongoose = require('mongoose')
 
+// authentication middleware
+const isAdmin = require('../utilities/checkAuth').isAdmin
+const isUser = require('../utilities/checkAuth').isUser
+
 // import model
 const music = require('../models/music')
 
-
-// TODO: check permissions
-router.get('/upload', async (req, res) => {
-  db = await music.select(format(req.query))
-  res.render('upload.ejs', {isLoggedIn: req.user, message: '', db: db})
-})
-
-// make new entry using an image
-// TODO: should be an insert/ from-html-form type thing
-router.post('/insert', upload.array('file', [2]), async (req, res) => {
+// insert entry into music model
+// TODO: neaten by determining which file is name midi and the other image, check extension
+router.post('/insert', isAdmin, upload.array('file', [2]), async (req, res) => {
 
   // parse file from request and convert to base64
   image = fs.readFileSync(req.files[0].path)
@@ -28,7 +25,7 @@ router.post('/insert', upload.array('file', [2]), async (req, res) => {
   req.body.image = image_64
   req.body.midi = midi_64
 
-  // insert file into music database
+  // insert file into music model
   try {
     entry = await music.insert(format(req.body))
     res.render("home.ejs", {isLoggedIn: req.user, message:"Entry successfully uploaded"})
@@ -37,33 +34,49 @@ router.post('/insert', upload.array('file', [2]), async (req, res) => {
   }
 })
 
-// delete entry
-router.post('/remove', async (req, res) => {
+// delete entry from music model
+router.post('/remove', isAdmin, async (req, res) => {
   try {
     meta = await music.remove(format(req.body._id.trim()))
     db = await music.select({})
     res.render('upload.ejs', {isLoggedIn: req.user, message: 'Entry Deleted', db: db})
   } catch (err) {
-    console.log(err)
-    res.send('something went wrong')
+    res.render('error.js')
   }
 })
 
-// render archive-entry view
-router.get('/archive-entry*', async (req, res) => {
-  data = await music.select(req.query)
-  res.render('archive-entry.ejs', {data: data[0], isLoggedIn: req.user, message:''})
+// update entry in music model
+router.post('/update', isAdmin, async (req, res) => {
+
+  // seperate the id of the entry and the properties to be updated
+  id = req.body._id.trim()
+  delete req.body._id
+  update = req.body
+
+  try {
+
+    // update model
+    entry = await music.update(id, format(update))
+
+    // prepare information for rendering and render the admin page
+    db = await music.select({})
+    res.render('upload.ejs', {isLoggedIn: req.user, message: 'Entry Updated: ' + entry.artistName + ', ' + entry.trackName , db: db})
+
+  } catch (err) {
+    res.render('error.ejs')
+  }
 })
 
-// search database w/ specific values
+// search music model w/ specific values
 router.get('/select', async (req, res) => {
   try {
     results = await music.select(format(req.query))
     res.render('results.ejs', {data: results, isLoggedIn: req.user})
   } catch (err) {
-    res.status(404).render('error.ejs')
+    res.render('error.ejs')
   }
 })
+
 
 // search database by phrase
 router.get('/search', async (req, res) => {
@@ -75,26 +88,16 @@ router.get('/search', async (req, res) => {
   }
 })
 
-// update entry
-router.post('/update', async (req, res) => {
+// render archive-entry view
+router.get('/archive-entry*', async (req, res) => {
+  data = await music.select(req.query)
+  res.render('archive-entry.ejs', {data: data[0], isLoggedIn: req.user, message:''})
+})
 
-  id = req.body._id.trim()
-  delete req.body._id
-  update = req.body
-
-  // update entries in database
-  try {
-    entry = await music.update(id, format(update))
-    delete entry.image
-    delete entry.midi
-
-    db = await music.select({})
-
-    res.render('upload.ejs', {isLoggedIn: req.user, message: 'New Entry: ' + JSON.stringify(entry) , db: db})
-  } catch (err) {
-    console.log(err)
-    res.send('something went wrong')
-  }
+// render upload entry view
+router.get('/admin', isAdmin, async (req, res) => {
+  db = await music.select(format(req.query))
+  res.render('upload.ejs', {isLoggedIn: req.user, message: '', db: db})
 })
 
 //NOTE we can remove any sort of malformed entry --> ['', ' ', 'poop'].includes(query[key])
@@ -107,6 +110,29 @@ function format(query) {
   }
   return query
 }
+
+// check if user has the correct permissions for an endpoint
+function _checkAuth(req, res, next, permission) {
+
+  // error message
+  login = 'You must be logged in to visit that page!'
+  permission = 'You need ' + permission + ' permissions if you want to visit that page!'
+
+  // render error message if user is not logged in
+  if (!req.user) {
+    res.render('login.ejs', {isLoggedIn: false, message: login})
+  }
+
+  // render error message if user does not have correct permissions
+  if (req.user.permissions !== permissions) {
+    res.render('home.ejs', {isLoggedIn: req.user, message: permission})
+  }
+
+  // continue to endpoint if everything checks out!
+  next()
+}
+
+
 
 module.exports = {
   router: router
