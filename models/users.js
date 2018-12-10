@@ -34,9 +34,9 @@ function select(query) {
 }
 
 // update document in database
-function update(query, update) {
+function update(id, update) {
   return new Promise((resolve, reject) => {
-    User.findOneAndUpdate(query, update, { new: true }).then((user) => {
+    User.findByIdAndUpdate(id, update, { new: true }).then((user) => {
       if (!user) return reject('couldn\'t update user')
       return resolve(user)
     })

@@ -4,10 +4,7 @@
 
 <head>
 <% include partials/head.ejs %>
-
-<script>
-  var image = new Image();
-</script>
+<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 
 </head>
 
@@ -18,13 +15,30 @@
 
 
     <h4> Search Archive </h4>
-    <form action='/archive/select'>
-      artistName <input type='text' name='artistName'><br>
-      trackName <input type='text' name='trackName'><br>
-      key <input type='text' name='key'><br>
-      tempo <input type='text' name='tempo'><br>
-      <input type='submit'>
-    </form>
+
+
+    <!-- Search Bar -->
+    <div class="row">
+      <div class="col-md-12">
+        <form action='/archive/search'>
+          <div class="input-group">
+            <input name="search" class="form-control border-secondary " type="text" placeholder="search">
+            <a class="btn btn-outline-secondary" type='submit'><i class="fa fa-search"></i></a>
+          </div>
+        </form><br><br>
+          </div>
+      </div>
+
+      <!-- Advanced Search Options -->
+      <div class='row'>
+        <div class='col-md-4 offset-md-5'>
+          <button type="button" id='advsearch_button' class="btn btn_material_style">Advanced Search Options</button>
+        </div>
+        <div class='col-md-6 offset-md-3'>
+          <% include partials/advanced-search.ejs %>
+        </div>
+      </div>
+
     <br>
   <hgroup class="mb20">
 		<h1>Search Results</h1>

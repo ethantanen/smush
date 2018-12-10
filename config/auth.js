@@ -25,6 +25,7 @@ passport.use(new FacebookStrategy({
   callbackURL: process.env.FACEBOOK_CALLBACKURL,
   profileFields: ['id', 'emails', 'displayName']
 }, (accessToken, refreshToken, profile, done) => {
+
   return users.select({facebookId: profile.id})
     .then((user) => {
       return done(null, user, {message: user})

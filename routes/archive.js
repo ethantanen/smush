@@ -2,6 +2,7 @@
 const upload = require('multer')({dest:'upload/'})
 const fs = require('fs')
 const router = require('express').Router()
+const mongoose = require('mongoose')
 
 // import model
 const music = require('../models/music')
@@ -9,7 +10,6 @@ const music = require('../models/music')
 
 // TODO: check permissions
 router.get('/upload', async (req, res) => {
-  console.log(req.query)
   db = await music.select(format(req.query))
   res.render('upload.ejs', {isLoggedIn: req.user, message: '', db: db})
 })
@@ -37,18 +37,19 @@ router.post('/insert', upload.array('file', [2]), async (req, res) => {
   }
 })
 
-// delete user
-router.get('/remove', async (req, res) => {
+// delete entry
+router.post('/remove', async (req, res) => {
   try {
-    meta = await music.remove(format(req.query))
-    res.send('success')
+    meta = await music.remove(format(req.body._id.trim()))
+    db = await music.select({})
+    res.render('upload.ejs', {isLoggedIn: req.user, message: 'Entry Deleted', db: db})
   } catch (err) {
+    console.log(err)
     res.send('something went wrong')
   }
 })
 
-
-//testing my musicdtails
+// render archive-entry view
 router.get('/archive-entry*', async (req, res) => {
   data = await music.select(req.query)
   res.render('archive-entry.ejs', {data: data[0], isLoggedIn: req.user, message:''})
@@ -77,23 +78,21 @@ router.get('/search', async (req, res) => {
 // update entry
 router.post('/update', async (req, res) => {
 
-  // seperate html form data to determine the item that needs updating
-  // and the new information
-  oldEntry = {}
-  newEntry = {}
-  for (key in req.body) {
-    if (key.slice(-1) == 'O') {
-      oldEntry[key.slice(0,-1)] = req.body[key]
-    } else {
-      newEntry[key.slice(0,-1)] = req.body[key]
-    }
-  }
+  id = req.body._id.trim()
+  delete req.body._id
+  update = req.body
 
   // update entries in database
   try {
-    entry = await music.update(format(oldEntry), (newEntry))
-    res.send(entry)
+    entry = await music.update(id, format(update))
+    delete entry.image
+    delete entry.midi
+
+    db = await music.select({})
+
+    res.render('upload.ejs', {isLoggedIn: req.user, message: 'New Entry: ' + JSON.stringify(entry) , db: db})
   } catch (err) {
+    console.log(err)
     res.send('something went wrong')
   }
 })
