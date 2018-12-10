@@ -52,9 +52,11 @@
             <!-- Request Admin Permission button -->
             <br>
 
+            <% if (user.permissions !== 'Admin') { %>
             <form>
               <button type="submit" class="btn btn-large btn-secondary pull-right" formaction='/contact/request-admin'>Request Admin Permissions</button>
             </form>
+            <% } %>
 
 
 

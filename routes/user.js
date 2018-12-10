@@ -3,6 +3,10 @@ const router = require('express').Router()
 const uuid = require('uuid/v1');
 const passport = require('passport')
 
+// authentication middleware
+const isAdmin = require('../utilities/checkAuth').isAdmin
+const isUser = require('../utilities/checkAuth').isUser
+
 // TODO: check that password matches before signin someone up
 
 // import model
@@ -53,7 +57,7 @@ router.get('/signup', (req, res) => {
   res.render('signup.ejs', {message: "", isLoggedIn: req.user})
 })
 
-router.get('/reset-password', (req, res) => {
+router.get('/reset-password', isUser, (req, res) => {
   res.render('reset-password.ejs', {isLoggedIn: req.user})
 })
 
@@ -70,7 +74,7 @@ router.post('/insert', async (req, res) => {
 })
 
 // delete user
-router.get('/remove', async (req, res) => {
+router.get('/remove', isUser, async (req, res) => {
   // TODO: convert '' to null to delete entries where the field doesnt exist/ is empty
   try {
     meta = await users.remove(format(req.query))
@@ -81,28 +85,26 @@ router.get('/remove', async (req, res) => {
 })
 
 // search database
-router.get('/select', async (req, res) => {
+router.get('/select', isUser, async (req, res) => {
   try {
     results = await users.select(format(req.query))
     res.send(results)
   } catch (err) {
-    res.status(404).send('something went wrong')
+    res.render('error.ejs')
   }
 })
 
-router.get('/profile', (req, res) => {
+router.get('/profile', isUser, (req, res) => {
   res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
 })
 
 // update entry TODO: convert this to use primary id and method find by id and update
-router.post('/update', async (req, res) => {
+router.post('/update', isUser, async (req, res) => {
   // seperate html form data to determine the item that needs updating
   // and the new information
   id = req.body._id.trim()
   delete req.body._id
   update = req.body
-
-  console.log(id, update)
 
   // update entry
   try {
@@ -111,6 +113,12 @@ router.post('/update', async (req, res) => {
   } catch (err) {
     res.send('something went wrong')
   }
+})
+
+router.get('/admin-confirm', async (req, res) => {
+  console.log('[INFO]', req.query)
+  user = await users.select({'_id': req.query.user.trim()})
+  res.render('admin-auth/admin-confirm.ejs', {message:'', isLoggedIn: req.user, user: user})
 })
 
 // remove property where value is ''
