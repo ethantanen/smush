@@ -29,7 +29,6 @@
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
-    "material-components-web": "^0.42.0",
     "mongoose": "^5.3.14",
     "mongoose-text-search": "0.0.2",
     "morgan": "^1.9.1",
