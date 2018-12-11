@@ -10,6 +10,12 @@
 
   <div class="container">
 
+    <!-- Results Page Header -->
+    <hgroup class="mb20">
+      <h1>Search Results</h1>
+      <h2 class="lead"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
+    </hgroup><br>
+
     <!-- Search Bar -->
     <h4> Search Archive </h4>
     <div class="row">
@@ -17,43 +23,40 @@
         <form action='/archive/search'>
           <div class="input-group">
             <input name="search" class="form-control border-secondary " type="text" placeholder="search">
-            <button class="btn btn-outline-secondary" type='submit'><i class="fa fa-search"></i></button>
+            <div class='input-group-append'>
+              <button class="btn btn-outline-secondary" type='submit'><i class="fa fa-music"></i></button>
+            </div>
           </div>
         </form><br><br>
       </div>
     </div>
 
-      <!-- Advanced Search Options -->
-      <div class='row'>
-        <div class='col-md-4 offset-md-5'>
-          <button type="button" id='advsearch_button' class="btn btn_material_style">Advanced Search Options</button>
-        </div>
-        <div class='col-md-6 offset-md-3'>
-          <% include partials/advanced-search.ejs %>
-        </div>
-      </div><br>
+    <!-- Advanced Search Options -->
+    <div class='row'>
+      <div class='col-md-4 offset-md-5'>
+        <button type="button" id='advsearch_button' class="btn btn_material_style">Advanced Search Options</button>
+      </div>
+      <div class='col-md-6 offset-md-3'>
+        <% include partials/advanced-search.ejs %>
+      </div>
+    </div><br>
 
-      <!-- Results Page Header -->
-      <hgroup class="mb20">
-        <h1>Search Results</h1>
-        <h2 class="lead"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
-      </hgroup><br>
+    <!-- List of Results -->
+    <table class='table table-hover '>
+      <thead>
+        <tr>
+          <th scope='col'> # </th>
+          <th scope='col'> Artist </th>
+          <th scope='col'> Track </th>
+          <th scope='col'> Tempo </th>
+          <th scope='col'> Key </th>
+          <th scope='col'> Image </th>
+        </tr>
+      </thead>
 
-      <!-- List of Results -->
-      <table class='table table-hover '>
-        <thead>
-          <tr>
-            <th scope='col'> # </th>
-            <th scope='col'> Artist </th>
-            <th scope='col'> Track </th>
-            <th scope='col'> Tempo </th>
-            <th scope='col'> Key </th>
-            <th scope='col'> Image </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% for (i=0; i<data.length; i++) { %>
+      <!-- Populate Table w/ Query Results -->
+      <tbody>
+        <% for (i=0; i<data.length; i++) { %>
           <tr class='clickable' link='/archive/archive-entry?_id=<%= data[i]._id%>'>
             <th scope='row'>
               <%= i %>
@@ -73,18 +76,18 @@
             <script> console.log('<%= data[i].image %>') </script>
             <td> <img style='width:75px; height:75px', src='data:image/png;base64, <%= data[i].image %>'> </td>
           <tr>
-            <% } %>
-        </tbody>
-        <table>
-    </div>
+        <% } %>
+      </tbody>
+    <table>
   </div>
+</div>
 
-  <!-- Redirect Page to Archive Entry -->
-  <script>
-    $('.clickable').on('click', (e) => {
-      document.location.href = e.currentTarget.getAttribute('link')
-    })
-  </script>
+<!-- Redirect Page to Archive Entry -->
+<script>
+  $('.clickable').on('click', (e) => {
+    document.location.href = e.currentTarget.getAttribute('link')
+  })
+</script>
 
 </body>
 
