@@ -13,7 +13,7 @@
     <!-- Results Page Header -->
     <hgroup class="mb20">
       <h1>Search Results</h1>
-      <h2 class="lead"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
+      <h2 class="lead" id="searchnum"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
     </hgroup><br>
 
     <!-- Search Bar -->
@@ -57,7 +57,7 @@
       <!-- Populate Table w/ Query Results -->
       <tbody>
         <% for (i=0; i<data.length; i++) { %>
-          <tr class='clickable' link='/archive/archive-entry?_id=<%= data[i]._id%>'>
+          <tr class='clickable' id="row" link='/archive/archive-entry?_id=<%= data[i]._id%>'>
             <th scope='row'>
               <%= i %>
             </th>
