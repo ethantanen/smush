@@ -3,3 +3,4 @@ config/app_env
 .DS_Store
 upload
 cypress/screenshots/
+cypress.json
