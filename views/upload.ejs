@@ -10,20 +10,22 @@
   <% include partials/navbar.ejs %>
 
 
-  <p style="margin-bottom:10%;"> </p>
-
+  <br>
   <div class="container">
 
-    <div class="row">
+    <div class='row'>
+      <div class='col-lg-6 offset-lg-3'>
+        <div class='page-header'><h1><b>Administrative Page</b></h1></div>
+      </div>
+    </div><br>
 
+    <div class="row">
 
       <!-- Upload Document -->
       <div class='col-md-4 '>
         <div class="shadow p-3 mb-5 bg-white rounded">
           <!-- Title -->
           <h3> Upload Score </h3>
-
-          <div class="row"> </div>
 
           <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
             <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
@@ -42,7 +44,7 @@
         <div class="shadow p-3 mb-5 bg-white rounded">
 
           <!-- Title -->
-          <h3> Edit Database </h3>
+          <h3> Edit Music Archive </h3>
 
           <!--Database Viewer -->
           <div style='height:300px; overflow:scroll;'>
@@ -81,55 +83,119 @@
             <div class='col-md-6 border-right' >
               <br><h4> Refine Table Content </h4>
               <form action='/archive/upload'>
-                ID <input type='text' readonly><br>
-                Artist <input type='text' name='artistName'><br>
-                Track <input type='text' name='trackName' ><br>
-                Tempo <input type='text' name='tempo' ><br>
-                Key <input type='text' name='key'><br>
-                <input type='submit'>
+
+
+                <div class="form-group row">
+                  <label for="artistName" class="col-2 col-form-label">ID</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text"  name='artistName'>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="artistName" class="col-2 col-form-label">Artist</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" name='artistName'>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trackname" class="col-2 col-form-label">Track</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text"  name='trackName' >
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="tempo" class="col-2 col-form-label">Tempo</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" name='tempo' >
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="key" class="col-2 col-form-label">Key</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" name='key' >
+                  </div>
+                </div>
+
+                <button  type='submit' class='btn btn-success'> Submit </button>
+
               </form>
             </div>
 
             <!-- Edit Entry -->
             <div class='col-md-6'>
               <br><h4> Edit Entry </h4>
-              <form action='/archive/update' method='POST'>
-                ID <input type='text' name='_id' id='id' readonly><br>
-                Artist <input type='text' name='artistName' id='artistName'><br>
-                Track <input type='text' name='trackName' id='trackName'><br>
-                Tempo <input type='text' name='tempo' id='tempo'><br>
-                Key <input type='text' name='key' id='key'><br>
-                <input type='submit'>
+              <form action='/archive/update' method='POST' id='edits'>
+
+                <div class="form-group row">
+                  <label for="artistName" class="col-2 col-form-label">ID</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text"  name='_id' id="id" readonly>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="artistName" class="col-2 col-form-label">Artist</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" name='artistName' id="artistName">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trackname" class="col-2 col-form-label">Track</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text"  name='trackName' id="trackName">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="tempo" class="col-2 col-form-label">Tempo</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" name='tempo' id="tempo">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="key" class="col-2 col-form-label">Key</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" name='key' id="key">
+                  </div>
+                </div>
+
               </form>
 
               <!-- Delete Entry -->
               <form action='/archive/remove' method='POST'>
                 <input type='hidden' name='_id' id='rmid'>
-                <button type='submit' formaction='/archive/remove'> Delete </button>
+                <button type='submit' class='btn btn-danger float-lg-right' formaction='/archive/remove'> Delete Entry </button>
               </form>
-            </div>
-
-
+              <button form='edits' type='submit' class='btn btn-success float-md-left'> Submit Edits </button>
 
           </div>
         </div>
       </div>
-
-      <script>
-        $("tr").click(function(e) {
-            row = $(e.target).closest('tr')
-            $('#id').val(row.children('.id').text())
-            $('#artistName').val(row.children('.artistName').text())
-            $('#trackName').val(row.children('.trackName').text())
-            $('#tempo').val(row.children('.tempo').text())
-            $('#key').val(row.children('.key').text())
-            $('#rmid').val(row.children('.id').text())
-
-
-        });
-      </script>
-      <% include partials/message.ejs %>
-
     </div>
   </div>
+</div>
+
+<script>
+  $("tr").click(function(e) {
+    row = $(e.target).closest('tr')
+    $('#id').val(row.children('.id').text())
+    $('#artistName').val(row.children('.artistName').text())
+    $('#trackName').val(row.children('.trackName').text())
+    $('#tempo').val(row.children('.tempo').text())
+    $('#key').val(row.children('.key').text())
+    $('#rmid').val(row.children('.id').text())
+
+
+  });
+</script>
+<% include partials/message.ejs %>
+
+
+
 </body>

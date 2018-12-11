@@ -116,7 +116,6 @@ router.post('/update', isUser, async (req, res) => {
 })
 
 router.get('/admin-confirm', async (req, res) => {
-  console.log('[INFO]', req.query)
   user = await users.select({'_id': req.query.user.trim()})
   res.render('admin-auth/admin-confirm.ejs', {message:'', isLoggedIn: req.user, user: user})
 })

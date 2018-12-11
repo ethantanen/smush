@@ -28,9 +28,9 @@ router.post('/insert', isAdmin, upload.array('file', [2]), async (req, res) => {
   // insert file into music model
   try {
     entry = await music.insert(format(req.body))
-    res.render("home.ejs", {isLoggedIn: req.user, message:"Entry successfully uploaded"})
+    res.render("upload.ejs", {isLoggedIn: req.user, message:"Entry successfully uploaded"})
   } catch (err) {
-    res.render("home.ejs", {isLoggedIn: req.user, message:"Could not insert entry!"})
+    res.render("upload.ejs", {isLoggedIn: req.user, message:"Could not insert entry!"})
   }
 })
 
@@ -76,7 +76,6 @@ router.get('/select', async (req, res) => {
     res.render('error.ejs')
   }
 })
-
 
 // search database by phrase
 router.get('/search', async (req, res) => {
