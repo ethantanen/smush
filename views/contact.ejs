@@ -3,51 +3,47 @@
 
 <head>
   <% include partials/head.ejs %>
-
 </head>
 
-<body >
+<body>
   <% include partials/navbar.ejs %>
 
   <link rel='stylesheet' href='bootstrap-social.css'>
-<!-- Add font awesome icons -->
-
 
   <p style="margin-bottom:10%;"> </p>
 
   <div class="container">
     <div class="row">
       <div class='col-md-5 offset-md-4'>
-        <div class="shadow p-3 mb-5 bg-white rounded">
-
+        <div class="p-3 bg-white rounded">
 
           <!-- Title -->
           <h3> Send SMUSH an email </h3>
-
 
           <!-- Login with username and password -->
           <div class='row' style="margin-bottom:3px;">
             <div class='col-md-12'>
               <form action='/contact/sendEmail' method='POST' id="email">
-                <input type='text' class="form-control" placeholder="Your name" ><br>
-                <input type='text' class="form-control" placeholder="Email" ><br>
-                <textarea type='text' rows='7' class="form-control" placeholder="Your message"></textarea><br>
+                <input type='text' class="form-control" name='name' placeholder="Your name" required><br>
+                <input type='text' class="form-control" name='email'placeholder="Email" required><br>
+                <textarea type='text' rows='7' class="form-control"  name='message' placeholder="Your message" required></textarea><br>
             </div>
-          </div>
-
-          <!-- Login page footer -->
-          <div class="row">
-
-            <!-- Login button -->
-            <div class="col-md-1 pull-left">
-              <button type="submit" class="btn btn-large btn-danger pull-right" form='email' style="margin: 0 auto">Send Email</button>
             </div>
+
+            <!-- Login page footer -->
+            <div class="row">
+
+              <!-- Login button -->
+              <div class="col-md-1 pull-left">
+                <button type="submit" class="btn btn-large btn-danger pull-right" form='email' style="margin: 0 auto">Send Email</button>
+              </div>
+
+            </div>
+
+            <% include partials/message.ejs %>
+
           </div>
-
-          <% include partials/message.ejs %>
-
         </div>
       </div>
     </div>
-  </div>
 </body>

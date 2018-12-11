@@ -74,13 +74,15 @@ router.post('/insert', async (req, res) => {
 })
 
 // delete user
-router.get('/remove', isUser, async (req, res) => {
-  // TODO: convert '' to null to delete entries where the field doesnt exist/ is empty
+router.post('/remove', isUser, async (req, res) => {
+  user = req.user
   try {
-    meta = await users.remove(format(req.query))
-    res.send('success')
+    meta = await users.remove(req.body._id)
+    req.session.destroy((err) => {
+      res.render('home.ejs', {message: user.name + ' has been deleted from the SMUSH community!', isLoggedIn: false})
+    })
   } catch (err) {
-    res.send('something went wrong')
+    res.render('profile.ejs', {message: user.name + 'your account could not be deleted', isLoggedIn: req.user})
   }
 })
 

@@ -1,88 +1,94 @@
-
-
 <html>
 
 <head>
-<% include partials/head.ejs %>
-<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-
+  <% include partials/head.ejs %>
+  <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 </head>
 
 <body>
-<% include partials/navbar.ejs %>
+  <% include partials/navbar.ejs %>
 
-<div class="container">
+  <div class="container">
 
-
-    <h4> Search Archive </h4>
-
+    <!-- Results Page Header -->
+    <hgroup class="mb20">
+      <h1>Search Results</h1>
+      <h2 class="lead"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
+    </hgroup><br>
 
     <!-- Search Bar -->
+    <h4> Search Archive </h4>
     <div class="row">
       <div class="col-md-12">
         <form action='/archive/search'>
           <div class="input-group">
             <input name="search" class="form-control border-secondary " type="text" placeholder="search">
-            <a class="btn btn-outline-secondary" type='submit'><i class="fa fa-search"></i></a>
+            <div class='input-group-append'>
+              <button class="btn btn-outline-secondary" type='submit'><i class="fa fa-music"></i></button>
+            </div>
           </div>
         </form><br><br>
-          </div>
       </div>
+    </div>
 
-      <!-- Advanced Search Options -->
-      <div class='row'>
-        <div class='col-md-4 offset-md-5'>
-          <button type="button" id='advsearch_button' class="btn btn_material_style">Advanced Search Options</button>
-        </div>
-        <div class='col-md-6 offset-md-3'>
-          <% include partials/advanced-search.ejs %>
-        </div>
+    <!-- Advanced Search Options -->
+    <div class='row'>
+      <div class='col-md-4 offset-md-5'>
+        <button type="button" id='advsearch_button' class="btn btn_material_style">Advanced Search Options</button>
       </div>
+      <div class='col-md-6 offset-md-3'>
+        <% include partials/advanced-search.ejs %>
+      </div>
+    </div><br>
 
-    <br>
-  <hgroup class="mb20">
-		<h1>Search Results</h1>
-		<h2 class="lead" id="searchnum" ><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
-	</hgroup>
-  <br>
-  <div class="result">
+    <!-- List of Results -->
+    <table class='table table-hover '>
+      <thead>
+        <tr>
+          <th scope='col'> # </th>
+          <th scope='col'> Artist </th>
+          <th scope='col'> Track </th>
+          <th scope='col'> Tempo </th>
+          <th scope='col'> Key </th>
+          <th scope='col'> Image </th>
+        </tr>
+      </thead>
 
-  <% for (result in data) { %>
-      <a href='/archive/archive-entry?_id=<%= data[result].id%>'>
-        <table class="table table-filter fixed">
-
-          <tr id="row">
-          <col width="50%"/>
-          <col width="30%"/>
-          <col width="20%"/>
+      <!-- Populate Table w/ Query Results -->
+      <tbody>
+        <% for (i=0; i<data.length; i++) { %>
+          <tr class='clickable' link='/archive/archive-entry?_id=<%= data[i]._id%>'>
+            <th scope='row'>
+              <%= i %>
+            </th>
             <td>
-              Artist: <%=data[result].artistName %>
+              <%= data[i].artistName %>
             </td>
             <td>
-              Track: <%=data[result].trackName %>
+              <%= data[i].trackName %>
             </td>
-            <td id="image<%=result%>">
+            <td>
+              <%= data[i].tempo %>
             </td>
-
-            <script>
-
-              cell = document.getElementById("image<%=result%>");
-              image = new Image();
-
-              image.src = 'data:image/png;base64,<%=data[result].image%>';
-              ratio = Math.min(100 / image.width, 100 / image.height);
-              image.width = image.width*ratio;
-              image.height = image.height*ratio;
-
-              cell.appendChild(image);
-
-            </script>
-            </tr>
-        </table>
-        </a>
-
-  <% } %>
+            <td>
+              <%= data[i].key %>
+            </td>
+            <script> console.log('<%= data[i].image %>') </script>
+            <td> <img style='width:75px; height:75px', src='data:image/png;base64, <%= data[i].image %>'> </td>
+          <tr>
+        <% } %>
+      </tbody>
+    <table>
   </div>
 </div>
+
+<!-- Redirect Page to Archive Entry -->
+<script>
+  $('.clickable').on('click', (e) => {
+    document.location.href = e.currentTarget.getAttribute('link')
+  })
+</script>
+
 </body>
+
 </html>

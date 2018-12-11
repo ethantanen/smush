@@ -25,6 +25,7 @@ async function insert(entry) {
 
 // select document from database, returns a promise-like object (good for async, await)
 function select(query) {
+  console.log('here?', query)
   return new Promise((resolve, reject) => {
     User.findOne(query).then((users) => {//.limit.sort ... very open ended!
       if (!users) return reject('couldn\'t select user')
@@ -44,10 +45,10 @@ function update(id, update) {
 }
 
 // delete document from database
-function remove(query) {
+function remove(id) {
   return new Promise((resolve, reject) => {
-    User.find(query).deleteOne().then((meta) => {
-      if (!meta) return reject('couldn\'t remove user')
+    User.findByIdAndDelete(id).then((meta) => {
+      if (!meta) return reject(meta)
       return resolve(meta) //TODO: what does remove return?
     })
   })
