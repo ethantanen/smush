@@ -20,20 +20,29 @@ describe('Admin access', function() {
 
     })
 
-describe('Filling out login info', function() {
-  it('successfully logs in as an admin', function() {
-    cy.get('input[name=username]')
-      .type(Cypress.config('test_admin_username'))
-      .should('have.value', Cypress.config('test_admin_username'))
+  describe('Filling out login info', function() {
+    it('successfully logs in as an admin', function() {
+      cy.get('input[name=username]')
+        .type(Cypress.config('test_admin_username'))
+        .should('have.value', Cypress.config('test_admin_username'))
 
-    cy.get('input[name=password]')
-      .type(Cypress.config('test_admin_password'))
+      cy.get('input[name=password]')
+        .type(Cypress.config('test_admin_password'))
 
-    //click the login button
-    cy.get('button[type=submit]').click()
-    cy.url().should('include', '/home')
-
-    //test it is an admin
+      //click the login button
+      cy.get('button[type=submit]').click()
+      //check we are on the home page and successfully logged in
+      cy.url().should('include', '/home')
+      cy.contains('Profile')
+      cy.contains('Admin')
+      //test it is an admin
+      // cy.getCookie('passport').should('exist')
+      })
     })
-  })
+
+    describe('Logging out as admin', function() {
+      it('successfully logs out as admin', function() {
+
+      })
+    })
 })
