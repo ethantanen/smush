@@ -1,6 +1,0 @@
-{
-	"baseUrl": "http://localhost:3000",
-
-	"test_admin_username": "cypress_admin",
-	"test_admin_password": "password123."
-}
