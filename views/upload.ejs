@@ -82,13 +82,13 @@
             <!-- Refine Table Content -->
             <div class='col-md-6 border-right' >
               <br><h4> Refine Table Content </h4>
-              <form action='/archive/upload'>
+              <form action='/archive/admin'>
 
 
                 <div class="form-group row">
                   <label for="artistName" class="col-2 col-form-label">ID</label>
                   <div class="col-10">
-                    <input class="form-control" type="text"  name='artistName'>
+                    <input class="form-control" type="text"  name='_id'>
                   </div>
                 </div>
 
@@ -168,12 +168,17 @@
               </form>
 
               <!-- Delete Entry -->
-              <form action='/archive/remove' method='POST'>
-                <input type='hidden' name='_id' id='rmid'>
-                <button type='submit' class='btn btn-danger float-lg-right' formaction='/archive/remove'> Delete Entry </button>
-              </form>
-              <button form='edits' type='submit' class='btn btn-success float-md-left'> Submit Edits </button>
-
+              <div class='row'>
+                <div class='col-md-6'>
+                  <button form='edits' type='submit' class='btn btn-success float-md-right'> Submit Edits </button>
+                </div>
+                <div class='col-md-6'>
+                  <form action='/archive/remove' method='POST'>
+                    <input type='hidden' name='_id' id='rmid'>
+                    <button type='submit' class='btn btn-danger float-lg-left' formaction='/archive/remove'> Delete Entry </button>
+                  </form>
+                </div>
+              </div>
           </div>
         </div>
       </div>

@@ -81,6 +81,7 @@ router.get('/select', async (req, res) => {
 router.get('/search', async (req, res) => {
   try {
     results = await music.search(req.query.search)
+    console.log(results)
     res.render('results.ejs', {data: results, isLoggedIn: req.user})
   } catch (err) {
     res.status(404).render('error.ejs')
@@ -95,6 +96,7 @@ router.get('/archive-entry*', async (req, res) => {
 
 // render upload entry view
 router.get('/admin', isAdmin, async (req, res) => {
+  console.log(req.query)
   db = await music.select(format(req.query))
   res.render('upload.ejs', {isLoggedIn: req.user, message: '', db: db})
 })

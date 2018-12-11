@@ -12,12 +12,11 @@ function _checkAuth(req, res, next, permission) {
 
   // render error message if user is not logged in
   if (!req.user) {
-    res.render('login.ejs', {isLoggedIn: false, message: login})
+    return res.render('login.ejs', {isLoggedIn: false, message: login})
   }
-
   // render error message if user does not have correct permissions
   if (!permission.includes(req.user.permissions)) {
-    res.render('home.ejs', {isLoggedIn: req.user, message: permissions})
+    return res.render('home.ejs', {isLoggedIn: req.user, message: permissions})
   }
 
   // continue to endpoint if everything checks out!
@@ -31,6 +30,7 @@ function isAdmin(req, res, next) {
 
 // user wrapper for the _checkAuth function
 function isUser(req, res, next) {
+  console.log('HERE')
   _checkAuth(req, res, next, ['User', 'Admin'])
 }
 

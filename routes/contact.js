@@ -2,6 +2,7 @@
 const router = require('express').Router()
 const fs = require('fs')
 const ejs = require('ejs')
+
 // create transporter object used to send emails
 const transporter = require('nodemailer').createTransport({
  service: 'gmail',
@@ -16,20 +17,19 @@ router.get('/', (req, res) => {
   res.render('contact.ejs', {isLoggedIn: req.user, message:""})
 })
 
-// use nodemailer to send the email
+// use nodemailer to send email
 router.post('/sendEmail', (req, res) => {
   transporter.sendMail(format(req.body), (err, m) => {
     if (err) return res.render('error.ejs')
-    res.render('home.ejs', {message: 'Your email has been sent!', isLoggedIn: use})
+    res.render('home.ejs', {message: 'Your email has been sent!', isLoggedIn: req.user})
   })
 })
 
-// TODO: m
+// use nodemailer to send a request admin email to the smush account
 router.get('/request-admin', async (req, res) => {
 
   message = await fs.readFileSync('./views/admin-auth/admin-email.ejs').toString()
   message = ejs.render(message, {user: req.user})
-
 
   mailOptions = {
     from: 'guccipancakes1234@gmail.com',
