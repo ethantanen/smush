@@ -23,14 +23,3 @@ describe('Basic Searching', function() {
     cy.get('#row').should('exist')
   })
 })
-
-describe('auto login?this is broken still lololasdhkjdkh??', function() {
-  it('logs in without using the ui...?', function() {
-    cy.visit('/')
-    cy.request('POST', '/authenticate', {
-      username: Cypress.config('test_admin_username') ,
-      password: Cypress.config('test_admin_username')
-    })
-    cy.visit('/home')
-  })
-})
