@@ -18,28 +18,10 @@
 
     <!-- Search Bar -->
     <h4> Search Archive </h4>
-    <div class="row">
-      <div class="col-md-12">
-        <form action='/archive/search'>
-          <div class="input-group">
-            <input name="search" class="form-control border-secondary " type="text" placeholder="search">
-            <div class='input-group-append'>
-              <button class="btn btn-outline-secondary" type='submit'><i class="fa fa-music"></i></button>
-            </div>
-          </div>
-        </form><br><br>
-      </div>
-    </div>
+    <% include partials/search-bar %>
 
     <!-- Advanced Search Options -->
-    <div class='row'>
-      <div class='col-md-4 offset-md-5'>
-        <button type="button" id='advsearch_button' class="btn btn_material_style">Advanced Search Options</button>
-      </div>
-      <div class='col-md-6 offset-md-3'>
-        <% include partials/advanced-search.ejs %>
-      </div>
-    </div><br>
+    <% include partials/advanced-search.ejs %>
 
     <!-- List of Results -->
     <table class='table table-hover '>
@@ -57,7 +39,7 @@
       <!-- Populate Table w/ Query Results -->
       <tbody>
         <% for (i=0; i<data.length; i++) { %>
-          <tr class='clickable' id="row" link='/archive/archive-entry?_id=<%= data[i]._id%>'>
+          <tr class='clickable' style='cursor: pointer;' id="row" link='/archive/archive-entry?_id=<%= data[i]._id%>'>
             <th scope='row'>
               <%= i %>
             </th>

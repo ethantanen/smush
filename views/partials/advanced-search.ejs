@@ -1,26 +1,57 @@
 <p style="margin-bottom:5%;"> </p>
 
-<div class="container as" style='display:none;'>
-  <div class="row">
-    <div class='col-md-8 offset-md-4'>
-      <div class="shadow p-3 mb-5 bg-white rounded">
-        <div class='row' style='margin-bottom:3px;'>
-          <div class='col-md-12'>
-            <form id='select' action='/archive/select'>
-              <input type='text' class='form-control' name='artistName' placeholder='Artist'><br>
-              <input type='text' class='form-control' name='trackName' placeholder='Title'><br>
-              <input type='text' class='form-control' name='key' placeholder='Key'><br>
-              <input type='text' class='form-control' name='tempo' placeholder='Tempo'><br>
-              <input type='submit'>
-            </form>
+<!-- Advanced Search Button -->
+<div class='row'>
+  <div class='col-md-4 offset-md-4'>
+    <button type="button" id='advsearch_button' class="btn btn_material_style border-secondary">Advanced Search Options</button>
+  </div>
+</div><br>
+
+<!-- Advanced Search Form -->
+<div class='row'>
+  <div class='col-md-10 '>
+
+    <!-- Hidden Before Click Event -->
+    <div class="container as" style='display:none;'>
+      <div class="row">
+        <div class='col-md-8 offset-md-4' style='z-index:1000; position:relative;'>
+          <div class="shadow p-3 mb-5 bg-white rounded border">
+
+            <!-- Form -->
+            <div class='row' style='margin-bottom:3px;'>
+              <div class='col-md-12'>
+                <form id='select' action='/archive/select'>
+
+                  <div class='row'>
+                    <!-- Artist and Track Title -->
+                    <div class='col-lg-6'>
+                      <input type='text' class='form-control' name='artistName' placeholder='Artist'><br>
+                      <input type='text' class='form-control' name='trackName' placeholder='Title'><br>
+                    </div>
+
+                      <!-- Key and Tempo -->
+                      <div class='col-lg-6'>
+                        <input type='text' class='form-control' name='key' placeholder='Key'><br>
+                        <input type='text' class='form-control' name='tempo' placeholder='Tempo'><br>
+                    </div>
+                  </div>
+
+                  <input type='submit' class='btn btn-outline-success text-center'>
+
+                </form>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- Pull up form on click -->
+
+<!-- Display Container On Click  -->
 <script>
   $('#advsearch_button').on('click', (event) => {
     if ($('.as').attr('style') === 'display:none;') {

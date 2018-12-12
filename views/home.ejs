@@ -4,55 +4,75 @@
 <head>
   <% include partials/head.ejs %>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 </head>
 
 <body>
 
   <% include partials/navbar.ejs %>
 
-  <!-- Cloud Animation and Page Title -->
+  <!-- Cloud Animation, Page Title  and Search Bar -->
   <div style="text-align:center;">
     <div id="banner">
       <div id="cloud-scroll">
-        <h1 id="header1" style="line-height:400px;">
-          SMUSH
-        </h1>
+        <div class='container'>
+          <h1 id="header1" style="line-height:200px; font-size:4em">
+            SMUSH
+          </h1>
+          <!-- Search Bar -->
+          <h5>Search Music...</h5>
+          <% include partials/search-bar.ejs %>
+
+          <!-- Advanced Search Options -->
+          <% include partials/advanced-search.ejs %>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="container">
+  <!-- Contact -->
+  <div  style='margin-top: 85px'>
 
-    <!-- Search Bar -->
-    <h5>Search Music...</h5>
-    <div class="row">
-      <div class="col-md-12">
-        <form action='/archive/search'>
-          <div class="input-group">
-            <input name="search" class="form-control border-secondary " type="search" placeholder="search">
-            <div class='input-group-append'>
-              <button class="btn btn-outline-secondary" type='submit'><i class="fa fa-music"></i></button>
-            </div>
-          </div>
-        </form><br><br>
-      </div>
-    </div>
-
-    <!-- Advanced Search Options -->
     <div class='row'>
-      <div class='col-md-4 offset-md-5'>
-        <button type="button" id='advsearch_button' class="btn btn_material_style">Advanced Search Options</button>
+        <!-- Join the Community Blurb -->
+        <div class='col-md-8 offset-md-2'>
+          <div class='card-deck'>
+          <div class='card' style='width:30%'>
+            <div class='card-header'><div class='text-center'><i class="fa fa-headphones" style='font-size:3em;'></i> </div></div>
+            <div class='card-body'>
+              <h5 class='card-title text-center'> Join the community! &nbsp </h5>
+              <p class='card-text'> The SMUSH team is making the sharing of sheet music a breeze!
+                We provide a one-stop shop to share and explore a multitude of sheet music. Join us!</p>
+            </div>
+            <div class='card-footer'><a href='/user/signup' class='btn btn-outline-primary col-md-4 offset-md-4'>Sign Up</a></div>
+          </div>
+
+        <!-- Join the Community Blurb -->
+          <div class='card'>
+            <div class='card-header'><div class='text-center'><i class="fa fa-volume-up" style='font-size:3em;'></i> </div></div>
+            <div class='card-body'>
+              <h5 class='card-title text-center'> Want to get involved? &nbsp </h5>
+              <p class='card-text'> The SMUSH community is dynamic and we understand that change is integral to
+              success! If you want to get involved, whether it be contributing a score or suggesting a change to the site
+              we would love to hear from you! Click on the button below to shoot us an email. </p>
+            </div>
+            <div class='card-footer'><a href='/contact' class='btn btn-outline-primary col-md-4 offset-md-4'>Contact</a></div>
+          </div>
+        </div>
       </div>
-      <div class='col-md-6 offset-md-3'>
-        <% include partials/advanced-search.ejs %>
-      </div>
-    </div>
   </div>
 
-    <% include partials/message.ejs %>
+<script>
+  $('.fa').hover(
+    (e) => { $(e.target).addClass('fa-spin'); },
+    (e) => { $(e.target).removeClass('fa-spin');}
+  )
+</script>
+
+
+
+
+  <% include partials/message.ejs %>
 
 </body>
 

@@ -80,8 +80,16 @@ router.get('/select', async (req, res) => {
 // search database by phrase
 router.get('/search', async (req, res) => {
   try {
-    results = await music.search(req.query.search)
-    console.log(results)
+
+    // accommodate full database results w/ query --> ''
+    if (req.query.search === '') {
+      results = await music.select({})
+    } else {
+      results = await music.search(req.query.search)
+    }
+
+    console.log(results )
+
     res.render('results.ejs', {data: results, isLoggedIn: req.user})
   } catch (err) {
     res.status(404).render('error.ejs')
