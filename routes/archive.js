@@ -28,7 +28,8 @@ router.post('/insert', isAdmin, upload.array('file', [2]), async (req, res) => {
   // insert file into music model
   try {
     entry = await music.insert(format(req.body))
-    res.render("upload.ejs", {isLoggedIn: req.user, message:"Entry successfully uploaded"})
+    db = await music.select({})
+    res.render("upload.ejs", {isLoggedIn: req.user, message:"Entry successfully uploaded", db: db})
   } catch (err) {
     res.render("upload.ejs", {isLoggedIn: req.user, message:"Could not insert entry!"})
   }
