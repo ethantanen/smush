@@ -55,7 +55,6 @@
             <td>
               <%= data[i].key %>
             </td>
-            <script> console.log('<%= data[i].image %>') </script>
             <td> <img style='width:75px; height:75px', src='data:image/png;base64, <%= data[i].image %>'> </td>
           <tr>
         <% } %>
@@ -69,6 +68,11 @@
   $('.clickable').on('click', (e) => {
     document.location.href = e.currentTarget.getAttribute('link')
   })
+
+  $('.fa').hover(
+    (e) => { $(e.target).addClass('fa-spin'); },
+    (e) => { $(e.target).removeClass('fa-spin');}
+  )
 </script>
 
 </body>
