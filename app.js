@@ -20,14 +20,17 @@ const user = require('./routes/user')
 const contact = require('./routes/contact')
 const archive = require('./routes/archive')
 
+// either localhost 3000 or the servers default port
+const PORT = process.env.PORT || 3000
+
 // create app
 app = express()
 
 // start server on port 3000
-app.listen(3000, (err) => {
-  if (err) { return console.log(err) }
-  console.log('listening on port 3000')
-})
+// app.listen(3000, (err) => {
+//   if (err) { return console.log(err) }
+//   console.log('listening on port 3000')
+// })
 
 // set view engine
 app.set('view engine', 'ejs')
@@ -61,3 +64,13 @@ app.use('/archive', archive.router)
 app.all('/*', (req, res) => {
   res.render('home.ejs', {isLoggedIn:req.user, message: ""})
 })
+
+// begin https server on port 8000
+https.createServer({
+    key: fs.readFileSync('./config/server.key'),
+    cert: fs.readFileSync('./config/server.crt')
+  }, app)
+  .listen(PORT, (err) => {
+    if (err) return console.log("Can't connect to port ",PORT, err)
+    return console.log("Listening on port ", PORT)
+  })

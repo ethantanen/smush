@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
+    "dev": "source ./config/app_env && nodemon app.js",
     "cypress:open": "./node_modules/.bin/cypress open"
   },
   "repository": {
