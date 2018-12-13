@@ -28,12 +28,12 @@
           <h3> Upload Score </h3>
 
           <form action='/archive/insert' method='POST' id="email" enctype="multipart/form-data">
-            <input type='text' class="form-control" placeholder="Artist name" name='artistName'><br>
-            <input type='text' class="form-control" placeholder="Track Name" name='trackName' ><br>
+            <input type='text' class="form-control" placeholder="Artist name" name='artistName' required><br>
+            <input type='text' class="form-control" placeholder="Track Name" name='trackName' required><br>
             <input type='text' class="form-control" placeholder="Key" name='key'><br>
             <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
-              Image of Score <input type='file' class='form-control' name='file'><br>
-              Midi or MusicXML File <input type='file' class='form-control' name='file'><br>
+              Image of Score <input type='file' class='form-control' name='file' required><br>
+              Midi or MusicXML File <input type='file' class='form-control' name='file' required><br>
             <button type="submit" class="btn btn-success">Upload</button>
           </form>
         </div>
