@@ -9,20 +9,26 @@
 <body>
 
 <br>
+<br>
+<br>
   <div class="container">
     <div class="row">
 
       <div class='col-md-5 offset-md-4'>
 
         <div class="shadow p-3 mb-5 bg-white rounded">
-
           <!-- Title -->
-
           <div class="card">
             <div class="card-header">
                <h1> <%= data.trackName %></h1>
             </div>
-            <img class="card-img-top" src='data:image/png;base64, <%= data.image %>' alt="Card image cap">
+            <br>
+            <div style="text-align: center;">
+                <img id ="scoreImg" style="max-height: 400px; max-width: 300px;" class="card-img-top" src='data:image/png;base64, <%= data.image %>'  alt="Card image cap">
+
+
+            </div>
+
             <div class="card-body">
               <h2>  Written by <%= data.artistName %></h2>
               <div style="text-align:center;">

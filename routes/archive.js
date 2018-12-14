@@ -103,6 +103,12 @@ router.get('/archive-entry*', async (req, res) => {
   res.render('archive-entry.ejs', {data: data[0], isLoggedIn: req.user, message:''})
 })
 
+//render sheetmusic view
+router.get('/sheetmusic*', async (req, res) => {
+  data = await music.select(req.query)
+  res.render('sheetmusic.ejs', {data: data[0], isLoggedIn: req.user, message:''})
+})
+
 // render upload entry view
 router.get('/admin', isAdmin, async (req, res) => {
   console.log(req.query)
