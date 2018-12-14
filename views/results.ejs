@@ -5,20 +5,23 @@
   <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 </head>
 
+<% include partials/navbar.ejs %>
+<br><br><br>
 <body>
-  <% include partials/navbar.ejs %>
+
 
   <div class="container">
 
     <!-- Results Page Header -->
     <hgroup class="mb20">
+      <br>
       <h1>Search Results</h1>
       <h2 class="lead" id="searchnum"><strong class="text-danger"><%=data.length%></strong> results were found for your search </h2>
     </hgroup><br>
 
     <!-- Search Bar -->
-    <h4> Search Archive </h4>
     <% include partials/search-bar %>
+
 
     <!-- Advanced Search Options -->
     <% include partials/advanced-search.ejs %>
@@ -43,16 +46,16 @@
             <th scope='row'>
               <%= i %>
             </th>
-            <td>
+            <td id="tableartistName">
               <%= data[i].artistName %>
             </td>
-            <td>
+            <td id="tabletrackName">
               <%= data[i].trackName %>
             </td>
-            <td>
+            <td id="tabletempo">
               <%= data[i].tempo %>
             </td>
-            <td>
+            <td id="tablekey">
               <%= data[i].key %>
             </td>
             <td> <img style='width:75px; height:75px', src='data:image/png;base64, <%= data[i].image %>'> </td>
