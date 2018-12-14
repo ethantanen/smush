@@ -29,7 +29,7 @@ router.post('/sendEmail', (req, res) => {
 router.get('/request-admin', async (req, res) => {
 
   message = await fs.readFileSync('./views/admin-auth/admin-email.ejs').toString()
-  message = ejs.render(message, {user: req.user})
+  message = ejs.render(message, {user: req.user, url: process.env.SITE_URL})
 
   mailOptions = {
     from: 'guccipancakes1234@gmail.com',

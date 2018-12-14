@@ -25,7 +25,6 @@ async function insert(entry) {
 
 // select document from database, returns a promise-like object (good for async, await)
 function select(query) {
-  console.log('here?', query)
   return new Promise((resolve, reject) => {
     User.findOne(query).then((users) => {//.limit.sort ... very open ended!
       if (!users) return reject('couldn\'t select user')
@@ -67,9 +66,14 @@ function validatePasswordHash(password, storedPasswordHash) {
 // connect to database
 function connect() {
   // connect to mongo database
-  const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
-    '@ds115712.mlab.com:15712/music_app_1234'
-  mongoose.connect(URI, {useNewUrlParser: true})
+  // const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
+    // '@ds115712.mlab.com:15712/music_app_1234'
+  // const URI = 'mongodb://localhost:3001,localhost:3002,localhost:3003/testDB?replicaSet=rs0'
+  var options = { server: { socketOptions: { keepAlive: 1 } } };
+  const URI = process.env.MONGO_URI
+
+  mongoose.connect(URI, options) //{useNewUrlParser: true}
+    .catch((err) => {console.log(JSON.stringify(err, null, 2))})
 
   // define user schema
   userSchema = new mongoose.Schema({

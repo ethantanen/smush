@@ -56,4 +56,12 @@
   <% include partials/message.ejs %>
 
 </body>
+
+<script>
+  $('.fa').hover(
+    (e) => { $(e.target).addClass('fa-spin'); },
+    (e) => { $(e.target).removeClass('fa-spin');}
+  )
+</script>
+
 </html>

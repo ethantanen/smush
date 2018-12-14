@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "cypress:open": "./node_modules/.bin/cypress open"
-  },
+    "dev": "source ./config/app_env && nodemon app.js",
+    "cypress:open": "./node_modules/.bin/cypress open",
+		"start":"source ./config/app_env && node app.js"
+ },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ethantanen/MPS-Project.git"
