@@ -59,6 +59,9 @@ app.get('/index', (req, res) => {
 app.use('/user', user.router)
 app.use('/contact', contact.router)
 app.use('/archive', archive.router)
+app.get('/about', (req, res) => {
+  res.render('about.ejs', {isLoggedIn: req.user, message:""})
+})
 
 // render homescreen/ redirect unmatched urls to homescreen
 app.all('/*', (req, res) => {
