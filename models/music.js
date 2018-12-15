@@ -56,14 +56,9 @@ function remove(id) {
 async function connect() {
 
   // connect to mongo database
-  //const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
-    //'@ds115712.mlab.com:15712/music_app_1234'
-  //const URI = 'mongodb://localhost:3001,localhost:3002,localhost:3003/testDB?replicaSet=rs0'
-
   const URI = process.env.MONGO_URI
-  var options = { server: { socketOptions: { keepAlive: 1 } } };
-
-  mongoose.connect(URI, options )//{useNewUrlParser: true}
+  options = { server: { socketOptions: { keepAlive: 1 } }, useNewUrlParser: true };
+  mongoose.connect(URI, options)
 
   // define music schema
   musicSchema = new mongoose.Schema({

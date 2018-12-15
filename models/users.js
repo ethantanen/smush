@@ -1,7 +1,4 @@
-// NOTE: need to do some research on passport
-// for authentication and such
-// TODO: check for reduncy before inserting a document!
-
+// published modules 
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
@@ -65,14 +62,11 @@ function validatePasswordHash(password, storedPasswordHash) {
 
 // connect to database
 function connect() {
-  // connect to mongo database
-  // const URI = 'mongodb://' + process.env.USERNAME_MLAB + ':' + process.env.PASSWORD_MLAB +
-    // '@ds115712.mlab.com:15712/music_app_1234'
-  // const URI = 'mongodb://localhost:3001,localhost:3002,localhost:3003/testDB?replicaSet=rs0'
-  var options = { server: { socketOptions: { keepAlive: 1 } } };
-  const URI = process.env.MONGO_URI
 
-  mongoose.connect(URI, options) //{useNewUrlParser: true}
+  // connect to mongo database
+  const URI = process.env.MONGO_URI
+  options = { server: { socketOptions: { keepAlive: 1 } }, useNewUrlParser: true}
+  mongoose.connect(URI, options)
     .catch((err) => {console.log(JSON.stringify(err, null, 2))})
 
   // define user schema

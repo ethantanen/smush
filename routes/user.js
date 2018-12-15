@@ -87,7 +87,7 @@ router.post('/remove', isUser, async (req, res) => {
 })
 
 // search database
-router.get('/select', isUser, async (req, res) => {
+router.get('/select', async (req, res) => {
   try {
     results = await users.select(format(req.query))
     res.send(results)

@@ -19,13 +19,13 @@ passport.use(new LocalStrategy( (username, password, done) => {
     })
 }))
 
+// setup FacebookStrategy
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENTID,
   clientSecret: process.env.FACEBOOK_CLIENTSECRET,
   callbackURL: process.env.FACEBOOK_CALLBACKURL,
   profileFields: ['id', 'emails', 'displayName']
 }, (accessToken, refreshToken, profile, done) => {
-
   return users.select({facebookId: profile.id})
     .then((user) => {
       return done(null, user, {message: user})
@@ -36,6 +36,7 @@ passport.use(new FacebookStrategy({
     })
 }))
 
+// setup TwitterStrategy
 passport.use(new TwitterStrategy({
   consumerKey: process.env.TWITTER_CONSUMERKEY,
   consumerSecret: process.env.TWITTER_CONSUMERSECRET,
@@ -52,12 +53,12 @@ passport.use(new TwitterStrategy({
     })
 }))
 
-// serialize user using the user's username
+// serialize user using the user's primary-key/_id
 passport.serializeUser((user, done) => {
   done(null, user._id)
 })
 
-// deserialize user by querying database by username
+// deserialize user by querying database by primary-key/_id
 passport.deserializeUser((id, done) => {
   users.select({_id: id})
     .then((user) => {

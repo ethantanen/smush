@@ -27,7 +27,7 @@
     <% include partials/advanced-search.ejs %>
 
     <!-- List of Results -->
-    <table class='table table-hover '>
+    <table class='table table-hover' >
       <thead>
         <tr>
           <th scope='col'> # </th>
@@ -40,7 +40,7 @@
       </thead>
 
       <!-- Populate Table w/ Query Results -->
-      <tbody>
+      <tbody >
         <% for (i=0; i<data.length; i++) { %>
           <tr class='clickable' style='cursor: pointer;' id="row" link='/archive/archive-entry?_id=<%= data[i]._id%>'>
             <th scope='row'>

@@ -25,7 +25,7 @@ router.post('/insert', isAdmin, upload.array('file', [2]), async (req, res) => {
   req.body.image = image_64
   req.body.midi = midi_64
 
-  // insert file into music model
+  // insert fi le into music model
   try {
     entry = await music.insert(format(req.body))
     db = await music.select({})
@@ -81,16 +81,12 @@ router.get('/select', async (req, res) => {
 // search database by phrase
 router.get('/search', async (req, res) => {
   try {
-
     // accommodate full database results w/ query --> ''
     if (req.query.search === '') {
       results = await music.select({})
     } else {
       results = await music.search(req.query.search)
     }
-
-    console.log(results )
-
     res.render('results.ejs', {data: results, isLoggedIn: req.user})
   } catch (err) {
     res.status(404).render('error.ejs')
@@ -105,7 +101,6 @@ router.get('/archive-entry*', async (req, res) => {
 
 // render upload entry view
 router.get('/admin', isAdmin, async (req, res) => {
-  console.log(req.query)
   db = await music.select(format(req.query))
   res.render('upload.ejs', {isLoggedIn: req.user, message: '', db: db})
 })
@@ -120,29 +115,6 @@ function format(query) {
   }
   return query
 }
-
-// check if user has the correct permissions for an endpoint
-function _checkAuth(req, res, next, permission) {
-
-  // error message
-  login = 'You must be logged in to visit that page!'
-  permission = 'You need ' + permission + ' permissions if you want to visit that page!'
-
-  // render error message if user is not logged in
-  if (!req.user) {
-    res.render('login.ejs', {isLoggedIn: false, message: login})
-  }
-
-  // render error message if user does not have correct permissions
-  if (req.user.permissions !== permissions) {
-    res.render('home.ejs', {isLoggedIn: req.user, message: permission})
-  }
-
-  // continue to endpoint if everything checks out!
-  next()
-}
-
-
 
 module.exports = {
   router: router
