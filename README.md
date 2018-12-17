@@ -1,6 +1,6 @@
 # MPS-Project
 
-![Alt text](./static/logo.png){:height="50%" width="50%"}
+[logo]: (./static/logo.png) "SMUSH"
 
 To setup the Smush system simply run:
 
