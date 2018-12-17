@@ -25,7 +25,7 @@ router.get('/logout', (req, res) => {
   if (!req.user) return res.redirect('/home')
   user = req.user
   req.session.destroy((err) => {
-    res.render('home.ejs', {message: user.name + ' has been logged out of SMUSH!', isLoggedIn: false})
+    res.render('home.ejs', {message: user.name + ' has been logged out of SMUSH!', isLoggedIn: req.user})
   })
 })
 

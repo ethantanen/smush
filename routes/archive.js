@@ -54,6 +54,7 @@ router.post('/update', isAdmin, async (req, res) => {
   delete req.body._id
   update = req.body
 
+
   try {
 
     // update model

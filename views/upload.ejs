@@ -9,7 +9,6 @@
 
   <% include partials/navbar.ejs %>
 
-
   <br><br><br><br>
   <div class="container">
 
@@ -31,9 +30,9 @@
             <input type='text' class="form-control" placeholder="Artist name" name='artistName' required><br>
             <input type='text' class="form-control" placeholder="Track Name" name='trackName' required><br>
             <input type='text' class="form-control" placeholder="Key" name='key'><br>
-            <input type='text' class="form-control" placeholder="Tempo" name='tempo'><br>
-              Image of Score <input type='file' class='form-control' name='file' required><br>
-              Music File <input type='file' class='form-control' name='file'><br>
+            <input type='text' class="form-control" placeholder="Tempo" name='tempo' data-toggle="tooltip" data-placement='left' title="This could be a number such as '15bpm' or a word such as 'allegro.'"><br>
+              Image of Score <input type='file' class='form-control' name='file' data-toggle="tooltip" data-placement='left' title="Upload an image of the sheet music. We support all major file formats!" required><br>
+              Music File <input type='file' class='form-control' name='file' data-toggle="tooltip" data-placement='left' title="Upload a music file to listen to the jam! We suport .wav, .mp3 and .ogg files."><br>
             <button type="submit" class="btn btn-success">Upload</button>
           </form>
         </div>
@@ -81,7 +80,7 @@
 
             <!-- Refine Table Content -->
             <div class='col-md-6 border-right' >
-              <br><h4> Refine Table Content </h4>
+              <br><h4 data-toggle="tooltip" data-placement='top' title="Use this form to refine the content of the database viewer above. Maybe you only want to see music by Mozart?"> Refine Table Content </h4>
               <form action='/archive/admin'>
 
 
@@ -127,11 +126,11 @@
 
             <!-- Edit Entry -->
             <div class='col-md-6'>
-              <br><h4> Edit Entry </h4>
+              <br><h4 data-toggle="tooltip" data-placement='top' title="Use this form to update or delete a database entry. Simply update the field and click Submit!"> Edit Entry </h4>
               <form action='/archive/update' method='POST' id='edits'>
 
                 <div class="form-group row">
-                  <label for="artistName" class="col-2 col-form-label">ID</label>
+                  <label for="artistName" class="col-2 col-form-label" data-toggle="tooltip" data-placement='left' title="You can't edit the primary id of this entry! This is how we locate the file in our database.">ID</label>
                   <div class="col-10">
                     <input class="form-control" type="text"  name='_id' id="id" readonly>
                   </div>
@@ -168,14 +167,15 @@
                 <div class="form-group row">
                   <label for="file" class="col-2 col-form-label">Image of Score</label>
                   <div class="col-10">
-                    <input type='file' class='form-control' name='file' >
+                    <input type='file' class='form-control' name='file' id='image'>
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="file" class="col-2 col-form-label">Midi or MusicXML File</label>
                   <div class="col-10">
-                    <input type='file' class='form-control' name='file' required><br>                  </div>
+                    <input type='file' class='form-control' name='file' id='music'><br>
+                  </div>
                 </div>
 
               </form>
@@ -208,12 +208,11 @@
     $('#tempo').val(row.children('.tempo').text())
     $('#key').val(row.children('.key').text())
     $('#rmid').val(row.children('.id').text())
-
-
   });
 </script>
-<% include partials/message.ejs %>
 
+<% include partials/tooltip.ejs %>
+<% include partials/message.ejs %>
 
 
 </body>
