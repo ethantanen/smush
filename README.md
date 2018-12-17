@@ -1,5 +1,7 @@
 # MPS-Project
 
+![Alt text](./static/logo.png)
+
 To setup the Smush system simply run:
 
 ```console
