@@ -1,6 +1,6 @@
 # MPS-Project
 
-[logo]: (./static/logo.png) "SMUSH"
+[logo]: ./static/logo.png "SMUSH"
 
 To setup the Smush system simply run:
 
