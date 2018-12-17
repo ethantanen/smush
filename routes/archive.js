@@ -1,5 +1,5 @@
 // published modules
-const upload = require('multer')({dest:'upload/'})
+const upload = require('multer')({dest:'upload/'}).fields([{name: 'image', maxCount: 1}, {name: 'music', maxCount: 1}])
 const fs = require('fs')
 const router = require('express').Router()
 const mongoose = require('mongoose')
@@ -13,19 +13,22 @@ const music = require('../models/music')
 
 // insert entry into music model
 // TODO: neaten by determining which file is name midi and the other image, check extension
-router.post('/insert', isAdmin, upload.array('file', [2]), async (req, res) => {
+router.post('/insert', isAdmin, upload, async (req, res) => {
 
   // parse file from request and convert to base64
-  image = fs.readFileSync(req.files[0].path)
+  image = fs.readFileSync(req.files.image[0].path)
   image_64 = new Buffer(image).toString('base64')
-
-  midi = fs.readFileSync(req.files[1].path)
-  midi_64 = new Buffer(midi).toString('base64')
-
   req.body.image = image_64
-  req.body.midi = midi_64
 
-  // insert fi le into music model
+  // music files are optional so check to see if it exists!
+  if (req.files.music) {
+    midi = fs.readFileSync(req.files.music[0].path)
+    midi_64 = new Buffer(midi).toString('base64')
+    console.log(midi_64)
+    req.body.midi = midi_64
+  }
+
+  // insert file into music model
   try {
     entry = await music.insert(format(req.body))
     db = await music.select({})
@@ -47,13 +50,27 @@ router.post('/remove', isAdmin, async (req, res) => {
 })
 
 // update entry in music model
-router.post('/update', isAdmin, async (req, res) => {
+router.post('/update', isAdmin, upload, async (req, res) => {
+
+  console.log(req.files, req.image, req.music, req.file, req.body)
+  // parse image from request and convert to base64
+  if(req.files.image) {
+    image = fs.readFileSync(req.files.image[0].path)
+    image_64 = new Buffer(image).toString('base64')
+    req.body.image = image_64
+  }
+
+  // parse music file from request and convert to base64
+  if(req.files.music) {
+    midi = fs.readFileSync(req.files.music[1].path)
+    midi_64 = new Buffer(midi).toString('base64')
+    req.body.midi = midi_64
+  }
 
   // seperate the id of the entry and the properties to be updated
   id = req.body._id.trim()
   delete req.body._id
   update = req.body
-
 
   try {
 

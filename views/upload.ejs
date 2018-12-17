@@ -31,8 +31,8 @@
             <input type='text' class="form-control" placeholder="Track Name" name='trackName' required><br>
             <input type='text' class="form-control" placeholder="Key" name='key'><br>
             <input type='text' class="form-control" placeholder="Tempo" name='tempo' data-toggle="tooltip" data-placement='left' title="This could be a number such as '15bpm' or a word such as 'allegro.'"><br>
-              Image of Score <input type='file' class='form-control' name='file' data-toggle="tooltip" data-placement='left' title="Upload an image of the sheet music. We support all major file formats!" required><br>
-              Music File <input type='file' class='form-control' name='file' data-toggle="tooltip" data-placement='left' title="Upload a music file to listen to the jam! We suport .wav, .mp3 and .ogg files."><br>
+              Image of Score <input type='file' class='form-control' name='image' data-toggle="tooltip" data-placement='left' title="Upload an image of the sheet music. We support all major file formats!" required><br>
+              Music File <input type='file' class='form-control' name='music' data-toggle="tooltip" data-placement='left' title="Upload a music file to listen to the jam! We suport .wav, .mp3 and .ogg files."><br>
             <button type="submit" class="btn btn-success">Upload</button>
           </form>
         </div>
@@ -127,7 +127,7 @@
             <!-- Edit Entry -->
             <div class='col-md-6'>
               <br><h4 data-toggle="tooltip" data-placement='top' title="Use this form to update or delete a database entry. Simply update the field and click Submit!"> Edit Entry </h4>
-              <form action='/archive/update' method='POST' id='edits'>
+              <form action='/archive/update' method='POST' id='edits' enctype="multipart/form-data">>
 
                 <div class="form-group row">
                   <label for="artistName" class="col-2 col-form-label" data-toggle="tooltip" data-placement='left' title="You can't edit the primary id of this entry! This is how we locate the file in our database.">ID</label>
@@ -167,14 +167,14 @@
                 <div class="form-group row">
                   <label for="file" class="col-2 col-form-label">Image of Score</label>
                   <div class="col-10">
-                    <input type='file' class='form-control' name='file' id='image'>
+                    <input type='file' class='form-control' name='image' id='image'>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="file" class="col-2 col-form-label">Midi or MusicXML File</label>
+                  <label for="file" class="col-2 col-form-label"> Music File</label>
                   <div class="col-10">
-                    <input type='file' class='form-control' name='file' id='music'><br>
+                    <input type='file' class='form-control' name='music' id='music'><br>
                   </div>
                 </div>
 
@@ -208,6 +208,8 @@
     $('#tempo').val(row.children('.tempo').text())
     $('#key').val(row.children('.key').text())
     $('#rmid').val(row.children('.id').text())
+    $('#image').val('')
+    $('#music').val('')
   });
 </script>
 

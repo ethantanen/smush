@@ -52,6 +52,10 @@ app.get('/error', (req, res) => {
   res.render('error.ejs', {isLoggedIn: req.user, message:""})
 })
 
+app.get('/poop', (req, res) => {
+  res.render('poop.ejs')
+})
+
 // connect routers
 app.use('/user', user.router)
 app.use('/contact', contact.router)
