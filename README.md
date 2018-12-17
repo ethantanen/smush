@@ -36,9 +36,9 @@ Directory Structure (does not include testing suite or views):
 
 Description of Directory Structure:
 
-  app.js - this file setups the application and routes calls to specific endpoints
-  config - contains files related to the apps configuration such as https credentials and setting up passport.js strategies
-  models - contains utility files for our models. One model for user information and another for the music archive
-  routes - contains the routers that the app.js file routes to. One for endpoints related to the archive, one for endpoints related to users and another for endpoints related to contacting users with email
-  start.js - RUN THIS FILE TO START THE APPLICATION. This file communicates with the Vault to get the necessary credentials to run the application and initializes the application (using the app.js file)
-  utilities - this directory contains helpful utility files such as for authorizing access to endpoints
+  - app.js - this file setups the application and routes calls to specific endpoints
+  - config - contains files related to the apps configuration such as https credentials and setting up passport.js strategies
+  - models - contains utility files for our models. One model for user information and another for the music archive
+  - routes - contains the routers that the app.js file routes to. One for endpoints related to the archive, one for - -endpoints related to users and another for endpoints related to contacting users with email
+  - start.js - RUN THIS FILE TO START THE APPLICATION. This file communicates with the Vault to get the necessary credentials to run the application and initializes the application (using the app.js file)
+  - utilities - this directory contains helpful utility files such as for authorizing access to endpoints
