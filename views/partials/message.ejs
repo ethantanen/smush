@@ -4,6 +4,7 @@
 
 <%if (message.length > 0) { %>
 <div id='myModal' class="modal fade b" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <br>
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <h3> <%= message %> </h3>
@@ -13,4 +14,5 @@
 <script>
   $('#myModal').modal('show')
 </script>
+<br>
 <% } %>

@@ -54,6 +54,9 @@ app.use((req, res, next) => {
 app.get('/index', (req, res) => {
   res.render('index.ejs')
 })
+app.get('/error', (req, res) => {
+  res.render('error.ejs', {isLoggedIn: req.user, message:""})
+})
 
 // connect routers
 app.use('/user', user.router)
