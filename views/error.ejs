@@ -8,21 +8,37 @@
 
 <body>
   <br><br><br><br>
-
   <% include partials/navbar.ejs %>
+  <div class='container'>
 
-  <div style="margin:auto; width = 500px;">
-    <div style="float: right;">
-      <h3>Something went wrong. This is your fault and your fault alone.</h3>
+
+    <div style="width:500px; margin:auto;">
     </div>
-    <div style="float: left;">
-      <img id="error_image" style = "text-align:center;" src="https://bigpicturethings.files.wordpress.com/2011/06/dog-against-window.png" alt="error picture" width="20%" height="20%">
-    </div>
-  </div>
+    <h3>Oops! Something went wrong.</h3>
 
+      <br>
+      <% var num = Math.floor(Math.random()*3) %>
+      <% if (num === 0 ){%>
+        <img title="One very smushed doggie."  class="center" src="https://bigpicturethings.files.wordpress.com/2011/06/dog-against-window.png" alt="error picture" style="max-height:300px; width: auto;">
+      <% } %>
+      <% if (num === 1 ) {%>
+        <img title="Smush Parker during his time with the Lakers."  class="center" src="https://media.nbcphiladelphia.com/images/652*368/smush.jpg" alt="error picture" style="max-height:300px; width: auto;">
+      <% } %>
+      <% if (num === 2) { %>
+        <img title="A tragically smushed PB&J."  class="center" src="http://azwanderings.com/wp-content/uploads/PBJ1.jpg" alt="error picture" style="max-height:300px; width: auto;">
+      <% } %>
 
-  <% include partials/message.ejs %>
-
+      <br>
+      <h3>Head back to the <a href="/">homepage.</a></h3>
+      <% include partials/search-bar.ejs %>
+      <br>
+      </div>
+    <script>
+      $('.fa').hover(
+        (e) => { $(e.target).addClass('fa-spin'); },
+        (e) => { $(e.target).removeClass('fa-spin');}
+      )
+    </script>
 </body>
 
 </html>

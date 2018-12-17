@@ -3,10 +3,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <%if (message.length > 0) { %>
-<div id='myModal' class="modal fade b" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id='myModal' class="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <br>
   <div class="modal-dialog modal-sm">
-    <div class="modal-content">
+    <div class="modal-content" style ="padding: 10px 20px;">
       <h3> <%= message %> </h3>
     </div>
   </div>
