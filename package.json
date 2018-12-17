@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "source ./config/app_env && nodemon app.js",
     "cypress:open": "./node_modules/.bin/cypress open",
-		"start":"source ./config/app_env && node app.js"
- },
+    "start": "source ./config/app_env && node app.js",
+    "begin": "node start.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ethantanen/MPS-Project.git"
@@ -36,6 +37,7 @@
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
     "ngx-score": "^0.3.0",
+    "node-vault": "^0.9.5",
     "nodemailer": "^4.7.0",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
