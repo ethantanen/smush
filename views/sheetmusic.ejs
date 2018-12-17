@@ -2,7 +2,6 @@
 <head>
   <% include partials/head.ejs %>
 </head>
-  <script src="opensheetmusicdisplay.min.js"></script>
   <% include partials/navbar.ejs %>
 
 <body>
@@ -10,20 +9,8 @@
 
   <br><br><br><br>
 
-  <div style="text-align: center;">
     <img src='data:image/png;base64, <%= data.image %>' >
-  </div>
-  <div id="osmdCanvas"/>
 
-
-
-  <!-- This example will fail due to CORS restrictions, see README -->
-  <!-- You cannot just load local files in Javascript without user interaction. -->
-  <script>
-    var openSheetMusicDisplay = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas");
-    openSheetMusicDisplay.load("data:audio/ogg;base64,<%=data.midi%>");
-    openSheetMusicDisplay.render();
-  </script>
 
 </body>
 </html>
