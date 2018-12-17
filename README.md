@@ -1,7 +1,6 @@
 # MPS-Project
 
-[logo]: https://github.com/ethantanen/MPS-Project/static/logo.png "SMUSH"
-
+[logo]: https://github.com/ethantanen/MPS-Project/blob/master/static/logo.png "SMUSH"
 To setup the Smush system simply run:
 
 ```console
