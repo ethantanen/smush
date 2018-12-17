@@ -25,10 +25,6 @@ describe('Admin access', function() {
     cy.contains('Admin')
 
   })
-  it('is able to access the admin page', function() {
-    cy.visit('/archive/admin')
-    cy.contains('Upload Score')
-  })
 
   it('successfully logs out as admin', function() {
     cy.contains('Logout').click()
