@@ -1,6 +1,6 @@
 # MPS-Project
 
-![GitHub Logo](https://github.com/ethantanen/MPS-Project/blob/master/static/logo.png =320x200)
+<img src='https://github.com/ethantanen/MPS-Project/blob/master/static/logo.png' width="50%" height='50%'/>
 
 To setup the Smush system simply run:
 
