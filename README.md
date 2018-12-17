@@ -2,12 +2,13 @@
 
 To setup the Smush system simply run:
 
-'''bash
+```console
   npm install && npm run start
-'''
+```
 
 Directory Structure (does not include testing suite or views):
 
+```bash
 .
 ├── README.md
 ├── app.js
@@ -29,6 +30,7 @@ Directory Structure (does not include testing suite or views):
 ├── start.js
 └── utilities
     └── checkAuth.js
+```
 
 Description of Directory Structure:
 
