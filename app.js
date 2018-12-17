@@ -60,9 +60,16 @@ app.get('/about', (req, res) => {
   res.render('about.ejs', {isLoggedIn: req.user, message:""})
 })
 
-// render homescreen/ redirect unmatched urls to homescreen
-app.all('/*', (req, res) => {
+// render homescreen
+app.get('/', (req, res) => {
   res.render('home.ejs', {isLoggedIn:req.user, message: ""})
+})
+app.get('/home', (req, res) => {
+  res.render('home.ejs', {isLoggedIn:req.user, message: ""})
+})
+//redirect unmatched urls to homescreen
+app.all('*', (req, res) => {
+  res.render('error.ejs', {isLoggedIn:req.user, message: ""})
 })
 
 // start sesrver as http if http argument is passed in

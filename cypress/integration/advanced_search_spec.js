@@ -17,10 +17,10 @@ describe('Advanced search options from home page', function() {
 
   it('searches by track name', function() {
     cy.get('input[name=trackName]')
-      .type('Requiem Lacrimosa')
-      .should('have.value', 'Requiem Lacrimosa')
+      .type('Requiem')
+      .should('have.value', 'Requiem')
     cy.get('input[id=advancedquery]').click()
-    cy.get('#tabletrackName').contains('Requiem Lacrimosa')
+    cy.get('#tabletrackName').contains('Requiem')
   })
 
   it('searches by key', function() {
