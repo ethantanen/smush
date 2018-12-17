@@ -26,12 +26,6 @@ const PORT = process.env.PORT || 3000
 // create app
 app = express()
 
-// start server on port 3000
-// app.listen(3000, (err) => {
-//   if (err) { return console.log(err) }
-//   console.log('listening on port 3000')
-// })
-
 // set view engine
 app.set('view engine', 'ejs')
 
@@ -71,12 +65,29 @@ app.all('/*', (req, res) => {
   res.render('home.ejs', {isLoggedIn:req.user, message: ""})
 })
 
-// begin https server on port 8000
-https.createServer({
-    key: fs.readFileSync('./config/server.key'),
-    cert: fs.readFileSync('./config/server.crt')
-  }, app)
-  .listen(PORT, (err) => {
-    if (err) return console.log("Can't connect to port ",PORT, err)
-    return console.log("Listening on port ", PORT)
+// start sesrver as http if http argument is passed in
+if (process.argv[2] === 'http') {
+
+  //start server on port 3000
+  server = app.listen(PORT, (err) => {
+    if (err) { return console.log(err) }
+    host = server.address().address
+    port = server.address().port
+    console.log('listening on port %s --> http://%s:%s', port, host, port)
   })
+
+} else {
+
+  // begin https server on port 8000
+  server = https.createServer({
+      key: fs.readFileSync('./config/server.key'),
+      cert: fs.readFileSync('./config/server.crt')
+    }, app)
+    .listen(PORT, (err) => {
+      if (err) return console.log(err)
+      host = server.address().address
+      port = server.address().port
+      return console.log('Listening on port %s --> https://%s:%s', port, host,port)
+    })
+
+}

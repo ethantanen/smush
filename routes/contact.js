@@ -19,12 +19,12 @@ router.get('/', (req, res) => {
 
 // use nodemailer to send email
 router.post('/sendEmail', (req, res) => {
-  send(req, res, req.body, './views/contact_email.ejs', 'Your email has been sent!', 'home.ejs')
+  send(req, res, {user: req.body}, './views/contact_email.ejs', 'Your email has been sent!', 'home.ejs')
 })
 
 // use nodemailer to send a request admin email to the smush account
 router.get('/request-admin', async (req, res) => {
-  send(req, res,{user: req.user, url: process.env.SITE_URL}, './views/admin-auth/admin-email.ejs', 'Admin Permission Request Sent!', 'profile.ejs')
+  send(req, res, {user: req.user, url: process.env.SITE_URL}, './views/admin-auth/admin-email.ejs', 'Admin Permission Request Sent!', 'profile.ejs')
 })
 
 async function send(req, res, info, path_to_template, confirmation_msg, confirmation_view) {
