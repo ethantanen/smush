@@ -12,6 +12,7 @@ To run Smush using an http server run:
 
 ```console
   source config/app_env && node app.js http 
+ ```
 
 Directory Structure (does not include testing suite or views):
 
