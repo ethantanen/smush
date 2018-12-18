@@ -81,13 +81,13 @@
      }
      else {
        form.password.focus();
-       message = "Error: Please check that you've entered and confirmed your password!"
+       message = "Password and password confirmation do not match!"
        valid = false;
      }
      if (!valid){
      $('.alert').alert('close')
-     $("#contain").before(
-         '<div class="alert alert-danger alert-dismissable">'+
+     $("#contain").after(
+         '<div class="alert alert-danger alert-dismissable text-center">'+
              '<button type="button" class="close" ' +
                      'data-dismiss="alert" aria-hidden="true">' +
                  '&times;' +
