@@ -2,6 +2,7 @@
 
 <head>
   <% include partials/head.ejs %>
+  <title>SMUSH - <%= data.trackName %></title>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
               <div id="sheetmusic"></div><br>
               <div class='row'>
                 <div style="margin: 0 auto;">
-                  <button type="button" id='mxlviewer' onclick ="location.href = '/archive/sheetmusic?_id=<%= data._id%>';" class="btn btn_material_style border-secondary">View the full score</button>
+                  <button type="button" onclick ="location.href = '/archive/sheetmusic?_id=<%= data._id%>';" class="btn btn_material_style border-secondary">View the full score</button>
                 </div>
               </div>
               <p style="margin-bottom:10%;"> </p>
