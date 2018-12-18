@@ -96,7 +96,7 @@ router.get('/select', async (req, res) => {
   }
 })
 
-router.get('/profile', isUser, (req, res) => {
+router.get('/profile', (req, res) => {
   res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
 })
 

@@ -45,16 +45,12 @@ app.use((req, res, next) => {
 })
 
 // TESTING TESTING TESTING
-app.get('/index', (req, res) => {
-  res.render('index.ejs')
-})
 app.get('/error', (req, res) => {
   res.render('error.ejs', {isLoggedIn: req.user, message:""})
 })
 
-app.get('/poop', (req, res) => {
-  res.render('poop.ejs')
-})
+
+
 
 // connect routers
 app.use('/user', user.router)
@@ -64,6 +60,10 @@ app.get('/about', (req, res) => {
   res.render('about.ejs', {isLoggedIn: req.user, message:""})
 })
 
+app.get('/ctest', (req, res) => {
+  res.render('confirmationtest.ejs', {isLoggedIn: req.user, message:"", user: req.user})
+})
+
 // render homescreen
 app.get('/', (req, res) => {
   res.render('home.ejs', {isLoggedIn:req.user, message: ""})
@@ -71,7 +71,8 @@ app.get('/', (req, res) => {
 app.get('/home', (req, res) => {
   res.render('home.ejs', {isLoggedIn:req.user, message: ""})
 })
-//redirect unmatched urls to homescreen
+
+//redirect unmatched urls to error page
 app.all('*', (req, res) => {
   res.render('error.ejs', {isLoggedIn:req.user, message: ""})
 })
