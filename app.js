@@ -45,6 +45,13 @@ app.use((req, res, next) => {
 })
 
 // TESTING TESTING TESTING
+
+app.get('/pass', (req, res) => {
+  res.render('reset-password.ejs', {isLoggedIn: req.user, message:"", user: req.user})
+})
+app.get('/index', (req, res) => {
+  res.render('index.ejs')
+})
 app.get('/error', (req, res) => {
   res.render('error.ejs', {isLoggedIn: req.user, message:""})
 })

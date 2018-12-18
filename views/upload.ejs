@@ -47,7 +47,7 @@
 
           <!--Database Viewer -->
           <div style='height:300px; overflow:scroll;'>
-            <table class="table table-hover">
+            <table class="table table-hover" id="dbdisplaydata">
               <thead>
                 <tr>
                   <th scope='col'>#</th>
@@ -127,7 +127,7 @@
             <!-- Edit Entry -->
             <div class='col-md-6'>
               <br><h4 data-toggle="tooltip" data-placement='top' title="Use this form to update or delete a database entry. Simply update the field and click Submit!"> Edit Entry </h4>
-              <form action='/archive/update' method='POST' id='edits' enctype="multipart/form-data">>
+              <form action='/archive/update' method='POST' id='edits' enctype="multipart/form-data">
 
                 <div class="form-group row">
                   <label for="artistName" class="col-2 col-form-label" data-toggle="tooltip" data-placement='left' title="You can't edit the primary id of this entry! This is how we locate the file in our database.">ID</label>
@@ -183,7 +183,7 @@
               <!-- Delete Entry -->
               <div class='row'>
                 <div class='col-md-6'>
-                  <button form='edits' type='submit' class='btn btn-success float-md-right'> Submit Edits </button>
+                  <button form='edits' id="editsubmission" type='submit' class='btn btn-success float-md-right'> Submit Edits </button>
                 </div>
                 <div class='col-md-6'>
                   <form action='/archive/remove' method='POST'>

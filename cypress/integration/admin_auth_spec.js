@@ -26,8 +26,32 @@ describe('Admin access', function() {
 
   })
 
+  it('can edit a song music in db', function() {
+    cy.visit('/archive/admin')
+    cy.get('#dbdisplaydata').contains('Mozart').click()
+    cy.get('#artistName').clear().type('Not mozart anymore')
+      .should('have.value', 'Not mozart anymore')
+    cy.get('#editsubmission').click()
+  })
+  it('checks the edit in db on Mozart', function() {
+    cy.visit('/')
+    cy.get('input[name=search]')
+      .type('Not mozart anymore')
+    cy.get('button[type=submit]').click()
+    cy.get('#row').should('exist')
+    cy.contains('Not mozart anymore')
+  })
+  it('undoes the edit back to original', function() {
+    cy.visit('/archive/admin')
+    cy.get('#dbdisplaydata').contains('Not mozart anymore').click()
+    cy.get('#artistName').clear().type('Mozart')
+      .should('have.value', 'Mozart')
+    cy.get('#editsubmission').click()
+  })
+
   it('successfully logs out as admin', function() {
     cy.contains('Logout').click()
     cy.url().should('include', '/user/logout')
   })
+
 })

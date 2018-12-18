@@ -7,8 +7,6 @@ const passport = require('passport')
 const isAdmin = require('../utilities/checkAuth').isAdmin
 const isUser = require('../utilities/checkAuth').isUser
 
-// TODO: check that password matches before signin someone up
-
 // import model
 const users = require('../models/users')
 
@@ -25,7 +23,7 @@ router.get('/logout', (req, res) => {
   if (!req.user) return res.redirect('/home')
   user = req.user
   req.session.destroy((err) => {
-    res.render('home.ejs', {message: user.name + ' has been logged out of SMUSH!', isLoggedIn: req.user})
+    res.render('home.ejs', {message: user.name + ' has been logged out of SMUSH!', isLoggedIn: false})
   })
 })
 
@@ -35,6 +33,7 @@ router.get('/login', (req, res) => {
   res.render('login.ejs', {message: req.flash('error'), isLoggedIn: false})
 })
 
+// endpoints for authenticating with facebook
 router.get('/facebook-login', passport.authenticate('facebook', {scope: ['email']}))
 router.get('/facebook-token', passport.authenticate('facebook',
 {
@@ -44,6 +43,7 @@ router.get('/facebook-token', passport.authenticate('facebook',
 
 }))
 
+// endpoints for authenticating with twitter
 router.get('/twitter-login', passport.authenticate('twitter',{ scope: ['include_email=true']}))
 router.get('/twitter-token', passport.authenticate('twitter',
 {
@@ -52,14 +52,16 @@ router.get('/twitter-token', passport.authenticate('twitter',
   failureFlash: true
 }))
 
+// redner sign up page
 router.get('/signup', (req, res) => {
   if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in', isLoggedIn: req.user})
   res.render('signup.ejs', {message: "", isLoggedIn: req.user})
 })
 
-router.get('/reset-password', isUser, (req, res) => {
-  res.render('reset-password.ejs', {isLoggedIn: req.user})
-})
+// TODO:
+// router.get('/reset-password', isUser, (req, res) => {
+//   res.render('reset-password.ejs', {isLoggedIn: req.user})
+// })
 
 // add new user to database and log them in
 router.post('/insert', async (req, res) => {
@@ -96,12 +98,20 @@ router.get('/select', async (req, res) => {
   }
 })
 
-router.get('/profile', (req, res) => {
+// render profile page
+router.get('/profile', isUser, (req, res) => {
   res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
 })
 
-// update entry TODO: convert this to use primary id and method find by id and update
+// update entry using primary key as locator
 router.post('/update', isUser, async (req, res) => {
+
+  // if the passwords being updated convert it to a
+  if (req.body.password) {
+    req.body.password = await users.makePasswordHash(req.body.password)
+    req.body.password = req.body.password.trim()
+  }
+
   // seperate html form data to determine the item that needs updating
   // and the new information
   id = req.body._id.trim()
