@@ -54,7 +54,4 @@ describe('Admin access', function() {
     cy.url().should('include', '/user/logout')
   })
 
-  it('successfully changes/updates song info', function() {
-
-  })
 })
