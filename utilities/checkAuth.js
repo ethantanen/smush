@@ -30,7 +30,6 @@ function isAdmin(req, res, next) {
 
 // user wrapper for the _checkAuth function
 function isUser(req, res, next) {
-  console.log('HERE')
   _checkAuth(req, res, next, ['User', 'Admin'])
 }
 

@@ -47,7 +47,7 @@
 
           <!--Database Viewer -->
           <div style='height:300px; overflow:scroll;'>
-            <table class="table table-hover">
+            <table class="table table-hover" id="dbdisplaydata">
               <thead>
                 <tr>
                   <th scope='col'>#</th>
@@ -183,7 +183,7 @@
               <!-- Delete Entry -->
               <div class='row'>
                 <div class='col-md-6'>
-                  <button form='edits' type='submit' class='btn btn-success float-md-right'> Submit Edits </button>
+                  <button form='edits' id="editsubmission" type='submit' class='btn btn-success float-md-right'> Submit Edits </button>
                 </div>
                 <div class='col-md-6'>
                   <form action='/archive/remove' method='POST'>

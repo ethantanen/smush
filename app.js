@@ -55,8 +55,6 @@ app.get(['/home', '/'], (req, res) => {
 
 // redirect unmatched urls error page
 app.all(['*', '/error'], (req, res) => {
-  res.render('error.ejs', {isLoggedIn:req.user, message: ""})
-})
 
 // catch any errors that havent been caught
 app.on('error', (err) => {

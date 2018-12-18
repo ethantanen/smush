@@ -10,7 +10,7 @@
 
   <p style="margin-bottom:10%;"> </p>
 
-  <div class="container">
+  <div id ="contain" class="container">
     <div class="row">
 
 
@@ -24,11 +24,12 @@
           <!-- Signup with username and password -->
           <div class='row' style="margin-bottom:3px;">
             <div class='col-md-12'>
-              <form action='/user/insert' method='POST' id='signup'>
+              <form action='/user/insert' method='POST' onsubmit="return checkForm(this)" id='signup'>
                 <input type='text' class='form-control' placeholder="Name" name='name' autofocus required>
                 <input type='email' class='form-control' placeholder="Email" name='email' required>
                 <input type="text" class="form-control" placeholder="Username"  name='username' required>
                 <input type="password" class="form-control" placeholder="Password" name='password' required>
+                <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirm" required>
               </form>
             </div>
           </div>
@@ -43,9 +44,9 @@
               </div>
             </div>
 
-            <!-- Login button -->
+            <!-- Signup button -->
             <div class="col-md-1 pull-left">
-              <button type="submit" class="btn btn-large btn-danger pull-right" form='signup' >Signup</button>
+              <button id="signupbtn" type="submit" class="btn btn-large btn-danger pull-right" form='signup' >Signup</button>
             </div>
           </div>
 
@@ -55,5 +56,50 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function checkForm(form){
+     var message = ""
+     re = /^\w+$/;
+     valid = true;
+     if(!re.test(form.username.value)) {
+       message = "Error: Username must contain only letters, numbers and underscores!"
+       form.username.focus();
+       valid = false;
+     }
+     else if(form.password.value != "" && form.password.value == form.password_confirm.value) {
+       if(form.password.value.length < 6) {
+         message = "Your password must be longer than 6 characters!"
+         form.password.focus();
+         valid = false;
+       }
+       else if(form.password.value == form.username.value) {
+         message = "Your password cannot be the same as your username!"
+         form.password.focus();
+         valid = false;
+       }
+     }
+     else {
+       form.password.focus();
+       message = "Password and password confirmation do not match!"
+       valid = false;
+     }
+     if (!valid){
+     $('.alert').alert('close')
+     $("#contain").after(
+         '<div class="alert alert-danger alert-dismissable text-center">'+
+             '<button type="button" class="close" ' +
+                     'data-dismiss="alert" aria-hidden="true">' +
+                 '&times;' +
+             '</button>' +
+             message +
+          '</div>');
+        }
+
+     console.log(message)
+     return valid;
+   }
+
+  </script>
 
 </body>
