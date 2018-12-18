@@ -1,4 +1,4 @@
-// published modules 
+// published modules
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
@@ -93,4 +93,5 @@ module.exports = {
   update: update,
   select: select,
   validatePasswordHash: validatePasswordHash,
+  makePasswordHash: makePasswordHash,
 }
