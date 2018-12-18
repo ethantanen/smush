@@ -22,16 +22,10 @@
   "dependencies": {
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
-<<<<<<< HEAD
-=======
     "bootstrap": "^4.1.3",
     "bootstrap-confirmation2": "^4.0.2",
     "bootstrap-tooltip-popover": "^1.0.1",
-    "browserify": "^16.2.3",
-    "buffer": "^5.2.1",
->>>>>>> 31fb75652768fb32f8dfd0006551bd9f397d64ef
     "connect-flash": "^0.1.1",
-    "cors": "^2.8.5",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
@@ -46,15 +40,10 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
-<<<<<<< HEAD
     "passport-twitter": "^1.0.4"
-=======
     "passport-twitter": "^1.0.4",
     "popover": "^2.4.1",
     "popper.js": "^1.14.6",
-    "uuid": "^3.3.2",
-    "vexflow": "^1.2.87"
->>>>>>> 31fb75652768fb32f8dfd0006551bd9f397d64ef
   },
   "devDependencies": {
     "cypress": "^3.1.3",

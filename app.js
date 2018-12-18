@@ -43,6 +43,11 @@ app.use('/user', user.router)
 app.use('/contact', contact.router)
 app.use('/archive', archive.router)
 
+// TODO: delete
+app.get('/pass', (req, res) => {
+  res.render('reset-password.ejs', {isLoggedIn: req.user, message: "", user: req.user})
+})
+
 // render about page
 app.get('/about', (req, res) => {
   res.render('about.ejs', {isLoggedIn: req.user, message:""})
