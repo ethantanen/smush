@@ -24,8 +24,20 @@ router.post('/sendEmail', (req, res) => {
 
 // use nodemailer to send a request admin email to the smush account
 router.get('/request-admin', async (req, res) => {
-  send(req, res, {user: req.user, url: process.env.SITE_URL}, './views/admin-auth/admin-email.ejs', 'Admin Permission Request Sent!', 'profile.ejs')
+  send(req, res, {user: req.user, url: process.env.SITE_URL + '/user/admin-confirm?user='},
+    './views/admin-auth/admin-email.ejs', 'Admin Permission Request Sent!', 'profile.ejs')
 })
+
+// // use noemailer to send a reset password link to a user
+// router.get('/reset-password', async (req, res) => {
+//
+//   // make sure user has an email
+//   if (!req.user.email) {
+//     res.render('login.ejs', {isLoggedIn: req.user, message: 'You don\'t have an email associated with your account and thusly we cant confirm your identity nor reset your password! You can always make a new account'})
+//   }
+//
+//   send(req, res, {user: req.user, url: process.env.SITEURL + '/user/r='})
+// })
 
 async function send(req, res, info, path_to_template, confirmation_msg, confirmation_view) {
 
@@ -37,7 +49,7 @@ async function send(req, res, info, path_to_template, confirmation_msg, confirma
   mailOptions = {
     from: 'guccipancakes1234@gmail.com',
     to: 'guccipancakes1234@gmail.com',
-    subject: 'Email From Smush Request Admin Page',
+    subject: 'Email From Smush!',
     html: message
   }
 

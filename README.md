@@ -2,7 +2,7 @@
 
 <img src='https://github.com/ethantanen/MPS-Project/blob/master/static/logo.png' width="50%" height='50%'/>
 
-To setup the Smush system simply run after obtaining the necessary credentials outlined in the app_env file:
+To setup the Smush system simply run the following command after obtaining the necessary credentials outlined in the app_env file:
 
 ```console
   npm install && npm run start

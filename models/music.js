@@ -16,7 +16,7 @@ function insert(entry) {
 // select document from database, returns a promise-like object (good for async, await)
 function select(query) {
   return new Promise((resolve, reject) => {
-    Music.find(query).then((entry) => {//.limit.sort ... very open ended!
+    Music.find(query).sort({'artistName':1, 'trackName': 1}).then((entry) => {//.limit.sort ... very open ended!
       if (!entry) return reject(entry)
       return resolve(entry)
     })
@@ -27,6 +27,7 @@ function select(query) {
 function search(query) {
   return new Promise((resolve, reject) => {
     Music.find({$text: {$search: query }})
+      .sort({'artistName':1, 'trackName': 1})
       .then(resolve)
       .catch(reject)
   })
