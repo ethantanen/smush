@@ -41,7 +41,7 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "popover": "^2.4.1",
-    "popper.js": "^1.14.6",
+    "popper.js": "^1.14.6"
   },
   "devDependencies": {
     "cypress": "^3.1.3",
