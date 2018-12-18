@@ -32,58 +32,41 @@ app.set('view engine', 'ejs')
 // add middleware
 app.use(bodyParser({limit: '50mb'}))
 app.use(express.static(__dirname + '/static'))
-app.use(logger('dev'))
+app.use(logger('[INFO] :method :url :status :res[content-length] - :response-time ms'))
 app.use(session({secret: 'guccipancakes', cookie: {secure: false}}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash());
 
-// TODO: delete this!/ make an info flag that prints all available pritnouts
-app.use((req, res, next) => {
-  //console.log('\nSESSION:', req.session, '\nBODY:', req.body, '\nUSER:', req.user)
-  next()
-})
-
-// TESTING TESTING TESTING
-
-app.get('/pass', (req, res) => {
-  res.render('reset-password.ejs', {isLoggedIn: req.user, message:"", user: req.user})
-})
-app.get('/index', (req, res) => {
-  res.render('index.ejs')
-})
-app.get('/error', (req, res) => {
-  res.render('error.ejs', {isLoggedIn: req.user, message:""})
-})
-
-app.get('/poop', (req, res) => {
-  res.render('poop.ejs')
-})
-
 // connect routers
 app.use('/user', user.router)
 app.use('/contact', contact.router)
 app.use('/archive', archive.router)
+
+// render about page
 app.get('/about', (req, res) => {
   res.render('about.ejs', {isLoggedIn: req.user, message:""})
 })
 
-// render homescreen
-app.get('/', (req, res) => {
+// render home page
+app.get(['/home', '/'], (req, res) => {
   res.render('home.ejs', {isLoggedIn:req.user, message: ""})
 })
-app.get('/home', (req, res) => {
-  res.render('home.ejs', {isLoggedIn:req.user, message: ""})
-})
-//redirect unmatched urls to homescreen
-app.all('*', (req, res) => {
+
+// redirect unmatched urls error page
+app.all(['*', '/error'], (req, res) => {
   res.render('error.ejs', {isLoggedIn:req.user, message: ""})
 })
+
+// catch any errors that havent been caught
+app.on('error', (err) => {
+  res.render('error.ejs', {isLoggedIn:req.user, message: ""})
+});
 
 // start sesrver as http if http argument is passed in
 if (process.argv[2] === 'http') {
 
-  //start server on port 3000
+  //spin up server on port 3000
   server = app.listen(PORT, (err) => {
     if (err) { return console.log(err) }
     host = server.address().address
@@ -93,10 +76,10 @@ if (process.argv[2] === 'http') {
 
 } else {
 
-  // begin https server on port 8000
+  // spin up https server on port 8000
   server = https.createServer({
-      key: fs.readFileSync('./config/server.key'),
-      cert: fs.readFileSync('./config/server.crt')
+      key: fs.readFileSync('./config/https/server.key'),
+      cert: fs.readFileSync('./config/https/server.crt')
     }, app)
     .listen(PORT, (err) => {
       if (err) return console.log(err)

@@ -28,7 +28,7 @@ router.get('/request-admin', async (req, res) => {
     './views/admin-auth/admin-email.ejs', 'Admin Permission Request Sent!', 'profile.ejs')
 })
 
-// // use noemailer to send a reset password link to a user
+// // use nodemailer to send a reset password link to a user
 // router.get('/reset-password', async (req, res) => {
 //
 //   // make sure user has an email

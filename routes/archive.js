@@ -3,6 +3,7 @@ const upload = require('multer')({dest:'upload/'}).fields([{name: 'image', maxCo
 const fs = require('fs')
 const router = require('express').Router()
 const mongoose = require('mongoose')
+const fileType = require('file-type')
 
 // authentication middleware
 const isAdmin = require('../utilities/checkAuth').isAdmin
@@ -12,20 +13,22 @@ const isUser = require('../utilities/checkAuth').isUser
 const music = require('../models/music')
 
 // insert entry into music model
-// TODO: neaten by determining which file is name midi and the other image, check extension
 router.post('/insert', isAdmin, upload, async (req, res) => {
 
   // parse file from request and convert to base64
-  image = fs.readFileSync(req.files.image[0].path)
-  image_64 = new Buffer(image).toString('base64')
-  req.body.image = image_64
+  req.body.image = read64(req.files.image[0].path, 'image')
+
+  // reject insert if there isn't a valid image
+  if (!req.body.image) {
+    return res.render("upload.ejs", {isLoggedIn: req.user, message: "You must input a valid image!"})
+  }
 
   // music files are optional so check to see if it exists!
   if (req.files.music) {
-    midi = fs.readFileSync(req.files.music[0].path)
-    midi_64 = new Buffer(midi).toString('base64')
-    console.log(midi_64)
-    req.body.midi = midi_64
+    req.body.midi = read64(req.files.music[0].path, 'audio')
+    if (!req.body.midi) {
+      return res.render("upload.ejs", {isLoggedIn: req.user, message: "Music file is of an invalid type! Check tooltip for valid types."})
+    }
   }
 
   // insert file into music model
@@ -52,7 +55,6 @@ router.post('/remove', isAdmin, async (req, res) => {
 // update entry in music model
 router.post('/update', isAdmin, upload, async (req, res) => {
 
-  console.log(req.files, req.image, req.music, req.file, req.body)
   // parse image from request and convert to base64
   if(req.files.image) {
     image = fs.readFileSync(req.files.image[0].path)
@@ -134,11 +136,38 @@ router.get('/admin', isAdmin, async (req, res) => {
   res.render('upload.ejs', {isLoggedIn: req.user, message: '', db: db})
 })
 
-//NOTE we can remove any sort of malformed entry --> ['', ' ', 'poop'].includes(query[key])
+/**
+ * read a file from the filesystem, check if the file is of the type specified
+ * and convert the file to base64
+**/
+function read64(path, type) {
+
+  // determine which MIME types are valid
+  validTypes = []
+  if (type === 'image') {
+    validTypes = ['image/jpeg', 'image/png']
+  } else if (type === 'audio') {
+    validTypes = ['audio/wav', 	'audio/ogg', 'audio/mpeg']
+  }
+
+  // read in file
+  file = fs.readFileSync(path)
+  fileT = fileType(file)
+
+  console.log(path, fileT)
+  // check if file is not of a valid type
+  if (!fileT || !validTypes.includes(fileT.mime)) {
+    return undefined
+  } else {
+    return new Buffer(file).toString('base64')
+  }
+}
+
+// NOTE: remove any sort of malformed entry --> ['', ' ', 'poop'].includes(query[key])
 // remove property where value is ''
 function format(query) {
   for (key in query) {
-    if (query[key] === '') {
+    if (query[key].trim() === '') {
       delete query[key]
     }
   }

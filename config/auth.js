@@ -5,7 +5,7 @@ const TwitterStrategy = require('passport-twitter').Strategy
 const users = require('../models/users')
 const ObjectId = require('mongoose').ObjectId
 
-// TODO: link accounts by checking if the email exists
+// NOTE: link accounts by checking if the email exists
 
 // setup LocalStrategy
 passport.use(new LocalStrategy( (username, password, done) => {

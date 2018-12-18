@@ -1,6 +1,7 @@
-// setup app environemtn by retrieving credentials from vault
+// setup app environment by retrieving credentials from vault
 async function setup () {
 
+  // NOTE: Be sure your vault address is correct!
   options = {
     apiVersion: 'v1',
     endpoints: process.env.VAULT_ADDR

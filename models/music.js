@@ -1,6 +1,4 @@
-// TODO: check for redundency before inserting a document
 var mongoose = require('mongoose');
-var textSearch = require('mongoose-text-search');
 
 // insert document into database
 function insert(entry) {

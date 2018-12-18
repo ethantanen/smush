@@ -52,7 +52,7 @@ router.get('/twitter-token', passport.authenticate('twitter',
   failureFlash: true
 }))
 
-// redner sign up page
+// render sign up page
 router.get('/signup', (req, res) => {
   if (req.user) return res.render('home.ejs', {message: 'You\'re already logged in', isLoggedIn: req.user})
   res.render('signup.ejs', {message: "", isLoggedIn: req.user})
@@ -98,11 +98,6 @@ router.get('/select', async (req, res) => {
   }
 })
 
-// render profile page
-router.get('/profile', isUser, (req, res) => {
-  res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
-})
-
 // update entry using primary key as locator
 router.post('/update', isUser, async (req, res) => {
 
@@ -127,6 +122,12 @@ router.post('/update', isUser, async (req, res) => {
   }
 })
 
+// render profile page
+router.get('/profile', isUser, (req, res) => {
+  res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
+})
+
+// render the page admins use to grant admin permissions 
 router.get('/admin-confirm', async (req, res) => {
   user = await users.select({'_id': req.query.user.trim()})
   res.render('admin-auth/admin-confirm.ejs', {message:'', isLoggedIn: req.user, user: user})
