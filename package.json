@@ -24,7 +24,6 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^4.1.3",
     "bootstrap-confirmation2": "^4.0.2",
-    "bootstrap-tooltip-popover": "^1.0.1",
     "connect-flash": "^0.1.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
@@ -40,7 +39,6 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4"
     "passport-twitter": "^1.0.4",
     "popover": "^2.4.1",
     "popper.js": "^1.14.6",
