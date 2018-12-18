@@ -49,7 +49,7 @@ async function send(req, res, info, path_to_template, confirmation_msg, confirma
   mailOptions = {
     from: 'guccipancakes1234@gmail.com',
     to: 'guccipancakes1234@gmail.com',
-    subject: 'Email From Smush Request Admin Page',
+    subject: 'Email From Smush!',
     html: message
   }
 
