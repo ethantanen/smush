@@ -13,6 +13,15 @@ body {
 margin: auto;
 }
 
+.materialbtn {
+  background-color: var(--theme-primary) !important;
+  color: white;
+}
+.materialbtn:hover {
+  background-color: var(--theme-secondary) !important;
+  color: white;
+}
+
 form {
   margin: 0 auto;
   text-align: center;
