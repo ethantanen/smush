@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
 
-        <div class='col-md-7 offset-md-4'>
+        <div class='col-md-6 offset-md-3'>
           <div class=" p-3 bg-white rounded">
 
             <!-- Title -->
@@ -49,7 +49,7 @@
               <div class='col-md-4'>
                 <form action='/user/remove/' method='POST'>
                   <input type='hidden' name='_id' value='<%= user._id %>'>
-                  <button type='submit' class='btn btn-small btn-danger' data-toggle="confirmation"> Delete Account </button>
+                  <button type='submit' class='btn btn-small btn-danger'> Delete Account </button>
                 </form>
               </div>
 
@@ -68,14 +68,7 @@
     </div>
     <% include partials/message.ejs %>
 
-
-
     <script>
-
-      $('[data-toggle=confirmation]').confirmation({
-        rootSelector: '[data-toggle=confirmation]',
-        container: 'body'
-      });
 
       $('#editBtn').on('click', (event) => {
         if ($('#editBtn').text() === 'Edit') {
@@ -90,7 +83,6 @@
       })
 
       $('#cancel').on('click', (event) => {
-        console.log('hello')
         $('#profile').attr('action', '')
         $('.editable').attr('readonly', true)
         $('#editBtn').text('Edit')

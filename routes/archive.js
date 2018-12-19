@@ -48,7 +48,7 @@ router.post('/remove', isAdmin, async (req, res) => {
     db = await music.select({})
     res.render('upload.ejs', {isLoggedIn: req.user, message: 'Entry Deleted', db: db})
   } catch (err) {
-    res.render('error.js')
+    res.render('error.js', {isLoggedIn: req.user, message: ''})
   }
 })
 
@@ -57,16 +57,18 @@ router.post('/update', isAdmin, upload, async (req, res) => {
 
   // parse image from request and convert to base64
   if(req.files.image) {
-    image = fs.readFileSync(req.files.image[0].path)
-    image_64 = new Buffer(image).toString('base64')
-    req.body.image = image_64
+    req.body.image = read64(req.files.image[0].path, 'image')
+    if (!req.body.image) {
+      return res.render("upload.ejs", {isLoggedIn: req.user, message: "The image you uploaded is not of a valid type!"})
+    }
   }
 
   // parse music file from request and convert to base64
   if(req.files.music) {
-    midi = fs.readFileSync(req.files.music[1].path)
-    midi_64 = new Buffer(midi).toString('base64')
-    req.body.midi = midi_64
+    req.body.midi = read64(req.files.music[0].path, 'audio')
+    if (!req.body.midi) {
+      return res.render("upload.ejs", {isLoggedIn: req.user, message: "Music file is of an invalid type! Check tooltip for valid types."})
+    }
   }
 
   // seperate the id of the entry and the properties to be updated
@@ -84,7 +86,7 @@ router.post('/update', isAdmin, upload, async (req, res) => {
     res.render('upload.ejs', {isLoggedIn: req.user, message: 'Entry Updated: ' + entry.artistName + ', ' + entry.trackName , db: db})
 
   } catch (err) {
-    res.render('error.ejs')
+    res.render('error.ejs', {isLoggedIn: req.user, message: ''})
   }
 })
 
@@ -94,7 +96,8 @@ router.get('/select', async (req, res) => {
     results = await music.select(format(req.query))
     res.render('results.ejs', {data: results, isLoggedIn: req.user})
   } catch (err) {
-    res.render('error.ejs')
+    console.log(err)
+    res.render('error.ejs', {isLoggedIn: req.user, message: ''})
   }
 })
 
@@ -109,7 +112,7 @@ router.get('/search', async (req, res) => {
     }
     res.render('results.ejs', {data: results, isLoggedIn: req.user})
   } catch (err) {
-    res.status(404).render('error.ejs')
+    res.render('error.ejs', {isLoggedIn: req.user, message: ''})
   }
 })
 
@@ -119,12 +122,13 @@ router.get('/archive-entry*', async (req, res) => {
   res.render('archive-entry.ejs', {data: data[0], isLoggedIn: req.user, message:''})
 })
 
-//render sheetmusic view
+// render sheetmusic view
 router.get('/sheetmusic*', async (req, res) => {
   data = await music.select(req.query)
   res.render('sheetmusic.ejs', {data: data[0], isLoggedIn: req.user, message:''})
 })
 
+// render image of sheet music
 router.get('/image*', async (req, res) => {
   data = await music.select(req.query)
   res.render('image.ejs', {data: data[0], isLoggedIn: req.user, message:''})
@@ -154,7 +158,6 @@ function read64(path, type) {
   file = fs.readFileSync(path)
   fileT = fileType(file)
 
-  console.log(path, fileT)
   // check if file is not of a valid type
   if (!fileT || !validTypes.includes(fileT.mime)) {
     return undefined

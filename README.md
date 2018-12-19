@@ -2,10 +2,10 @@
 
 <img src='https://github.com/ethantanen/MPS-Project/blob/master/static/logo.png' width="50%" height='50%'/>
 
-To setup the Smush system simply run the following command after obtaining the necessary credentials outlined in the app_env file:
+To setup the SMUSH system, first obtain https credentials and place them in a directory titled https in the config directory. The certificate should be named server.crt and the key should be labeled server.key. Next copy and paste the content of the file title app_env_template into a file titled app_env and place that file in the config directory. Obtain the credentials described in the file and update the fields in the app_env file. Optionally, you may store your credentials in a Vault and provide the address and token of the vault in the app_env file as well as update the file titled setup_app_env.js with the keys for the information stored in the vault. To run from a vault instance replace ```console npm run start``` with ```console npm run vault```:
 
 ```console
-  npm install && npm run begin
+  npm install && npm run start
 ```
 
 To run Smush using an http server run:
@@ -47,4 +47,4 @@ Description of Directory Structure:
   - start.js - RUN THIS FILE TO START THE APPLICATION. This file communicates with the Vault to get the necessary credentials to run the application and initializes the application (using the app.js file)
   - utilities - this directory contains helpful utility files such as for authorizing access to endpoints
 
-  * to successfully begin the program you will need to obtain a fair number of credentials! Please contact me if you want temporary access to a set of credentials. They will be issued in the form of temporary readonly access to the Vault.
+  * to successfully begin the program you will need to obtain a fair number of credentials! Please contact me if you want temporary access to a set of credentials or help configuring your environment. T

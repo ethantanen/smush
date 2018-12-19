@@ -6,3 +6,4 @@ setup_app_env.setup()
   .then(() => {
     require('./app')
   })
+  .catch(console.log)

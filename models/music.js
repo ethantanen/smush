@@ -14,7 +14,7 @@ function insert(entry) {
 // select document from database, returns a promise-like object (good for async, await)
 function select(query) {
   return new Promise((resolve, reject) => {
-    Music.find(query).sort({'artistName':1, 'trackName': 1}).then((entry) => {//.limit.sort ... very open ended!
+    Music.find(query).collation({ locale: "en", strength: 2}).sort({'artistName':1, 'trackName': 1}).then((entry) => {//.limit.sort ... very open ended!
       if (!entry) return reject(entry)
       return resolve(entry)
     })
@@ -71,7 +71,7 @@ async function connect() {
   })
 
   // setup indices for full text search
-  musicSchema.index({artistName: 'text', trackName: 'text', key: 'text', tempo: 'text'})
+  musicSchema.index({artistName: 'text', trackName: 'text', key: 'text', tempo: 'text'}, {collation: {locale: 'en', strength: 2}})
 
   // create model
   global.Music =  mongoose.model('Music', musicSchema)

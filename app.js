@@ -55,13 +55,15 @@ app.get('/about', (req, res) => {
 
 // render home page
 app.get(['/home', '/'], (req, res) => {
-  res.render('home.ejs', {isLoggedIn:req.user, message: ""})
+  console.log(req.user, req.session)
+  res.render('home.ejs', {isLoggedIn: req.user, message: ""})
 })
 
 // redirect unmatched urls error page
 app.all(['*', '/error'], (req, res) => {
   res.render('error.ejs', {isLoggedIn: req.user, message: ""})
 })
+
 // catch any errors that havent been caught
 app.on('error', (err) => {
   res.render('error.ejs', {isLoggedIn:req.user, message: ""})

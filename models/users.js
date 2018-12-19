@@ -7,7 +7,7 @@ async function insert(entry) {
   return new Promise( async (resolve, reject) => {
 
     // check if user exists already before inserting new user
-    isUser = await User.findOne(entry)
+    isUser = await User.findOne({username: entry.username, email: entry.email})
     if (isUser) return reject('username or email already exists')
     if(entry.password) entry.password = await makePasswordHash(entry.password)
     entry.permissions = 'User'

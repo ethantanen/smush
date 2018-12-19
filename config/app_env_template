@@ -1,0 +1,30 @@
+# Email credentials
+# nodemailer is configured to use gmail so these must be gmail credentials!
+export USERNAME_EMAIL=<gmail address>
+export PASSWORD_EMAIL=<gmail password>
+
+# Facebook credentials
+# obtain these credentials from the facebook developers portal
+export FACEBOOK_CLIENTID=<facebook client id>
+export FACEBOOK_CLIENTSECRET=<facebook client secret>
+export FACEBOOK_CALLBACKURL=<facebook callback url>
+
+# Twitter credentials
+# obtain these credentials from the twitter developers portal
+export TWITTER_CONSUMERKEY=<twitter consumer key>
+export TWITTER_CONSUMERSECRET=<twitter consumer secret>
+export TWITTER_CALLBACKURL=<twitter callback url>
+
+# Replica Set credentials
+# this can be any valid mongo uri if you dont wont to make a replica set
+export MONGO_URI=<mongodb uri>
+
+# URL for current site
+# update this with the url for the site, certain emails require it
+export SITE_URL=<base url for site>
+
+# Vault credentials
+# the root token does not necessarily need to be a root token, any token with read permissions will do!
+# i reccomend keeping the facebook and twitter credentials in the vault and removing them from this file
+export VAULT_ADDR=<address of vault server'
+export ROOT_TOKEN=<any vault token with read capabilities>

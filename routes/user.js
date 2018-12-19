@@ -58,20 +58,15 @@ router.get('/signup', (req, res) => {
   res.render('signup.ejs', {message: "", isLoggedIn: req.user})
 })
 
-// TODO:
-// router.get('/reset-password', isUser, (req, res) => {
-//   res.render('reset-password.ejs', {isLoggedIn: req.user})
-// })
-
 // add new user to database and log them in
 router.post('/insert', async (req, res) => {
   try {
     entry = await users.insert(format(req.body))
     req.login(entry, (err) => {
-      res.render('home.ejs', {message: 'Welcome ' + entry.name, isLoggedIn: req.user})
+      res.render('home.ejs', {message: 'Welcome ' + entry.name, isLoggedIn: true})
     })
   } catch (err) {
-    res.render('signup.ejs', {message: 'Username already taken!', isLoggedIn: req.user})
+    res.render('signup.ejs', {message: 'Username or password already taken!', isLoggedIn: false})
   }
 })
 
@@ -99,7 +94,16 @@ router.get('/select', async (req, res) => {
 })
 
 // update entry using primary key as locator
-router.post('/update', isUser, async (req, res) => {
+router.post('/update', async (req, res) => {
+
+  /**
+   * this function doesnt use the isUser middleware so that when a password reset
+   * occurs the profile may be updated. Instead the program looks for a passport
+   * entry in the session
+  **/
+  if (!req.user && !req.session.update) {
+    return res.render('home.ejs', {isLoggedIn: req.user, message: 'You must be logged in to visit that link!'})
+  }
 
   // if the passwords being updated convert it to a
   if (req.body.password) {
@@ -118,7 +122,7 @@ router.post('/update', isUser, async (req, res) => {
     entry = await users.update(id, format(update))
     res.render('profile.ejs', {message: 'Profile updated!', isLoggedIn: req.user, user: entry})
   } catch (err) {
-    res.send('something went wrong')
+    res.render('error.ejs')
   }
 })
 
@@ -127,10 +131,21 @@ router.get('/profile', isUser, (req, res) => {
   res.render('profile.ejs', {message: '', isLoggedIn: req.user, user: req.user})
 })
 
-// render the page admins use to grant admin permissions 
-router.get('/admin-confirm', async (req, res) => {
+// render the page admins use to grant admin permissions
+router.get('/admin-confirm', isAdmin, async (req, res) => {
   user = await users.select({'_id': req.query.user.trim()})
   res.render('admin-auth/admin-confirm.ejs', {message:'', isLoggedIn: req.user, user: user})
+})
+
+// render page to get user's email to send reset password link to user
+router.get('/reset-password', (req, res) => {
+  res.render('password-reset/password-reset-send-email.ejs', {isLoggedIn: req.user, message: ''})
+})
+
+// render page to type in new password
+router.get('/reset-password-form', (req, res) => {
+  req.session.update = true
+  res.render('password-reset/reset-password.ejs', {isLoggedIn: req.user, message: '', _id: req.query.user})
 })
 
 // remove property where value is ''
